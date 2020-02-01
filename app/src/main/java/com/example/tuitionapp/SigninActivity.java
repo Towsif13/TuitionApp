@@ -107,7 +107,7 @@ public class SigninActivity extends AppCompatActivity {
                     showErrorDialog("There was a problem");
                 }else {
                     if (mAuth.getCurrentUser().isEmailVerified()){
-                        Intent intent = new Intent(SigninActivity.this,MainActivity.class);
+                        Intent intent = new Intent(SigninActivity.this,StudentLandingActivity.class);
                         finish();
                         startActivity(intent);
                     }else {
