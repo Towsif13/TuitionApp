@@ -16,25 +16,29 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        teacher = findViewById(R.id.button_teacher);
-        student = findViewById(R.id.button_student);
+        Intent intent = new Intent(MainActivity.this , SigninActivity.class);
+        finish();
+        startActivity(intent);
 
-        teacher.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this , SigninActivity.class);
-                finish();
-                startActivity(intent);
-            }
-        });
-
-        student.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this , SigninActivity.class);
-                finish();
-                startActivity(intent);
-            }
-        });
+//        teacher = findViewById(R.id.button_teacher);
+//        student = findViewById(R.id.button_student);
+//
+//        teacher.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(MainActivity.this , SigninActivity.class);
+//                finish();
+//                startActivity(intent);
+//            }
+//        });
+//
+//        student.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(MainActivity.this , SigninActivity.class);
+//                finish();
+//                startActivity(intent);
+//            }
+//        });
     }
 }
