@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">Tuition App</string>
+
+    <string name="error_invalid_email">This email address is invalid</string>
+
+    <string name="error_invalid_password">Password too short or does not match</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="error_invalid_phone">Phone number is not valid or empty</string>
+    <string name="title_activity_student_landing">StudentLandingActivity</string>
+
+    <string name="title_home">Home</string>
+
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_teacher_landing">TeacherLandingActivity</string>
+    <string-array name="sex">
+        <item>Gender</item>
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+    <string-array name="medium">
+        <item>Bangla Medium</item>
+        <item>English Medium</item>
+        <item>English Version</item>
+    </string-array>
+    <string-array name="classs">
+        <item>Class 1</item>
+        <item>Class 2</item>
+        <item>Class 3</item>
+        <item>Class 4</item>
+        <item>Class 5</item>
+        <item>Class 6</item>
+        <item>Class 7</item>
+        <item>Class 8</item>
+        <item>SSC</item>
+        <item>HSC</item>
+        <item>O level</item>
+        <item>A level</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
