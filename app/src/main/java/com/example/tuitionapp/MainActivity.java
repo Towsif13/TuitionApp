@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this , SigninActivity.class);
         finish();
         startActivity(intent);
+        //efaz
 
 //        teacher = findViewById(R.id.button_teacher);
 //        student = findViewById(R.id.button_student);

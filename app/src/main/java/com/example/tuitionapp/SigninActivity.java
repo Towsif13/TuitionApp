@@ -17,6 +17,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.DatabaseReference;
 
 public class SigninActivity extends AppCompatActivity {
 
@@ -25,6 +30,8 @@ public class SigninActivity extends AppCompatActivity {
     FloatingActionButton signbtn;
 
     private FirebaseAuth mAuth;
+    private DatabaseReference RootRef;
+    private String currentUserID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +51,8 @@ public class SigninActivity extends AppCompatActivity {
 
 
         mAuth = FirebaseAuth.getInstance();
+        currentUserID = mAuth.getCurrentUser().getUid();
+        RootRef = FirebaseDatabase.getInstance().getReference();
 
         register = findViewById(R.id.registerTextView);
         register.setOnClickListener(new View.OnClickListener() {
@@ -107,9 +116,29 @@ public class SigninActivity extends AppCompatActivity {
                     showErrorDialog("There was a problem");
                 }else {
                     if (mAuth.getCurrentUser().isEmailVerified()){
-                        Intent intent = new Intent(SigninActivity.this,StudentLandingActivity.class);
-                        finish();
-                        startActivity(intent);
+                        //String userId = mAuth.getCurrentUser().getUid();
+                        RootRef.child("Users").child("Student").child(currentUserID).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.exists()){
+                                    Intent intent = new Intent(SigninActivity.this,StudentLandingActivity.class);
+                                    finish();
+                                    startActivity(intent);
+                                }
+                                else {
+                                    Intent intent = new Intent(SigninActivity.this,TeacherLandingActivity.class);
+                                    finish();
+                                    startActivity(intent);
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+
                     }else {
                         Toast.makeText(SigninActivity.this, "Verify email please", Toast.LENGTH_SHORT).show();
                     }
