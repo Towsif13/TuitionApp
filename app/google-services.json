@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "715733712115-gpgfsvh677es0eqot9kasgvdk564a157.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tuitionapp",
+            "certificate_hash": "a5d63c04407fdef1aaa1e75462103dd8e2e87b0f"
+          }
+        },
+        {
           "client_id": "715733712115-pjlmeim59hi71f6if3g3hotsll65jd89.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
