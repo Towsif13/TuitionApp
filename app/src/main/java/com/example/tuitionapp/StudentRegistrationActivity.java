@@ -35,7 +35,7 @@ public class StudentRegistrationActivity extends AppCompatActivity implements Da
 
     TextView login;
     TextView dateOfBirth;
-    DatePickerDialog.OnDateSetListener setListener;
+    //DatePickerDialog.OnDateSetListener setListener;
     RadioGroup radioGroup;
     RadioButton radioButton;
     String sex = "Male";
