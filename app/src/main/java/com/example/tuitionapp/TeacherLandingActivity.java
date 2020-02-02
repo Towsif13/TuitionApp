@@ -12,7 +12,4 @@ public class TeacherLandingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_teacher_landing);
     }
 
-    public void alvichekcing(){
-        int i = 0;
-    }
 }
