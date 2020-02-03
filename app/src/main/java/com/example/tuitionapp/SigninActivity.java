@@ -51,7 +51,7 @@ public class SigninActivity extends AppCompatActivity {
 
 
         mAuth = FirebaseAuth.getInstance();
-        currentUserID = mAuth.getCurrentUser().getUid();
+        //currentUserID = mAuth.getCurrentUser().getUid();
         RootRef = FirebaseDatabase.getInstance().getReference();
 
         register = findViewById(R.id.registerTextView);
@@ -117,7 +117,7 @@ public class SigninActivity extends AppCompatActivity {
                 }else {
                     if (mAuth.getCurrentUser().isEmailVerified()){
                         //String userId = mAuth.getCurrentUser().getUid();
-                        RootRef.child("Users").child("Student").child(currentUserID).addValueEventListener(new ValueEventListener() {
+                        RootRef.child("Users").child("Student").child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 if (dataSnapshot.exists()){
