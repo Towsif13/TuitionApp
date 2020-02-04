@@ -6,6 +6,7 @@
     <string name="error_invalid_password">Password too short or does not match</string>
     <string name="error_field_required">This field is required</string>
     <string name="error_invalid_phone">Phone number is not valid or empty</string>
+    <string name="error_note_too_long">Note is too long. Maximum 100 characters.</string>
     <string name="title_activity_student_landing">StudentLandingActivity</string>
 
     <string name="title_home">Home</string>
