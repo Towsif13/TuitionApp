@@ -23,7 +23,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class TuitionPostActivity extends AppCompatActivity {
 
@@ -41,6 +46,8 @@ public class TuitionPostActivity extends AppCompatActivity {
 
     String fname , lname , medium , address , region , clas;
 
+    String date;
+
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference myref;
 
@@ -48,6 +55,10 @@ public class TuitionPostActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tuition_post);
+
+        DateFormat df = new SimpleDateFormat("d MMM yyyy, h:mm a");
+        date = df.format(Calendar.getInstance().getTime());
+        Toast.makeText(this, date, Toast.LENGTH_LONG).show();
 
         spinner_preference = findViewById(R.id.preference);
         spinner_days = findViewById(R.id.days);
@@ -60,7 +71,7 @@ public class TuitionPostActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String pref_gender = adapterView.getItemAtPosition(i).toString();
                 prefered_gender = pref_gender;
-                Toast.makeText(TuitionPostActivity.this, prefered_gender, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(TuitionPostActivity.this, prefered_gender, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -77,7 +88,7 @@ public class TuitionPostActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String dpw = adapterView.getItemAtPosition(i).toString();
                 days_per_week = dpw;
-                Toast.makeText(TuitionPostActivity.this, days_per_week, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(TuitionPostActivity.this, days_per_week, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -169,11 +180,11 @@ public class TuitionPostActivity extends AppCompatActivity {
 
     private void createPostInFirebase() {
 
+        DateFormat df = new SimpleDateFormat("d-MM-yyyy,HH:mm:ss");
+        String date = df.format(Calendar.getInstance().getTime());
 
         String userId = mAuth.getCurrentUser().getUid();
-        DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("TuitionPosts").child(userId);
-
-
+        DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("TuitionPosts").child(userId).child(userId+"-"+date);
 
 
         String desired_subjects = subjects.getText().toString();
@@ -181,6 +192,13 @@ public class TuitionPostActivity extends AppCompatActivity {
         String desired_days = days_per_week;
         String desired_gender = prefered_gender;
         String desired_note = notes.getText().toString();
+
+
+        DateFormat df1 = new SimpleDateFormat("d-MM-yyyy");
+        String today_date = df1.format(Calendar.getInstance().getTime());
+
+        DateFormat df2 = new SimpleDateFormat("HH:mm:ss");
+        String today_time = df2.format(Calendar.getInstance().getTime());
 
         HashMap<String,String> offerMap = new HashMap<>();
         offerMap.put("Subjects",desired_subjects);
@@ -195,6 +213,9 @@ public class TuitionPostActivity extends AppCompatActivity {
         offerMap.put("Class",clas);
         offerMap.put("Region",region);
         offerMap.put("Address",address);
+
+        offerMap.put("Date",today_date);
+        offerMap.put("Time",today_time);
 
 
         current_user_db.setValue(offerMap);
