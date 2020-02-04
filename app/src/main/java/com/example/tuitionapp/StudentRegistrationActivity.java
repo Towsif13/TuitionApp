@@ -52,7 +52,7 @@ public class StudentRegistrationActivity extends AppCompatActivity implements Da
 
     String[] mMedium = {"Bangla Medium" , "English Medium" , "English Version"};
 
-    String[] mRegion = {"Dhaka","Khulna","Sylhet","Ranjshahi","Chittagong","Barisal","Rongpur"};
+    String[] mRegion = {"Dhaka","Khulna","Sylhet","Rajshahi","Chittagong","Barisal","Rongpur"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
