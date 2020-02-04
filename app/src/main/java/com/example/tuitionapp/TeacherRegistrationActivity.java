@@ -288,8 +288,8 @@ public class TeacherRegistrationActivity extends AppCompatActivity implements Da
                                 String region = teacher_region;
 
                                 HashMap<String,String> profileMap = new HashMap<>();
-                                profileMap.put("First Name",fname);
-                                profileMap.put("Last Name",lname);
+                                profileMap.put("FirstName",fname);
+                                profileMap.put("LastName",lname);
                                 profileMap.put("Address",address);
                                 profileMap.put("Birthday",birthday);
                                 profileMap.put("Gender",gender);
