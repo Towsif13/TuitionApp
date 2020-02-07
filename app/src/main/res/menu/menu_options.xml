@@ -6,5 +6,11 @@
         android:title="Logout"
         android:id="@+id/main_menu_logout"
         app:showAsAction="never"></item>
+    <item
+        android:title=""
+        android:id="@+id/main_menu_user"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_account_circle_black_24dp"></item>
+
 
 </menu>
