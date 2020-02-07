@@ -6,7 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -18,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -28,6 +33,8 @@ public class MessageActivity extends AppCompatActivity {
     FirebaseUser firebaseUser;
     DatabaseReference databaseReference;
     ArrayList<UserContacts> list;
+    ImageButton imageButton;
+    EditText msg_send;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +53,13 @@ public class MessageActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         msg_user_name = findViewById(R.id.msg_username);
         msg_user_lastName = findViewById(R.id.msg_user_lastName);
+        msg_send= findViewById(R.id.msg_send);
+        imageButton = findViewById(R.id.btn_send);
         circleImageView = findViewById(R.id.msg_profile_image);
+
+        Intent intent = getIntent();
+        final String userid = intent.getStringExtra("userId");
+
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users")
                 .child("Teacher");
@@ -70,5 +83,32 @@ public class MessageActivity extends AppCompatActivity {
 
             }
         });
+
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String msg = msg_send.getText().toString();
+                if(!msg.equals("")){
+                    sendMessage(firebaseUser.getUid(),userid,msg);
+                }else {
+                    Toast.makeText(MessageActivity.this,"You cant send message",Toast.LENGTH_LONG);
+                }
+                msg_send.setText("");
+            }
+        });
+
+    }
+
+    private void sendMessage(String sender, String receiver, String message){
+
+       DatabaseReference Reference = FirebaseDatabase.getInstance().getReference();
+
+        HashMap<String,Object> hashMap = new HashMap<>();
+        hashMap.put("sender",sender);
+        hashMap.put("receiver",receiver);
+        hashMap.put("message",message);
+
+        Reference.child("Chats").push().setValue(hashMap);
+
     }
 }
