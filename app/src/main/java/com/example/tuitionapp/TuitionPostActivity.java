@@ -163,8 +163,8 @@ public class TuitionPostActivity extends AppCompatActivity {
         myref.child("Users").child("Student").child(userId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                fname = dataSnapshot.child("First Name").getValue().toString();
-                lname = dataSnapshot.child("Last Name").getValue().toString();
+                fname = dataSnapshot.child("FirstName").getValue().toString();
+                lname = dataSnapshot.child("LastName").getValue().toString();
                 medium = dataSnapshot.child("Medium").getValue().toString();
                 address = dataSnapshot.child("Address").getValue().toString();
                 region = dataSnapshot.child("Region").getValue().toString();
@@ -184,7 +184,7 @@ public class TuitionPostActivity extends AppCompatActivity {
         String date = df.format(Calendar.getInstance().getTime());
 
         String userId = mAuth.getCurrentUser().getUid();
-        DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("TuitionPosts").child(userId).child(userId+"-"+date);
+        DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("TuitionPosts").child(userId+" "+date);
 
 
         String desired_subjects = subjects.getText().toString();
@@ -203,12 +203,12 @@ public class TuitionPostActivity extends AppCompatActivity {
         HashMap<String,String> offerMap = new HashMap<>();
         offerMap.put("Subjects",desired_subjects);
         offerMap.put("Days",desired_days);
-        offerMap.put("Preferred Gender",desired_gender);
+        offerMap.put("PreferredGender",desired_gender);
         offerMap.put("Salary",desired_salary);
         offerMap.put("Notes",desired_note);
 
-        offerMap.put("First Name",fname);
-        offerMap.put("Last Name",lname);
+        offerMap.put("FirstName",fname);
+        offerMap.put("LastName",lname);
         offerMap.put("Medium",medium);
         offerMap.put("Class",clas);
         offerMap.put("Region",region);

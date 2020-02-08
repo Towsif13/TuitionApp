@@ -64,15 +64,14 @@ public class SigninActivity extends AppCompatActivity {
             }
         });
 
-//        resetPassword = findViewById(R.id.resetTextView);
-//        resetPassword.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(LoginActivity.this , LandingActivity.class);
-//                finish();
-//                startActivity(intent);
-//            }
-//        });
+        resetPassword = findViewById(R.id.resetTextView);
+        resetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SigninActivity.this , ResetPasswordActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void signInExistingUser() {

@@ -265,7 +265,7 @@
                 android:layout_marginEnd="25dp"
                 android:background="@drawable/edittext_style"
                 android:ems="10"
-                android:hint="Institutuin"
+                android:hint="Institution"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

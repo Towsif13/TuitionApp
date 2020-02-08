@@ -9,20 +9,57 @@
 
     <Button
         android:id="@+id/button_student_register"
+        android:layout_width="235dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/button_bg"
+        android:text="Student"
+        android:fontFamily="sans-serif-black"
+        android:textColor="#fff"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView13"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button_teacher_register"
+        android:layout_width="235dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="212dp"
+        android:background="@drawable/button_bg"
+        android:text="Teacher"
+        android:fontFamily="sans-serif-black"
+        android:textColor="#fff"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="224dp"
-        android:text="Student register"
+        android:layout_marginTop="153dp"
+        android:layout_marginBottom="65dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Register as"
+        android:textColor="@android:color/black"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/button_student_register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button_teacher_register"
+    <TextView
+        android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="84dp"
-        android:text="Teacher register"
-        app:layout_constraintStart_toStartOf="@+id/button_student_register"
-        app:layout_constraintTop_toBottomOf="@+id/button_student_register" />
+        android:layout_marginBottom="25dp"
+        android:fontFamily="sans-serif-black"
+        android:text="or"
+        android:textColor="@android:color/black"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/button_teacher_register"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
