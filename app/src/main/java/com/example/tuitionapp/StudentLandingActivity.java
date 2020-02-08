@@ -73,6 +73,7 @@ public class StudentLandingActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.main_menu_logout){
             FirebaseAuth.getInstance().signOut();
             Intent intent = new Intent(StudentLandingActivity.this, SigninActivity.class);
+            finish();
             startActivity(intent);
             //Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show();
         }
