@@ -12,6 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -35,6 +37,9 @@ public class MessageActivity extends AppCompatActivity {
     ArrayList<UserContacts> list;
     ImageButton imageButton;
     EditText msg_send;
+    MessageAdapter messageAdapter;
+    ArrayList<Chat>chats;
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,26 +61,34 @@ public class MessageActivity extends AppCompatActivity {
         msg_send= findViewById(R.id.msg_send);
         imageButton = findViewById(R.id.btn_send);
         circleImageView = findViewById(R.id.msg_profile_image);
+        recyclerView = findViewById(R.id.msg_recyclerView);
+
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        linearLayoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
 
         Intent intent = getIntent();
         final String userid = intent.getStringExtra("userId");
 
+
+
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users")
-                .child("Teacher");
+                .child("Teacher").child(userid);
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                list = new ArrayList<UserContacts>();
-                for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
-                {
-                    UserContacts p = dataSnapshot1.getValue(UserContacts.class);
-                    list.add(p);
+                //list = new ArrayList<UserContacts>();
+                  UserContacts p = dataSnapshot.getValue(UserContacts.class);
+                    //list.add(p);
                     msg_user_name.setText(p.getFirstName());
                     msg_user_lastName.setText(p.getLastName());
-                }
+
+                readMessage(firebaseUser.getUid(),userid);
             }
 
             @Override
@@ -97,7 +110,7 @@ public class MessageActivity extends AppCompatActivity {
             }
         });
 
-    }//bla bla
+    }
 
     private void sendMessage(String sender, String receiver, String message){
 
@@ -110,5 +123,40 @@ public class MessageActivity extends AppCompatActivity {
 
         Reference.child("Chats").push().setValue(hashMap);
 
+    }
+
+    private void readMessage(final String myid, final String userid){
+
+        chats = new ArrayList<>();
+
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Chats");
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                chats.clear();
+                for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
+                {
+                    Chat chat = dataSnapshot1.getValue(Chat.class);
+                    if(chat.getReceiver().equals(myid) && chat.getSender().equals(userid)
+                        || chat.getReceiver().equals(userid) && chat.getSender().equals(myid)){
+                        chats.add(chat);
+                        messageAdapter= new MessageAdapter(MessageActivity.this,chats);
+                        recyclerView.setAdapter(messageAdapter);
+                        messageAdapter.notifyDataSetChanged();
+
+                    }
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }

@@ -3,12 +3,12 @@ package com.example.tuitionapp;
 
 public class UserContacts {
 
-    private String id,FirstName,LastName,Address;//tutors_image;
+    private String Id,FirstName,LastName,Address;//tutors_image;
 
     public UserContacts(String id,String FirstName,String LastName, String Address)
 /* String tutors_image*/
 {
-        this.id = id;
+        this.Id = id;
         this.FirstName = FirstName;
         this.LastName = LastName;
         this.Address = Address;
@@ -21,7 +21,7 @@ public class UserContacts {
     }
 
     public String getId() {
-        return id;
+        return Id;
     }
 
     public String getAddress() {
