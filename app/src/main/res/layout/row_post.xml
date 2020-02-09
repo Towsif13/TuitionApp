@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="3dp"
     app:cardElevation="3dp"
@@ -9,49 +9,96 @@
     app:cardUseCompatPadding="true"
     app:cardBackgroundColor="@color/colorWhite"
     >
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="left"
-            android:orientation="horizontal"
-            android:padding="5dp">
-
+            android:orientation="vertical"
+            >
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:gravity="left"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
 
-                        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/profile_image"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:src="@drawable/userimg"
-                            app:civ_border_color="#FF000000"
-                            app:civ_border_width="2dp" />
-
-                        <TextView
-                            android:id="@+id/post_nameTV"
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="NAME:"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="20sp"></TextView>
+                            android:orientation="horizontal">
+
+                                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                                    android:id="@+id/profile_image"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:src="@drawable/userimg"
+                                    app:civ_border_color="#FF000000"
+                                    app:civ_border_width="2dp" />
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:paddingLeft="10dp">
+
+                                        <TextView
+                                            android:id="@+id/post_nameTV"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="NAME:"
+                                            android:textColor="@color/colorPrimaryDark"
+                                            android:textSize="20sp"></TextView>
+
+                                        <TextView
+                                            android:id="@+id/post_locTV"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="LOCATION"
+                                            android:textColor="@color/colorPrimaryDark"
+                                            android:textSize="20sp"></TextView>
+
+                                        <TextView
+                                            android:id="@+id/post_classTv"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Class"
+                                            android:textColor="@color/colorPrimaryDark"
+                                            android:textSize="15sp"></TextView>
+
+                                        <TextView
+                                            android:id="@+id/post_timeTV"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="POSTED TIME:"
+                                            android:textColor="@color/colorPrimaryDark"
+                                            android:textSize="15sp"></TextView>
+
+                                </LinearLayout>
 
 
-                        <TextView
-                            android:id="@+id/post_timeTV"
-                            android:layout_width="wrap_content"
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="POSTED TIME:"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="15sp"></TextView>
+                            android:layout_gravity="right"
+                            android:gravity="right">
+
+                                <ImageButton
+                                    android:id="@+id/deleteBtn"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@null"
+                                    android:src="@drawable/ic_delete_btn">
+
+                                </ImageButton>
+
+                        </LinearLayout>
+
 
                 </LinearLayout>
 
-
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical"
@@ -64,81 +111,197 @@
                             android:background="@drawable/layout_bg"
 
 
-                            android:gravity="center_horizontal"
+                            android:gravity=""
                             android:orientation="vertical">
 
-                                <TextView
-                                    android:id="@+id/post_idTV"
+                                <LinearLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="ID:"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textSize="20sp"></TextView>
+                                    android:orientation="horizontal"
+                                    android:paddingTop="2dp">
 
-                                <TextView
-                                    android:id="@+id/post_locTV"
+                                        <TextView
+                                            android:id="@+id/ID_tv"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:paddingLeft="10dp"
+                                            android:paddingRight="10dp"
+                                            android:text="ID:"
+                                            android:textColor="@color/colorPrimaryDark"
+                                            android:textSize="19sp"></TextView>
+
+                                        <TextView
+                                            android:id="@+id/post_idTV"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="ID"
+                                            android:textColor="@color/colorPrimaryDark"
+                                            android:textSize="19sp"></TextView>
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="LOCATION:"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textSize="20sp"></TextView>
+                                    android:orientation="horizontal">
 
-                                <TextView
-                                    android:id="@+id/post_categoryTV"
+                                        <TextView
+                                            android:id="@+id/cat_tv"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:paddingLeft="10dp"
+                                            android:paddingRight="10dp"
+                                            android:text="MEDIUM:"
+                                            android:textColor="@color/colorPrimaryDark"
+                                            android:textSize="19sp"></TextView>
+
+                                        <TextView
+                                            android:id="@+id/post_categoryTV"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Medium"
+                                            android:textColor="@color/colorPrimaryDark"
+                                            android:textSize="20sp"></TextView>
+
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Medium"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textSize="20sp"></TextView>
+                                    android:orientation="horizontal">
 
-                                <TextView
-                                    android:id="@+id/post_salTV"
+                                        <TextView
+                                            android:id="@+id/loc_tv"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:paddingLeft="10dp"
+                                            android:paddingRight="10dp"
+                                            android:text="SALARY:"
+                                            android:textColor="@color/colorPrimaryDark"
+                                            android:textSize="19sp"></TextView>
+
+
+                                        <TextView
+                                            android:id="@+id/post_salTV"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="SALARY:"
+                                            android:textColor="@color/colorPrimaryDark"
+                                            android:textSize="19sp"></TextView>
+
+
+                                </LinearLayout>
+
+                                <LinearLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="SALARY:"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textSize="20sp"></TextView>
+                                    android:orientation="horizontal">
 
-                                <TextView
-                                    android:id="@+id/post_genderTV"
+                                        <TextView
+                                            android:id="@+id/gen"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:paddingLeft="10dp"
+                                            android:paddingRight="10dp"
+                                            android:text="GENDER:"
+                                            android:textColor="@color/colorPrimaryDark"
+                                            android:textSize="19sp"></TextView>
+
+
+                                        <TextView
+                                            android:id="@+id/post_genderTV"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Gender"
+                                            android:textColor="@color/colorPrimaryDark"
+                                            android:textSize="19sp"></TextView>
+
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Gender"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textSize="20sp"></TextView>
+                                    android:orientation="horizontal">
 
-                                <TextView
-                                    android:id="@+id/post_daysTV"
+                                        <TextView
+                                            android:id="@+id/dayTv"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:paddingLeft="10dp"
+                                            android:paddingRight="10dp"
+                                            android:text="DAYS:"
+                                            android:textColor="@color/colorPrimaryDark"
+                                            android:textSize="19sp"></TextView>
+
+
+                                        <TextView
+                                            android:id="@+id/post_daysTV"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Days"
+                                            android:textColor="@color/colorPrimaryDark"
+                                            android:textSize="20sp"></TextView>
+
+
+                                </LinearLayout>
+
+                                <LinearLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Days"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textSize="20sp"></TextView>
+                                    android:orientation="horizontal">
+
+                                        <TextView
+                                            android:id="@+id/subTV"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:paddingLeft="10dp"
+                                            android:paddingRight="10dp"
+                                            android:text="SUBJECTS:"
+                                            android:textColor="@color/colorPrimaryDark"
+                                            android:textSize="19sp"></TextView>
+
+                                        <TextView
+                                            android:id="@+id/post_subTV"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Subject"
+                                            android:textColor="@color/colorPrimaryDark"
+                                            android:textSize="19sp"></TextView>
 
 
-                                <TextView
-                                    android:id="@+id/post_subTV"
+                                </LinearLayout>
+
+                                <LinearLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Subject"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textSize="20sp"></TextView>
+                                    android:orientation="horizontal"
+                                    android:paddingBottom="10dp">
 
-                                <TextView
-                                    android:id="@+id/post_notesTV"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="NOTE"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textSize="20sp"></TextView>
+                                        <TextView
+                                            android:id="@+id/note"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:paddingLeft="10dp"
+                                            android:paddingRight="10dp"
+                                            android:text="NOTES:"
+                                            android:textColor="@color/colorPrimaryDark"
+                                            android:textSize="19sp"></TextView>
 
-                                <TextView
-                                    android:id="@+id/post_classTv"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Class"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textSize="15sp"></TextView>
+                                        <TextView
+                                            android:id="@+id/post_notesTV"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="NOTE"
+                                            android:textColor="@color/colorPrimaryDark"
+                                            android:textSize="20sp"></TextView>
+
+
+                                </LinearLayout>
 
 
                         </LinearLayout>
@@ -155,28 +318,35 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-
+                    android:orientation="horizontal"
+                    android:weightSum="3"
+                    android:padding="5dp"
                     >
+
+
 
                         <ImageButton
                             android:id="@+id/moreBtnTV"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:background="@null"
-                            android:paddingBottom="50sp"
-                            android:src="@drawable/ic_more_black_btn">
+                            android:src="@drawable/ic_more_black_btn"
+                            android:layout_weight="1">
 
                         </ImageButton>
+
+
+
 
                         <ImageButton
                             android:id="@+id/sendMsgBtn"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@null"
-                            android:paddingBottom="50dp"
+                            android:layout_weight="1"
+
                             android:src="@drawable/ic_more_msg_btn">
 
                         </ImageButton>
@@ -187,6 +357,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@null"
+                            android:layout_weight="1"
+
                             android:src="@drawable/ic_add_btn">
 
                         </ImageButton>
@@ -196,4 +368,7 @@
 
 
         </LinearLayout>
+
+
+
 </androidx.cardview.widget.CardView>

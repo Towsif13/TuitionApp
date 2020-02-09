@@ -31,7 +31,6 @@ public class SigninActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private DatabaseReference RootRef;
-    private String currentUserID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,8 +114,8 @@ public class SigninActivity extends AppCompatActivity {
                     showErrorDialog("There was a problem");
                 }else {
                     if (mAuth.getCurrentUser().isEmailVerified()){
-                        //String userId = mAuth.getCurrentUser().getUid();
-                        RootRef.child("Users").child("Student").child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+                        String userId = mAuth.getCurrentUser().getUid();
+                        RootRef.child("Users").child("Student").child(userId).addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 if (dataSnapshot.exists()){

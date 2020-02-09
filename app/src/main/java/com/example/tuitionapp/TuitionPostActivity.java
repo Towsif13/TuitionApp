@@ -210,7 +210,7 @@ public class TuitionPostActivity extends AppCompatActivity {
         offerMap.put("FirstName",fname);
         offerMap.put("LastName",lname);
         offerMap.put("Medium",medium);
-        offerMap.put("Class",clas);
+        offerMap.put("sClass",clas);
         offerMap.put("Region",region);
         offerMap.put("Address",address);
 

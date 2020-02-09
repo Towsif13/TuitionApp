@@ -11,6 +11,12 @@
         android:id="@+id/main_menu_user"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_account_circle_black_24dp"></item>
+    <item
+        android:title="Search"
+        android:id="@+id/searchAction"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_search_btn"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"></item>
 
 
 </menu>

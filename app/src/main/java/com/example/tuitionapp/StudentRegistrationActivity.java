@@ -282,6 +282,7 @@ public class StudentRegistrationActivity extends AppCompatActivity implements Da
                                 String region = student_region;
 
                                 HashMap<String,String> profileMap = new HashMap<>();
+                                profileMap.put("Id",userId);
                                 profileMap.put("FirstName",fname);
                                 profileMap.put("LastName",lname);
                                 profileMap.put("Address",address);

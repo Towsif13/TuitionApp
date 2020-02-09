@@ -77,6 +77,11 @@ public class TeacherLandingActivity extends AppCompatActivity {
             startActivity(intent);
             //Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show();
         }
+        if (item.getItemId() == R.id.main_menu_user){
+
+            Intent intent = new Intent(TeacherLandingActivity.this, UserActivity.class);
+            startActivity(intent);
+        }
         return true;
     }
 }

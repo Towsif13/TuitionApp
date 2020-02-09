@@ -5,11 +5,17 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
+import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -53,7 +59,6 @@ public class PostFragment extends Fragment {
 
 
         //init
-
         firebaseAuth =FirebaseAuth.getInstance();
 
 
@@ -77,6 +82,52 @@ public class PostFragment extends Fragment {
 
 
     }
+    // inflate option menu
+    public void onCreatOptionsMenu(Menu menu, MenuInflater inflater){
+
+        inflater.inflate(R.menu.menu_options,menu);
+
+        //searchview to search posts by by category
+        MenuItem item =menu.findItem(R.id.searchAction);
+
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+//        search listener
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                //called when user press search button
+
+                if(!TextUtils.isEmpty(query)){
+
+                    searchPosts(query);
+                }else{
+                    loadPosts();
+                }
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                //called as and when user oress any letter
+
+                if(!TextUtils.isEmpty(newText)){
+
+                    searchPosts(newText);
+                }else{
+                    loadPosts();
+                }
+                return false;
+            }
+        });
+
+
+        super.onCreateOptionsMenu(menu,inflater);
+
+    }
+
+
+
 
     private void loadPosts(){
         // path of all posts
@@ -110,6 +161,51 @@ public class PostFragment extends Fragment {
                 Toast.makeText(getActivity(), ""+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
+    }
+
+    // search option isnt fully done yet
+
+    private void searchPosts(final String  query){
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("TuitionPosts");
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                postList.clear();
+                for (DataSnapshot ds: dataSnapshot.getChildren()){
+                    Post post = ds.getValue(Post.class);
+
+
+                    if(post.getsClass().toLowerCase().contains(query.toLowerCase())||post.getPreferredGender().toLowerCase().contains(query.toLowerCase())
+                            ||post.getAddress().toLowerCase().contains(query.toLowerCase())){
+
+                        postList.add(post);
+
+
+                    }
+
+
+                    //adapter
+                    adapterPosts = new AdapterPosts(getActivity(),postList);
+                    // set adapter to recycleview
+
+                    recyclerView.setAdapter(adapterPosts);
+
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // error handlle
+                Toast.makeText(getActivity(), ""+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
     }
 

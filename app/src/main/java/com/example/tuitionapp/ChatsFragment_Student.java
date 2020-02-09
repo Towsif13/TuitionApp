@@ -24,8 +24,5 @@ public class ChatsFragment_Student extends Fragment {
         return inflater.inflate(R.layout.fragment_chats_fragment__student, container, false);
     }
 
-//blaaaajjjjlll
 
-
-//lllll
 }

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -18,7 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class UserActivity extends AppCompatActivity {
-
+    FirebaseAuth mAuth;
     DatabaseReference reference;
     RecyclerView recyclerView;
     ArrayList<UserContacts> list;
@@ -37,29 +38,90 @@ public class UserActivity extends AppCompatActivity {
         setSupportActionBar(mtoolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Tutors");
         recyclerView.setAdapter(adapter);
 
-        reference = FirebaseDatabase.getInstance().getReference().child("Users").child("Teacher");
-        reference.addValueEventListener(new ValueEventListener() {
+        reference = FirebaseDatabase.getInstance().getReference();
+
+
+
+
+
+
+        // getting the current user
+        String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+
+        // checking the current user is  in the studnet node or teacher node
+        reference.child("Users").child("Student").child( currentuser).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                list = new ArrayList<UserContacts>();
-                for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
-                {
-                    UserContacts p = dataSnapshot1.getValue(UserContacts.class);
-                    list.add(p);
+                if (dataSnapshot.exists()){
+                    getSupportActionBar().setTitle("Tutors List");
+                    recyclerView.setAdapter(adapter);
+                    reference.child("Users").child("Teacher").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            list = new ArrayList<UserContacts>();
+                            for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
+                            {
+                                UserContacts p = dataSnapshot1.getValue(UserContacts.class);
+                                list.add(p);
+                            }
+
+                            adapter = new UserAdapter(UserActivity.this,list);
+                            recyclerView.setAdapter(adapter);
+                            adapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            Toast.makeText(UserActivity.this, "Opsss.... Something is wrong", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                 //   Toast.makeText(UserActivity.this, "working", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    getSupportActionBar().setTitle("Student List");
+
+
+
+                    reference.child("Users").child("Student").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            list = new ArrayList<UserContacts>();
+                            for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
+                            {
+                                UserContacts p = dataSnapshot1.getValue(UserContacts.class);
+                                list.add(p);
+                            }
+
+                            adapter = new UserAdapter(UserActivity.this,list);
+                            recyclerView.setAdapter(adapter);
+                            adapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            Toast.makeText(UserActivity.this, "Opsss.... Something is wrong", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                   // Toast.makeText(UserActivity.this, "not working", Toast.LENGTH_SHORT).show();
+
                 }
 
-                adapter = new UserAdapter(UserActivity.this,list);
-                recyclerView.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
-            }
+                }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(UserActivity.this, "Opsss.... Something is wrong", Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+
+
+
+
+
     }
 }

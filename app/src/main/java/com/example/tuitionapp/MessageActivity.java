@@ -75,20 +75,98 @@ public class MessageActivity extends AppCompatActivity {
 
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("Users")
-                .child("Teacher").child(userid);
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
+
+
+
+
+
+
+        databaseReference.child("Users").child("Student").child( currentuser).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()){
 
-                //list = new ArrayList<UserContacts>();
-                  UserContacts p = dataSnapshot.getValue(UserContacts.class);
-                    //list.add(p);
-                    msg_user_name.setText(p.getFirstName());
-                    msg_user_lastName.setText(p.getLastName());
+                    databaseReference.child("Users")
+                            .child("Teacher").child(userid).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                readMessage(firebaseUser.getUid(),userid);
+                            //list = new ArrayList<UserContacts>();
+                            UserContacts p = dataSnapshot.getValue(UserContacts.class);
+                            //list.add(p);
+                            msg_user_name.setText(p.getFirstName());
+                            msg_user_lastName.setText(p.getLastName());
+
+                            readMessage(firebaseUser.getUid(),userid);
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+                    imageButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            String msg = msg_send.getText().toString();
+                            if(!msg.equals("")){
+                                sendMessage(firebaseUser.getUid(),userid,msg);
+                            }else {
+                                Toast.makeText(MessageActivity.this,"You cant send message",Toast.LENGTH_LONG);
+                            }
+                            msg_send.setText("");
+                        }
+                    });
+                    //   Toast.makeText(UserActivity.this, "working", Toast.LENGTH_SHORT).show();
+                }
+                else {
+
+
+
+                    databaseReference.child("Users")
+                            .child("Student").child(userid).addValueEventListener(new ValueEventListener()  {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                            //list = new ArrayList<UserContacts>();
+                            UserContacts p = dataSnapshot.getValue(UserContacts.class);
+                            //list.add(p);
+                            msg_user_name.setText(p.getFirstName());
+                            msg_user_lastName.setText(p.getLastName());
+
+                            readMessage(firebaseUser.getUid(),userid);
+                            Toast.makeText(MessageActivity.this, userid, Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+                    imageButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            String msg = msg_send.getText().toString();
+                            if(!msg.equals("")){
+                                sendMessage(firebaseUser.getUid(),userid,msg);
+                            }else {
+                                Toast.makeText(MessageActivity.this,"You cant send message",Toast.LENGTH_LONG);
+                            }
+                            msg_send.setText("");
+                        }
+                    });
+
+
+                    // Toast.makeText(UserActivity.this, "not working", Toast.LENGTH_SHORT).show();
+
+                }
+
             }
 
             @Override
@@ -97,18 +175,6 @@ public class MessageActivity extends AppCompatActivity {
             }
         });
 
-        imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String msg = msg_send.getText().toString();
-                if(!msg.equals("")){
-                    sendMessage(firebaseUser.getUid(),userid,msg);
-                }else {
-                    Toast.makeText(MessageActivity.this,"You cant send message",Toast.LENGTH_LONG);
-                }
-                msg_send.setText("");
-            }
-        });
 
     }
 
