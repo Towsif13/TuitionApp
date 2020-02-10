@@ -38,4 +38,6 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.0.1'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    implementation 'androidx.percentlayout:percentlayout:1.0.0'
 }

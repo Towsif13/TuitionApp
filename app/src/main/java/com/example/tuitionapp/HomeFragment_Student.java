@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 
 public class HomeFragment_Student extends Fragment {
 
-    ConstraintLayout postOffer;
+    ConstraintLayout postOffer , studentProfile;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,6 +35,15 @@ public class HomeFragment_Student extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(),TuitionPostActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        studentProfile = getActivity().findViewById(R.id.studentProfile);
+        studentProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(),StudentProfileActivity.class);
                 startActivity(intent);
             }
         });

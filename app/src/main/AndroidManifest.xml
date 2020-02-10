@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ResetPasswordActivity"></activity>
+        <activity android:name=".TeacherProfileActivity"></activity>
+        <activity android:name=".StudentProfileActivity" />
+        <activity android:name=".ResetPasswordActivity" />
         <activity android:name=".MessageActivity" />
         <activity android:name=".TuitionPostActivity" />
         <activity android:name=".TeacherLandingActivity" />
