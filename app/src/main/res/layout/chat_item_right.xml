@@ -29,6 +29,15 @@
             android:background="@drawable/msg_background_right">
 
         </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/msg_seen"
+            android:layout_below="@+id/show_msg"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true">
+
+        </TextView>
 
 
     </RelativeLayout>
