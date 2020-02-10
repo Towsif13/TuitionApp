@@ -12,4 +12,20 @@
 
     <color name="colorBlue">#BEF1D8</color>
 
+<!--    profile-->
+    <color name="profilePrimary">#49BEFF</color>
+    <color name="profilePrimaryDark">#65DCE5</color>
+    <color name="accent">#0d5d98</color>
+    <color name="address">#2F7092</color>
+    <color name="followers">#0d5898</color>
+    <color name="headings">#3797cf</color>
+    <color name="solidCircle">#80ffff</color>
+    <color name="circleBorder">#30ffff</color>
+    <color name="gradEnd">#67efc8</color>
+    <color name="gradStart">#63c9ff</color>
+    <color name="followersBg">#65dce5</color>
+    <color name="followingBg">#49beff</color>
+    <color name="grey">#e5e5e5</color>
+
+
 </resources>
