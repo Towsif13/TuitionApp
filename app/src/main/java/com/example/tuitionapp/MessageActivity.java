@@ -40,6 +40,7 @@ public class MessageActivity extends AppCompatActivity {
     MessageAdapter messageAdapter;
     ArrayList<Chat>chats;
     RecyclerView recyclerView;
+    ValueEventListener valueEventListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,17 +73,9 @@ public class MessageActivity extends AppCompatActivity {
         Intent intent = getIntent();
         final String userid = intent.getStringExtra("userId");
 
-
-
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference();
         String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-
-
-
-
-
 
         databaseReference.child("Users").child("Student").child( currentuser).addValueEventListener(new ValueEventListener() {
             @Override
@@ -101,6 +94,7 @@ public class MessageActivity extends AppCompatActivity {
                             msg_user_lastName.setText(p.getLastName());
 
                             readMessage(firebaseUser.getUid(),userid);
+                            seenMessage(userid);
 
                         }
 
@@ -109,6 +103,7 @@ public class MessageActivity extends AppCompatActivity {
 
                         }
                     });
+
 
                     imageButton.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -126,8 +121,6 @@ public class MessageActivity extends AppCompatActivity {
                 }
                 else {
 
-
-
                     databaseReference.child("Users")
                             .child("Student").child(userid).addValueEventListener(new ValueEventListener()  {
                         @Override
@@ -141,6 +134,7 @@ public class MessageActivity extends AppCompatActivity {
 
                             readMessage(firebaseUser.getUid(),userid);
                             Toast.makeText(MessageActivity.this, userid, Toast.LENGTH_SHORT).show();
+                            seenMessage(userid);
                         }
 
                         @Override
@@ -148,6 +142,7 @@ public class MessageActivity extends AppCompatActivity {
 
                         }
                     });
+
 
                     imageButton.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -167,6 +162,7 @@ public class MessageActivity extends AppCompatActivity {
 
                 }
 
+
             }
 
             @Override
@@ -178,6 +174,39 @@ public class MessageActivity extends AppCompatActivity {
 
     }
 
+    private void seenMessage (final String userid){
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("Chats");
+
+        valueEventListener = databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
+                {
+                    Chat chat = dataSnapshot1.getValue(Chat.class);
+                    if(chat.getReceiver().equals(firebaseUser.getUid()) && chat.getSender().equals(userid)){
+                        HashMap<String,Object> hashMap = new HashMap<>();
+                        hashMap.put("isSeen",true);
+                        dataSnapshot1.getRef().updateChildren(hashMap);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        databaseReference.removeEventListener(valueEventListener);
+    }
+
     private void sendMessage(String sender, String receiver, String message){
 
        DatabaseReference Reference = FirebaseDatabase.getInstance().getReference();
@@ -186,6 +215,7 @@ public class MessageActivity extends AppCompatActivity {
         hashMap.put("sender",sender);
         hashMap.put("receiver",receiver);
         hashMap.put("message",message);
+        hashMap.put("isSeen",false);
 
         Reference.child("Chats").push().setValue(hashMap);
 

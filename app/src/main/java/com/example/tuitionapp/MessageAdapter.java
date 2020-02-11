@@ -50,8 +50,18 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyViewHo
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
 
-        final Chat msg = chats.get(position);
+        Chat msg = chats.get(position);
         holder.show_msg.setText(msg.getMessage());
+
+        if(position == (chats.size()-1)){
+            if(msg.isIsseen()){
+                holder.msg_seen.setText("Seen");
+            }else {
+                holder.msg_seen.setText("Delivered");
+            }
+        }else{
+            holder.msg_seen.setVisibility(View.GONE);
+        }
 
         // Picasso.get().load(profiles.get(position).getProfilePic()).into(holder.profilePic);
        /* if(profiles.get(position).getPermission()) {
@@ -68,7 +78,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyViewHo
         });*/
     }
 
-
+//hi
 
     @Override
     public int getItemCount() {
@@ -77,12 +87,13 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyViewHo
 
     class MyViewHolder extends RecyclerView.ViewHolder
     {
-        TextView show_msg;
+        TextView show_msg,msg_seen;
         //  ImageView profilePic;
         //  Button btn;
         public MyViewHolder(View itemView) {
             super(itemView);
             show_msg = (TextView) itemView.findViewById(R.id.show_msg);
+            msg_seen = itemView.findViewById(R.id.msg_seen);
 
            /* profilePic = (ImageView) itemView.findViewById(R.id.profilePic);
             btn = (Button) itemView.findViewById(R.id.checkDetails);*/
