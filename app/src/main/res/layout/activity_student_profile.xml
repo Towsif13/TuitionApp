@@ -196,6 +196,7 @@
                             android:textSize="13sp" />
 
                         <TextView
+                            android:id="@+id/studentEmail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-light"
@@ -225,10 +226,11 @@
                             android:textSize="13sp" />
 
                         <TextView
+                            android:id="@+id/studentPhone"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-light"
-                            android:text="01965287811"
+                            android:text="012345678"
                             android:textColor="#000000"
                             android:textSize="18sp" />
 
@@ -254,6 +256,7 @@
                             android:textSize="13sp" />
 
                         <TextView
+                            android:id="@+id/studentRegion"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-light"
@@ -283,6 +286,7 @@
                             android:textSize="13sp" />
 
                         <TextView
+                            android:id="@+id/studentAddress"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-light"
@@ -312,6 +316,7 @@
                             android:textSize="13sp" />
 
                         <TextView
+                            android:id="@+id/studentDOB"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-light"
@@ -341,6 +346,7 @@
                             android:textSize="13sp" />
 
                         <TextView
+                            android:id="@+id/studentGender"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-light"
@@ -370,6 +376,7 @@
                             android:textSize="13sp" />
 
                         <TextView
+                            android:id="@+id/studentMedium"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-light"
@@ -399,6 +406,7 @@
                             android:textSize="13sp" />
 
                         <TextView
+                            android:id="@+id/studentClass"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-light"
@@ -428,6 +436,7 @@
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingBtnStudentProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"

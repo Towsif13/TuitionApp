@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TeacherRegistrationActivity">
+    tools:context=".StudentEditProfileActivity">
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -21,7 +21,7 @@
             android:paddingBottom="20dp">
 
             <EditText
-                android:id="@+id/firstName"
+                android:id="@+id/editfirstName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
@@ -30,27 +30,12 @@
                 android:ems="10"
                 android:hint="First Name"
                 android:inputType="textPersonName"
-                app:layout_constraintBaseline_toBaselineOf="@+id/lastName"
-                app:layout_constraintEnd_toStartOf="@+id/lastName"
+                app:layout_constraintBaseline_toBaselineOf="@+id/editlastName"
+                app:layout_constraintEnd_toStartOf="@+id/editlastName"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <EditText
-                android:id="@+id/confirmPassword"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginEnd="25dp"
-                android:background="@drawable/edittext_style"
-                android:ems="10"
-                android:hint="Confirm Password"
-                android:inputType="textPassword"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/userPassword" />
-
-            <EditText
-                android:id="@+id/phone"
+                android:id="@+id/editphone"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
@@ -62,40 +47,10 @@
                 android:inputType="number"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/confirmPassword" />
+                app:layout_constraintTop_toBottomOf="@+id/editfirstName" />
 
             <EditText
-                android:id="@+id/userPassword"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginEnd="25dp"
-                android:background="@drawable/edittext_style"
-                android:ems="10"
-                android:hint="Password"
-                android:inputType="textPassword"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/userEmail" />
-
-            <EditText
-                android:id="@+id/userEmail"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginEnd="25dp"
-                android:background="@drawable/edittext_style"
-                android:ems="10"
-                android:hint="Email"
-                android:inputType="textPersonName"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/firstName" />
-
-            <EditText
-                android:id="@+id/lastName"
+                android:id="@+id/editlastName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="120dp"
@@ -105,11 +60,11 @@
                 android:hint="Last Name"
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/firstName"
+                app:layout_constraintStart_toEndOf="@+id/editfirstName"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/userAddress"
+                android:id="@+id/edituserAddress"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
@@ -121,7 +76,7 @@
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/phone" />
+                app:layout_constraintTop_toBottomOf="@+id/editphone" />
 
 
             <!--            <Spinner-->
@@ -133,19 +88,17 @@
             <!--                tools:layout_editor_absoluteY="485dp" />-->
 
             <RadioGroup
-                android:id="@+id/radioGroup"
+                android:id="@+id/editradioGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:layout_marginBottom="10dp"
                 android:orientation="horizontal"
-                app:layout_constraintBottom_toTopOf="@+id/registerFloatingActionButton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinner_department">
+                app:layout_constraintTop_toBottomOf="@+id/editspinner_medium">
 
                 <RadioButton
-                    android:id="@+id/maleGender"
+                    android:id="@+id/editmaleGender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -157,7 +110,7 @@
                     android:text="Male" />
 
                 <RadioButton
-                    android:id="@+id/femaleGender"
+                    android:id="@+id/editfemaleGender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -169,25 +122,34 @@
             </RadioGroup>
 
             <Spinner
-                android:id="@+id/spinner_department"
+                android:id="@+id/editspinner_medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="25dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/teacher_institution" />
+                app:layout_constraintTop_toBottomOf="@+id/editdateOfBirth" />
 
             <Spinner
-                android:id="@+id/spinner_year"
+                android:id="@+id/editspinner_class"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
                 android:layout_marginEnd="25dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/teacher_institution" />
+                app:layout_constraintTop_toBottomOf="@+id/editdateOfBirth" />
+
+            <Spinner
+                android:id="@+id/editspinner_region"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="25dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editphone" />
 
             <TextView
-                android:id="@+id/dateOfBirth"
+                android:id="@+id/editdateOfBirth"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
@@ -200,7 +162,7 @@
                 android:textSize="18dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/userAddress" />
+                app:layout_constraintTop_toBottomOf="@+id/edituserAddress" />
 
             <TextView
                 android:id="@+id/textView3"
@@ -208,7 +170,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="35dp"
                 android:fontFamily="sans-serif-black"
-                android:text="Teacher Register"
+                android:text="Student Edit Profile"
                 android:textColor="@android:color/black"
                 android:textSize="36sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -216,75 +178,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="9dp"
-                android:layout_marginBottom="20dp"
-                android:fontFamily="sans-serif"
-                android:text="Already have an account ?"
-                android:textColor="@android:color/black"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/signintext"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toStartOf="parent" />
 
-            <TextView
-                android:id="@+id/signintext"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:fontFamily="sans-serif"
-                android:text="Sign In"
-                android:textColor="@color/colorPrimary"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView" />
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/registerFloatingActionButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="165dp"
-                android:layout_marginEnd="25dp"
-                android:layout_marginBottom="25dp"
-                android:background="@color/colorPrimary"
-                android:backgroundTint="@color/colorPrimary"
-                android:clickable="true"
-                android:elevation="0dp"
-                app:borderWidth="0dp"
-                app:fabSize="normal"
-                app:layout_constraintBottom_toTopOf="@+id/signintext"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/userAddress"
-                app:srcCompat="@drawable/ic_arrow_forward" />
-
-            <Spinner
-                android:id="@+id/spinner_region"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginEnd="25dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/phone" />
-
-            <EditText
-                android:id="@+id/teacher_institution"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginEnd="25dp"
-                android:background="@drawable/edittext_style"
-                android:ems="10"
-                android:hint="Institution"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/dateOfBirth" />
 
             <!--            <EditText-->
             <!--                android:id="@+id/userGender"-->
@@ -301,5 +195,21 @@
 
 
     </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/editFloatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="25dp"
+        android:background="@color/colorPrimary"
+        android:backgroundTint="@color/colorPrimary"
+        android:clickable="true"
+        android:elevation="0dp"
+        app:borderWidth="0dp"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_check_white" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

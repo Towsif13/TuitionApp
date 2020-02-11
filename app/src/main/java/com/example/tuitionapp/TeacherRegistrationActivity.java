@@ -39,9 +39,9 @@ public class TeacherRegistrationActivity extends AppCompatActivity implements Da
     RadioGroup radioGroup;
     RadioButton radioButton;
     String sex = "Male";
-    String teacher_department , teacher_year , teacher_region;
+    String teacher_department , teacher_year , teacher_region ;
 
-    EditText userfirstname , userlastname , userEmail , userPassword , userConfirmPassword , userAddress, userInstitution;
+    EditText userfirstname , userlastname , userEmail , userPassword , userConfirmPassword , userAddress, userInstitution , userPhone;
 
     FloatingActionButton registerbtn;
 
@@ -143,6 +143,7 @@ public class TeacherRegistrationActivity extends AppCompatActivity implements Da
         userPassword = findViewById(R.id.userPassword);
         userConfirmPassword = findViewById(R.id.confirmPassword);
         userInstitution = findViewById(R.id.teacher_institution);
+        userPhone = findViewById(R.id.phone);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -198,6 +199,7 @@ public class TeacherRegistrationActivity extends AppCompatActivity implements Da
         String address = userAddress.getText().toString();
         String birthday = dateOfBirth.getText().toString();
         String institution = userInstitution.getText().toString();
+        String phone = userPhone.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
@@ -243,6 +245,11 @@ public class TeacherRegistrationActivity extends AppCompatActivity implements Da
             focusView = userInstitution;
             cancel = true;
         }
+        if(TextUtils.isEmpty(phone)){
+            userPhone.setError(getString(R.string.error_field_required));
+            focusView = userPhone;
+            cancel = true;
+        }
 
         if (cancel) {
             // There was an error; don't attempt login and focus the first
@@ -286,6 +293,8 @@ public class TeacherRegistrationActivity extends AppCompatActivity implements Da
                                 String department = teacher_department;
                                 String year = teacher_year;
                                 String region = teacher_region;
+                                String institution = userInstitution.getText().toString();
+                                String phone = userPhone.getText().toString();
 
                                 HashMap<String,String> profileMap = new HashMap<>();
                                 profileMap.put("Id",userId);
@@ -297,6 +306,8 @@ public class TeacherRegistrationActivity extends AppCompatActivity implements Da
                                 profileMap.put("Department",department);
                                 profileMap.put("Year",year);
                                 profileMap.put("Region",region);
+                                profileMap.put("Institution",institution);
+                                profileMap.put("Phone",phone);
                                 current_user_db.setValue(profileMap);
 
                                 Toast.makeText(TeacherRegistrationActivity.this, "Registration Complete Verify Email", Toast.LENGTH_SHORT).show();

@@ -41,7 +41,7 @@ public class StudentRegistrationActivity extends AppCompatActivity implements Da
     String sex = "Male";
     String student_class , student_medium , student_region;
 
-    EditText userfirstname , userlastname , userEmail , userPassword , userConfirmPassword , userAddress;
+    EditText userfirstname , userlastname , userEmail , userPassword , userConfirmPassword , userAddress , userPhone;
 
     FloatingActionButton registerbtn;
 
@@ -143,6 +143,7 @@ public class StudentRegistrationActivity extends AppCompatActivity implements Da
         userAddress = findViewById(R.id.userAddress);
         userPassword = findViewById(R.id.userPassword);
         userConfirmPassword = findViewById(R.id.confirmPassword);
+        userPhone = findViewById(R.id.phone);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -197,6 +198,7 @@ public class StudentRegistrationActivity extends AppCompatActivity implements Da
         String confirmPassword = userConfirmPassword.getText().toString();
         String address = userAddress.getText().toString();
         String birthday = dateOfBirth.getText().toString();
+        String phone = userPhone.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
@@ -235,6 +237,11 @@ public class StudentRegistrationActivity extends AppCompatActivity implements Da
         if(TextUtils.isEmpty(birthday)){
             dateOfBirth.setError(getString(R.string.error_field_required));
             focusView = dateOfBirth;
+            cancel = true;
+        }
+        if (TextUtils.isEmpty(phone)){
+            userPhone.setError(getString(R.string.error_field_required));
+            focusView = userPhone;
             cancel = true;
         }
 
@@ -280,6 +287,7 @@ public class StudentRegistrationActivity extends AppCompatActivity implements Da
                                 String clas = student_class;
                                 String medium = student_medium;
                                 String region = student_region;
+                                String phone = userPhone.getText().toString();
 
                                 HashMap<String,String> profileMap = new HashMap<>();
                                 profileMap.put("Id",userId);
@@ -291,6 +299,7 @@ public class StudentRegistrationActivity extends AppCompatActivity implements Da
                                 profileMap.put("Class",clas);
                                 profileMap.put("Medium",medium);
                                 profileMap.put("Region",region);
+                                profileMap.put("Phone",phone);
                                 current_user_db.setValue(profileMap);
 
                                 Toast.makeText(StudentRegistrationActivity.this, "Registration Complete Verify Email", Toast.LENGTH_SHORT).show();

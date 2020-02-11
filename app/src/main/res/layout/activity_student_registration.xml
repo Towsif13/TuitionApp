@@ -50,6 +50,21 @@
                 app:layout_constraintTop_toBottomOf="@+id/userPassword" />
 
             <EditText
+                android:id="@+id/phone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="25dp"
+                android:background="@drawable/edittext_style"
+                android:ems="10"
+                android:hint="Phone"
+                android:inputType="number"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/confirmPassword" />
+
+            <EditText
                 android:id="@+id/userPassword"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -106,7 +121,7 @@
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/confirmPassword" />
+                app:layout_constraintTop_toBottomOf="@+id/phone" />
 
 
             <!--            <Spinner-->
@@ -254,7 +269,7 @@
                 android:layout_marginTop="25dp"
                 android:layout_marginEnd="25dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/confirmPassword" />
+                app:layout_constraintTop_toBottomOf="@+id/phone" />
 
             <!--            <EditText-->
             <!--                android:id="@+id/userGender"-->
