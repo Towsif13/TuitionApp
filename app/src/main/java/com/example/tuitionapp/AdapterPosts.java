@@ -5,6 +5,8 @@ import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,20 +15,23 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
+public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> implements Filterable {
 
     Context context;
     List<Post> postList;
+    List<Post> mDataFiltered;
 
 
     public AdapterPosts (Context c , List<Post> p){
 
         this.context = c;
         this.postList = p;
+        this.mDataFiltered = p;
 
     }
 
@@ -42,22 +47,25 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
+
+        // bind data here
+
+
         //get data
 
-        String firstNameName = postList.get(position).getFirstName();
-        String lastName = postList.get(position).getLastName();
-
-        String Address = postList.get(position).getAddress();
-        String Date = postList.get(position).getDate();
-        String Days = postList.get(position).getDays();
-        String Gender = postList.get(position).getPreferredGender();
-        String Medium = postList.get(position).getMedium();
-        String Notes = postList.get(position).getNotes();
-        String Region = postList.get(position).getRegion();
-        String Salary = postList.get(position).getSalary();
-        String sClass = postList.get(position).getsClass();
-        String Subjects = postList.get(position).getSubjects();
-        String Time = postList.get(position).getTime();
+        String firstNameName = mDataFiltered.get(position).getFirstName();
+        String lastName = mDataFiltered.get(position).getLastName();
+        String Address = mDataFiltered.get(position).getAddress();
+        String Date = mDataFiltered.get(position).getDate();
+        String Days = mDataFiltered.get(position).getDays();
+        String Gender = mDataFiltered.get(position).getPreferredGender();
+        String Medium = mDataFiltered.get(position).getMedium();
+        String Notes = mDataFiltered.get(position).getNotes();
+        String Region = mDataFiltered.get(position).getRegion();
+        String Salary = mDataFiltered.get(position).getSalary();
+        String sClass = mDataFiltered.get(position).getsClass();
+        String Subjects = mDataFiltered.get(position).getSubjects();
+        String Time = mDataFiltered.get(position).getTime();
 
         // convert Time stap to dd/mm/yyyy hh:mm am/pm
         //Calendar calender = Calendar.getInstance(Locale.getDefault());
@@ -120,7 +128,41 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
 
     @Override
     public int getItemCount() {
-        return postList.size();
+        return mDataFiltered.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String key = charSequence.toString();
+                if(key.isEmpty()){
+                    mDataFiltered = postList;
+
+                }else {
+                    List <Post> listFiltered = new ArrayList<>();
+                    for(Post row : postList){
+                        if(row.getPreferredGender().toLowerCase().contains(key.toLowerCase())|| row.getsClass().toLowerCase().contains(key.toLowerCase())){
+                            listFiltered.add(row);
+                        }
+                    }
+
+                    mDataFiltered = listFiltered;
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = mDataFiltered;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+
+                mDataFiltered = (List<Post>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
     // creating adapter class for recyleviwew

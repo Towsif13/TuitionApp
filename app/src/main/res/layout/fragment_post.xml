@@ -12,15 +12,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/search_post"
+
+
+        <EditText
+            android:layout_margin="5dp"
+            android:hint="Search"
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/ic_search_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/search_item"
+            android:background="@drawable/search_input_style">
 
-            android:autofillHints="Search post Here">
 
-        </androidx.appcompat.widget.SearchView>
+        </EditText>
+
         <androidx.recyclerview.widget.RecyclerView
+            android:paddingTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/postRecyclerView"
