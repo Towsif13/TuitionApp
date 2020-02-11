@@ -12,8 +12,10 @@
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -87,6 +89,21 @@
             <!--                tools:layout_editor_absoluteX="220dp"-->
             <!--                tools:layout_editor_absoluteY="485dp" />-->
 
+            <EditText
+                android:id="@+id/editteacher_institution"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="25dp"
+                android:background="@drawable/edittext_style"
+                android:ems="10"
+                android:hint="Institution"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editdateOfBirth" />
+
             <RadioGroup
                 android:id="@+id/editradioGroup"
                 android:layout_width="wrap_content"
@@ -140,6 +157,16 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editteacher_institution" />
 
+            <Spinner
+                android:id="@+id/editspinner_region"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="25dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editphone" />
+
+
             <TextView
                 android:id="@+id/editdateOfBirth"
                 android:layout_width="0dp"
@@ -169,32 +196,6 @@
                 app:layout_constraintHorizontal_bias="0.085"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-
-
-            <Spinner
-                android:id="@+id/editspinner_region"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginEnd="25dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editphone" />
-
-            <EditText
-                android:id="@+id/editteacher_institution"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginEnd="25dp"
-                android:background="@drawable/edittext_style"
-                android:ems="10"
-                android:hint="Institution"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editdateOfBirth" />
 
             <!--            <EditText-->
             <!--                android:id="@+id/userGender"-->
