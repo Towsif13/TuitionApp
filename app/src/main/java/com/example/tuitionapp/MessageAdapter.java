@@ -78,8 +78,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyViewHo
         });*/
     }
 
-//hi
-
     @Override
     public int getItemCount() {
         return chats.size();
