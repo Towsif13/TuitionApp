@@ -30,7 +30,12 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Calendar;
 import java.util.HashMap;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class StudentEditProfileActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
+
+    CircleImageView studentProfileImage;
+    private static final int gallarypic = 1;
 
     TextView dateOfBirth;
     DatePickerDialog.OnDateSetListener setListener;
@@ -126,6 +131,19 @@ public class StudentEditProfileActivity extends AppCompatActivity implements Dat
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
+            }
+        });
+
+        studentProfileImage = findViewById(R.id.studentProfileImage);
+        studentProfileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent galleryIntent = new Intent();
+                galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
+                galleryIntent.setType("image/*");
+                startActivityForResult(galleryIntent,gallarypic);
+                Toast.makeText(StudentEditProfileActivity.this, "Pro pic", Toast.LENGTH_SHORT).show();
+                //TODO: profile pic
             }
         });
 
