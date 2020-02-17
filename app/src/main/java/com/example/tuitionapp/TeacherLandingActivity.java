@@ -82,6 +82,11 @@ public class TeacherLandingActivity extends AppCompatActivity {
             Intent intent = new Intent(TeacherLandingActivity.this, UserActivity.class);
             startActivity(intent);
         }
+        if (item.getItemId() == R.id.main_menu_public_profile){
+
+            Intent intent = new Intent(TeacherLandingActivity.this, PublicTeacherProfileActivity.class);
+            startActivity(intent);
+        }
         return true;
     }
 }
