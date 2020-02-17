@@ -11,13 +11,16 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -43,6 +46,8 @@ public class PostFragment extends Fragment {
     List<Post> postList;
     AdapterPosts adapterPosts;
 
+    EditText seachInput;
+
 
 
     public PostFragment(){
@@ -57,6 +62,8 @@ public class PostFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_post, container, false);
 
+
+        seachInput = view.findViewById(R.id.search_item);
 
         //init
         firebaseAuth =FirebaseAuth.getInstance();
@@ -75,56 +82,72 @@ public class PostFragment extends Fragment {
 
         postList = new ArrayList<>();
         loadPosts();
+        seachInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                adapterPosts.getFilter().filter(charSequence);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
 
         return  view;
 
 
     }
-    // inflate option menu
-    public void onCreatOptionsMenu(Menu menu, MenuInflater inflater){
-
-        inflater.inflate(R.menu.menu_options,menu);
-
-        //searchview to search posts by by category
-        MenuItem item =menu.findItem(R.id.searchAction);
-
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
-//        search listener
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                //called when user press search button
-
-                if(!TextUtils.isEmpty(query)){
-
-                    searchPosts(query);
-                }else{
-                    loadPosts();
-                }
-
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                //called as and when user oress any letter
-
-                if(!TextUtils.isEmpty(newText)){
-
-                    searchPosts(newText);
-                }else{
-                    loadPosts();
-                }
-                return false;
-            }
-        });
-
-
-        super.onCreateOptionsMenu(menu,inflater);
-
-    }
+//    // inflate option menu
+//    public void onCreatOptionsMenu(Menu menu, MenuInflater inflater){
+//
+//        inflater.inflate(R.menu.menu_options,menu);
+//
+//        //searchview to search posts by by category
+//      //  MenuItem item =menu.findItem(R.id.searchAction);
+//
+//       // SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+////        search listener
+////        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+////            @Override
+////            public boolean onQueryTextSubmit(String query) {
+////                //called when user press search button
+////
+////                if(!TextUtils.isEmpty(query)){
+////
+////                    searchPosts(query);
+////                }else{
+////                    loadPosts();
+////                }
+////
+////                return false;
+////            }
+////
+////            @Override
+////            public boolean onQueryTextChange(String newText) {
+////                //called as and when user oress any letter
+////
+////                if(!TextUtils.isEmpty(newText)){
+////
+////                    searchPosts(newText);
+////                }else{
+////                    loadPosts();
+////                }
+////                return false;
+////            }
+////        });
+//
+//
+//        super.onCreateOptionsMenu(menu,inflater);
+//
+//    }
 
 
 
