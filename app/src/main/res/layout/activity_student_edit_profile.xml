@@ -60,7 +60,7 @@
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/editfirstName"
-                app:layout_constraintTop_toBottomOf="@+id/studentProfileImage" />
+                app:layout_constraintTop_toBottomOf="@+id/editStudentProfileImage" />
 
             <EditText
                 android:id="@+id/edituserAddress"
@@ -186,7 +186,7 @@
                 app:srcCompat="@drawable/ic_check_white" />
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/studentProfileImage"
+                android:id="@+id/editStudentProfileImage"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_margin="10dp"

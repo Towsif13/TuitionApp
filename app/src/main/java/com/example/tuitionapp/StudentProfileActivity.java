@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -17,6 +18,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class StudentProfileActivity extends AppCompatActivity {
 
@@ -31,6 +35,8 @@ public class StudentProfileActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListner;
     private DatabaseReference myref;
     private String uid;
+
+    private CircleImageView studentProPic;
 
     FloatingActionButton floatingActionButton;
 
@@ -66,6 +72,8 @@ public class StudentProfileActivity extends AppCompatActivity {
         studentMedium = findViewById(R.id.studentMedium);
         studentClass = findViewById(R.id.studentClass);
 
+        studentProPic = findViewById(R.id.student_pro_pic);
+
         mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myref = mFirebaseDatabase.getReference();
@@ -87,6 +95,13 @@ public class StudentProfileActivity extends AppCompatActivity {
                 String medium = dataSnapshot.child("Medium").getValue().toString();
                 String classs = dataSnapshot.child("Class").getValue().toString();
 
+                if (dataSnapshot.child("ProfileImage").exists()){
+                    String propic = dataSnapshot.child("ProfileImage").getValue().toString();
+                    Picasso.get().load(propic).into(studentProPic);
+                    Toast.makeText(StudentProfileActivity.this, propic, Toast.LENGTH_LONG).show();
+
+                }
+
                 studentName.setText(name);
                 studentEmail.setText(email);
                 studentPhone.setText(phone);
@@ -96,6 +111,8 @@ public class StudentProfileActivity extends AppCompatActivity {
                 studentGender.setText(gender);
                 studentMedium.setText(medium);
                 studentClass.setText(classs);
+
+                //Picasso.get().load(propic).into(studentProPic);
             }
 
             @Override
