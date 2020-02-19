@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -45,9 +46,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class StudentEditProfileActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
 
+    private ProgressBar progressBar;
     CircleImageView studentProfileImage;
-    private static final int gallarypic = 1;
-    private StorageReference userProfileImagesRef;
+    private Uri studentPicUri=null;
+    private StorageReference storageReference;
+    private String studentpropiclink;
+
 
     TextView dateOfBirth;
     DatePickerDialog.OnDateSetListener setListener;
@@ -68,7 +72,7 @@ public class StudentEditProfileActivity extends AppCompatActivity implements Dat
     private DatabaseReference myref;
     private String usersid;
 
-    String propiclink;
+    private String propiclink;
 
     String[] mClass = {"Class 1","Class 2","Class 3","Class 4","Class 5","Class 6","Class 7",
             "Class 8","SSC","HSC","A level","O level"};
@@ -156,12 +160,6 @@ public class StudentEditProfileActivity extends AppCompatActivity implements Dat
                         .setGuidelines(CropImageView.Guidelines.ON)
                         .setAspectRatio(1,1)
                         .start(StudentEditProfileActivity.this);
-//                Intent galleryIntent = new Intent();
-//                galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
-//                galleryIntent.setType("image/*");
-//                startActivityForResult(galleryIntent,gallarypic);
-//                Toast.makeText(StudentEditProfileActivity.this, "Pro pic", Toast.LENGTH_SHORT).show();
-                //TODO: profile pic
             }
         });
 
@@ -186,7 +184,9 @@ public class StudentEditProfileActivity extends AppCompatActivity implements Dat
         final FirebaseUser user = mAuth.getCurrentUser();
         usersid = user.getUid();
 
-        userProfileImagesRef = FirebaseStorage.getInstance().getReference().child("ProfileImages");
+        storageReference = FirebaseStorage.getInstance().getReference();
+
+        progressBar = findViewById(R.id.progressBar);
 
         myref.child("Users").child("Student").child(usersid).addValueEventListener(new ValueEventListener() {
             @Override
@@ -199,14 +199,12 @@ public class StudentEditProfileActivity extends AppCompatActivity implements Dat
 
                 if (dataSnapshot.child("ProfileImage").exists()){
                     String propic = dataSnapshot.child("ProfileImage").getValue().toString();
-                    propiclink=propic;
+                    studentpropiclink=propic;
                     Picasso.get().load(propic).into(studentProfileImage);
+                    studentPicUri = Uri.parse(propic);
                     //Toast.makeText(StudentProfileActivity.this, propic, Toast.LENGTH_LONG).show();
 
                 }
-
-                //String propic = dataSnapshot.child("ProfileImage").getValue().toString();
-                //Picasso.get().load(propic).into(studentProfileImage);
             }
 
             @Override
@@ -219,81 +217,16 @@ public class StudentEditProfileActivity extends AppCompatActivity implements Dat
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode==gallarypic && resultCode==RESULT_OK && data != null)
-//        {
-//            Uri ImageUri = data.getData();
-//
-//            CropImage.activity()
-//                    .setGuidelines(CropImageView.Guidelines.ON)
-//                    .setAspectRatio(1,1)
-//                    .start(this);
-//        }
 
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
-
-            if (resultCode == RESULT_OK){
-                ///
-                final Uri resultUri = result.getUri();
-                final StorageReference filePath = userProfileImagesRef.child(usersid+".jpg");
-                filePath.putFile(resultUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        filePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                final String downloadUrl = uri.toString();
-                                myref.child("Users").child("Student").child(usersid).child("ProfileImage").setValue(downloadUrl).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()){
-                                            Toast.makeText(StudentEditProfileActivity.this, "Image saved in database", Toast.LENGTH_SHORT).show();
-                                            Intent intent = new Intent(StudentEditProfileActivity.this,StudentEditProfileActivity.class);
-                                            finish();
-                                            startActivity(intent);
-                                        }
-                                        else {
-                                            Toast.makeText(StudentEditProfileActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
-
-                                        }
-                                    }
-                                });
-                            }
-                        });
-                    }
-                });
-
-                ///
-//                Uri resultUri = result.getUri();
-//
-//                StorageReference filepath = userProfileImagesRef.child(usersid+".jpg");
-//                filepath.putFile(resultUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-//                        if (task.isSuccessful()){
-//                            Toast.makeText(StudentEditProfileActivity.this, "DP uploaded", Toast.LENGTH_SHORT).show();
-//                            final String downloadUrl = task.getResult().getStorage().getDownloadUrl().toString();
-//                            myref.child("Users").child("Student").child(usersid).child("ProfileImage").setValue(downloadUrl).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                @Override
-//                                public void onComplete(@NonNull Task<Void> task) {
-//                                    if (task.isSuccessful()){
-//                                        Toast.makeText(StudentEditProfileActivity.this, "Image saved in database", Toast.LENGTH_SHORT).show();
-//                                    }
-//                                    else{
-//                                        Toast.makeText(StudentEditProfileActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
-//                                    }
-//                                }
-//                            });
-//                        }
-//                        else{
-//                            Toast.makeText(StudentEditProfileActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
-//                        }
-//
-//                    }
-//                });
+            if (resultCode == RESULT_OK) {
+                studentPicUri = result.getUri();
+                studentProfileImage.setImageURI(studentPicUri);
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                Exception error = result.getError();
             }
         }
-        //TODO
     }
 
     public void datepick() {
@@ -372,6 +305,34 @@ public class StudentEditProfileActivity extends AppCompatActivity implements Dat
         String userId = mAuth.getCurrentUser().getUid();
         DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("Users").child("Student").child(userId);
 
+        progressBar.setVisibility(View.VISIBLE);
+        final StorageReference image_path = storageReference.child("ProfileImages").child(userId+".jpg");
+        image_path.putFile(studentPicUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                image_path.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        final String downloadUrl = uri.toString();
+                        myref.child("Users").child("Student").child(usersid).child("ProfileImage").setValue(downloadUrl).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()){
+                                    progressBar.setVisibility(View.INVISIBLE);
+                                    Toast.makeText(StudentEditProfileActivity.this, "Image saved in database", Toast.LENGTH_SHORT).show();
+
+                                }
+                                else {
+                                    Toast.makeText(StudentEditProfileActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
+
+                                }
+                            }
+                        });
+                    }
+                });
+            }
+        });
+
         String fname = userfirstname.getText().toString();
         String lname = userlastname.getText().toString();
         String phone = userPhone.getText().toString();
@@ -393,7 +354,7 @@ public class StudentEditProfileActivity extends AppCompatActivity implements Dat
         profileMap.put("Medium",medium);
         profileMap.put("Region",region);
         profileMap.put("Phone",phone);
-        profileMap.put("ProfileImage",propiclink);
+        profileMap.put("ProfileImage",studentPicUri.toString());
         current_user_db.setValue(profileMap);
 
         Toast.makeText(this, "Changes Saved", Toast.LENGTH_SHORT).show();

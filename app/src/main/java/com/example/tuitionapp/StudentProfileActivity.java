@@ -58,6 +58,7 @@ public class StudentProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(StudentProfileActivity.this , StudentEditProfileActivity.class);
+                finish();
                 startActivity(intent);
             }
         });
@@ -98,7 +99,7 @@ public class StudentProfileActivity extends AppCompatActivity {
                 if (dataSnapshot.child("ProfileImage").exists()){
                     String propic = dataSnapshot.child("ProfileImage").getValue().toString();
                     Picasso.get().load(propic).into(studentProPic);
-                    Toast.makeText(StudentProfileActivity.this, propic, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(StudentProfileActivity.this, propic, Toast.LENGTH_LONG).show();
 
                 }
 

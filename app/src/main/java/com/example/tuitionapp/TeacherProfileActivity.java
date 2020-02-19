@@ -17,6 +17,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class TeacherProfileActivity extends AppCompatActivity {
 
@@ -33,6 +36,9 @@ public class TeacherProfileActivity extends AppCompatActivity {
     private String uid;
 
     FloatingActionButton floatingActionButton;
+
+    private CircleImageView teacherProPic;
+    private String teacherpropiclink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +58,7 @@ public class TeacherProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(TeacherProfileActivity.this , TeacherEditProfileActivity.class);
+                finish();
                 startActivity(intent);
             }
         });
@@ -66,6 +73,8 @@ public class TeacherProfileActivity extends AppCompatActivity {
         teacherInstitution = findViewById(R.id.teacherInstitution);
         teacherDepartment = findViewById(R.id.teacherDepartment);
         teacherYear = findViewById(R.id.teacherYear);
+
+        teacherProPic = findViewById(R.id.teacher_profile_image);
 
         mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -88,6 +97,16 @@ public class TeacherProfileActivity extends AppCompatActivity {
                 String institution = dataSnapshot.child("Institution").getValue().toString();
                 String department = dataSnapshot.child("Department").getValue().toString();
                 String year = dataSnapshot.child("Year").getValue().toString();
+
+                if (dataSnapshot.child("ProfileImage").exists()){
+                    String propic = dataSnapshot.child("ProfileImage").getValue().toString();
+                    teacherpropiclink=propic;
+                    Picasso.get().load(propic).into(teacherProPic);
+                    //Toast.makeText(StudentProfileActivity.this, propic, Toast.LENGTH_LONG).show();
+
+                }
+
+
 
                 teacherName.setText(name);
                 teacherEmail.setText(email);

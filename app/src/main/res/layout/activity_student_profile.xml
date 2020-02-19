@@ -132,11 +132,13 @@
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/student_pro_pic"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
-                        android:layout_margin="10dp"
-                        android:padding="3dp"
-                        android:src="@drawable/userimg" />
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:layout_margin="1dp"
+                        android:padding="1dp"
+                        android:src="@drawable/userimg"
+                        app:civ_border_width="2dp"
+                        app:civ_border_color="#FFF"/>
 
 
                 </RelativeLayout>
@@ -160,7 +162,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/imgUser"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="15sp"
+                    android:layout_marginTop="2sp"
                     android:fontFamily="sans-serif-light"
                     android:text="Towsif Chowdhury"
                     android:textColor="@color/colorWhite"
