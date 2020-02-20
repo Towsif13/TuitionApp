@@ -19,8 +19,38 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingBottom="20dp">
+            android:layout_height="match_parent">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/editFloatingActionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="55dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginBottom="25dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:elevation="0dp"
+                app:borderWidth="0dp"
+                app:fabSize="normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editradioGroup"
+                app:srcCompat="@drawable/ic_check_white" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/editTeacherProfileImage"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_margin="10dp"
+                android:layout_marginTop="35dp"
+                android:layout_marginBottom="35dp"
+                android:padding="3dp"
+                android:src="@drawable/userimg"
+                app:layout_constraintBottom_toTopOf="@+id/editfirstName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
             <EditText
                 android:id="@+id/editfirstName"
@@ -55,7 +85,7 @@
                 android:id="@+id/editlastName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="120dp"
+                android:layout_marginTop="27dp"
                 android:layout_marginEnd="25dp"
                 android:background="@drawable/edittext_style"
                 android:ems="10"
@@ -63,7 +93,7 @@
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/editfirstName"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/editTeacherProfileImage" />
 
             <EditText
                 android:id="@+id/edituserAddress"
@@ -197,6 +227,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.373" />
+
             <!--            <EditText-->
             <!--                android:id="@+id/userGender"-->
             <!--                android:layout_width="0dp"-->
@@ -213,20 +256,20 @@
 
     </ScrollView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/editFloatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="25dp"
-        android:background="@color/colorPrimary"
-        android:backgroundTint="@color/colorPrimary"
-        android:clickable="true"
-        android:elevation="0dp"
-        app:borderWidth="0dp"
-        app:fabSize="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_check_white" />
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/editFloatingActionButton"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginEnd="25dp"-->
+<!--        android:layout_marginBottom="25dp"-->
+<!--        android:background="@color/colorPrimary"-->
+<!--        android:backgroundTint="@color/colorPrimary"-->
+<!--        android:clickable="true"-->
+<!--        android:elevation="0dp"-->
+<!--        app:borderWidth="0dp"-->
+<!--        app:fabSize="normal"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:srcCompat="@drawable/ic_check_white" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
