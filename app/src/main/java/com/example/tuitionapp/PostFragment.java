@@ -156,7 +156,7 @@ public class PostFragment extends Fragment {
         // path of all posts
        // String userId = mAuth.getCurrentUser().getUid();
         // FirebaseDatabase.getInstance().getReference().child("TuitionPosts").child(userId).child(userId+"-"+date);
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("TuitionPosts");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("TuitionPosts").child("StudentPosts");
 
         ref.addValueEventListener(new ValueEventListener() {
             @Override
@@ -191,7 +191,7 @@ public class PostFragment extends Fragment {
 
     private void searchPosts(final String  query){
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("TuitionPosts");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("TuitionPosts").child("StudentPosts");
 
         ref.addValueEventListener(new ValueEventListener() {
             @Override
