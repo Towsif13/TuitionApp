@@ -216,6 +216,7 @@ public class TuitionPostActivity extends AppCompatActivity {
 
         offerMap.put("Date",today_date);
         offerMap.put("Time",today_time);
+        offerMap.put("Uid",userId);
 
 
         current_user_db.setValue(offerMap);
