@@ -197,6 +197,7 @@
                             <ImageView
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"
+                                android:id="@+id/st_send_req"
                                 android:src="@drawable/ic_person_white"/>
 
                             <TextView

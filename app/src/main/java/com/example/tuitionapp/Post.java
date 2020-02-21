@@ -8,12 +8,22 @@ import androidx.annotation.NonNull;
 import java.security.acl.LastOwnerException;
 
 public class Post {
-    String  FirstName,LastName ,Address , sClass, Date , Time, Days, Region ,Salary, PreferredGender ,Subjects, Notes , Medium;
+    private String id, FirstName,LastName ,Address , sClass, Date , Time, Days, Region ,Salary, PreferredGender ,Subjects, Notes , Medium;
     // creating model class for recylerView
     public Post() {
     }
 
-    public Post(String FirstName,String LastName,String address, String sClass, String date, String time, String days, String region, String salary, String gender, String subjects, String notes, String medium) {
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        id = id;
+    }
+
+    public Post( String Id, String FirstName, String LastName, String address, String sClass, String date, String time, String days, String region, String salary, String gender, String subjects, String notes, String medium) {
+
+        this.id = Id;
         this.FirstName = FirstName;
         this.LastName = LastName;
 

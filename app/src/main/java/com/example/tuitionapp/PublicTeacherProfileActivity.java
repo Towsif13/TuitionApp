@@ -67,29 +67,38 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
         myref.child("Users").child("Teacher").child(uid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String fname = dataSnapshot.child("FirstName").getValue().toString();
-                String lname = dataSnapshot.child("LastName").getValue().toString();
-                String name = fname+" "+lname;
-                String email = user.getEmail();
-                String phone = dataSnapshot.child("Phone").getValue().toString();
-                String region = dataSnapshot.child("Region").getValue().toString();
-                String address = dataSnapshot.child("Address").getValue().toString();
-                String dob = dataSnapshot.child("Birthday").getValue().toString();
-                String gender = dataSnapshot.child("Gender").getValue().toString();
-                String institution = dataSnapshot.child("Institution").getValue().toString();
-                String department = dataSnapshot.child("Department").getValue().toString();
-                String year = dataSnapshot.child("Year").getValue().toString();
+                if (dataSnapshot.exists()){
 
-                teacherName.setText(name);
-                teacherEmail.setText(email);
-                teacherPhone.setText(phone);
-                teacherRegion.setText(region);
-                teacherAddress.setText(address);
-                teacherDOB.setText(dob);
-                teacherGender.setText(gender);
-                teacherInstitution.setText(institution);
-                teacherDepartment.setText(department);
-                teacherYear.setText(year);
+                    String fname = dataSnapshot.child("FirstName").getValue().toString();
+                    String lname = dataSnapshot.child("LastName").getValue().toString();
+                    String name = fname+" "+lname;
+                    String email = user.getEmail();
+                    String phone = dataSnapshot.child("Phone").getValue().toString();
+                    String region = dataSnapshot.child("Region").getValue().toString();
+                    String address = dataSnapshot.child("Address").getValue().toString();
+                    String dob = dataSnapshot.child("Birthday").getValue().toString();
+                    String gender = dataSnapshot.child("Gender").getValue().toString();
+                    String institution = dataSnapshot.child("Institution").getValue().toString();
+                    String department = dataSnapshot.child("Department").getValue().toString();
+                    String year = dataSnapshot.child("Year").getValue().toString();
+
+                    teacherName.setText(name);
+                    teacherEmail.setText(email);
+                    teacherPhone.setText(phone);
+                    teacherRegion.setText(region);
+                    teacherAddress.setText(address);
+                    teacherDOB.setText(dob);
+                    teacherGender.setText(gender);
+                    teacherInstitution.setText(institution);
+                    teacherDepartment.setText(department);
+                    teacherYear.setText(year);
+
+
+
+                }
+
+
+
             }
 
             @Override

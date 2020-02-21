@@ -96,7 +96,7 @@ public class ChatsFragment_Student extends Fragment {
                     for (String id :userlist){
                         if(userContacts.getId().equals(id)){
                             if(muser.size() != 0){
-                                for (UserContacts user : muser){
+                                for (UserContacts user : new ArrayList<UserContacts>(muser)){
                                     if(!userContacts.getId().equals(user.getId())){
                                         muser.add(userContacts);
                                     }

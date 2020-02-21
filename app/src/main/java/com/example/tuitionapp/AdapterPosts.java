@@ -1,6 +1,7 @@
 package com.example.tuitionapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,7 +50,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> im
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
 
         // bind data here
-
+        final Post post = mDataFiltered.get(position);
 
         //get data
 
@@ -119,7 +120,12 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> im
         holder.sendReq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "send req", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(context,PublicStudentProfileActivity.class);
+                intent.putExtra("visit_user_id",post.getId());
+                context.startActivity(intent);
+
+               // Toast.makeText(context, "send req", Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -12,12 +12,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> {
 
     Context context;
     ArrayList<UserContacts> profiles;
+    String last_Msg;
 
     public UserAdapter(Context c , ArrayList<UserContacts> p)
     {
@@ -37,7 +46,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
         final UserContacts user = profiles.get(position);
         holder.name.setText(profiles.get(position).getFirstName());
         holder.lname.setText(profiles.get(position).getLastName());
-        holder.address.setText(profiles.get(position).getAddress());
+      //  holder.last_message.setText(profiles.get(position).getAddress());
        // Picasso.get().load(profiles.get(position).getProfilePic()).into(holder.profilePic);
        /* if(profiles.get(position).getPermission()) {
             holder.btn.setVisibility(View.VISIBLE);
@@ -52,6 +61,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
                context.startActivity(intent);
            }
        });
+       lastMessage(user.getId(),holder.last_message);
     }
 
 
@@ -63,16 +73,51 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
 
     class MyViewHolder extends RecyclerView.ViewHolder
     {
-        TextView name,lname, address;
+        TextView name,lname, last_message;
       //  ImageView profilePic;
       //  Button btn;
         public MyViewHolder(View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.user_profile_name);
             lname = (TextView)itemView.findViewById(R.id.user_profile_lastName);
-            address = (TextView) itemView.findViewById(R.id.user_address);
+            last_message = (TextView) itemView.findViewById(R.id.last_message);
            /* profilePic = (ImageView) itemView.findViewById(R.id.profilePic);
             btn = (Button) itemView.findViewById(R.id.checkDetails);*/
         }
+    }
+
+    private void lastMessage(final String userid, final TextView last_message){
+
+        last_Msg = "default";
+        final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Chats");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
+                {
+                    Chat chat = dataSnapshot1.getValue(Chat.class);
+                    if(chat.getReceiver().equals(firebaseUser.getUid()) && chat.getSender().equals(userid)
+                            || chat.getReceiver().equals(userid) && chat.getSender().equals(firebaseUser.getUid())){
+                        last_Msg = chat.getMessage();
+
+                    }
+                }
+                switch (last_Msg){
+                    case "default":
+                        last_message.setText("No Message");
+                        break;
+                    default:
+                        last_message.setText(last_Msg);
+                        break;
+                }
+                last_Msg = "default";
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }
