@@ -43,7 +43,7 @@
                         <de.hdodenhof.circleimageview.CircleImageView
                             app:civ_border_width="2dp"
                             app:civ_border_color="#fff"
-                            android:id="@+id/userPhoto"
+                            android:id="@+id/userPhotoStudentHome"
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:layout_marginStart="2dp"
@@ -53,7 +53,7 @@
                             app:layout_constraintTop_toTopOf="parent"/>
 
                         <TextView
-                            android:id="@+id/userName"
+                            android:id="@+id/userNameStudent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
@@ -62,7 +62,7 @@
                             android:text="Towsif Chowdhury"
                             android:textColor="#fff"
                             android:textSize="25sp"
-                            app:layout_constraintStart_toEndOf="@+id/userPhoto"
+                            app:layout_constraintStart_toEndOf="@+id/userPhotoStudentHome"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
@@ -75,8 +75,8 @@
                             android:text="Welcome Student"
                             android:textColor="#fff"
                             android:textSize="22sp"
-                            app:layout_constraintStart_toEndOf="@+id/userPhoto"
-                            app:layout_constraintTop_toTopOf="@+id/userName" />
+                            app:layout_constraintStart_toEndOf="@+id/userPhotoStudentHome"
+                            app:layout_constraintTop_toTopOf="@+id/userNameStudent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
