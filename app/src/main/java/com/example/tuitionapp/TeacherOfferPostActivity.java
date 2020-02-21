@@ -26,27 +26,25 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 
-public class TuitionPostActivity extends AppCompatActivity {
+public class TeacherOfferPostActivity extends AppCompatActivity {
 
-    EditText subjects , salary , notes;
-    Spinner spinner_preference , spinner_days;
+    private EditText subjects , salary , notes;
+    private Spinner spinner_preference_medium , spinner_days;
 
-    String prefered_gender , days_per_week;
+    private String prefered_medium , days_per_week;
 
-    String[] mPreference = {"Any" , "Male" , "Female"};
-    String[] mDays = {"1 day" , "2 days", "3 days", "4 days", "5 days", "6 days", "7 days"};
-    
-    Button post;
-    
+    private String[] mPreferenceMedium = {"Any" , "Bangla Medium" , "English Medium" , "English Version"};
+    private String[] mDays = {"1 day" , "2 days", "3 days", "4 days", "5 days", "6 days", "7 days"};
+
+    private Button post;
+
     private FirebaseAuth mAuth;
 
-    String fname , lname , medium , address , region , clas;
+    private String fname , lname , department , year , region;
 
-    String date;
+    private String date;
 
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference myref;
@@ -54,23 +52,23 @@ public class TuitionPostActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tuition_post);
+        setContentView(R.layout.activity_teacher_offer_post);
 
         DateFormat df = new SimpleDateFormat("d MMM yyyy, h:mm a");
         date = df.format(Calendar.getInstance().getTime());
         Toast.makeText(this, date, Toast.LENGTH_LONG).show();
 
-        spinner_preference = findViewById(R.id.preference);
-        spinner_days = findViewById(R.id.days);
+        spinner_days = findViewById(R.id.tutor_days);
+        spinner_preference_medium = findViewById(R.id.tutor_preference_medium);
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item,mPreference);
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item,mPreferenceMedium);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_preference.setAdapter(arrayAdapter);
-        spinner_preference.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinner_preference_medium.setAdapter(arrayAdapter);
+        spinner_preference_medium.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String pref_gender = adapterView.getItemAtPosition(i).toString();
-                prefered_gender = pref_gender;
+                String pref_medium = adapterView.getItemAtPosition(i).toString();
+                prefered_medium = pref_medium;
                 //Toast.makeText(TuitionPostActivity.this, prefered_gender, Toast.LENGTH_SHORT).show();
             }
 
@@ -96,31 +94,49 @@ public class TuitionPostActivity extends AppCompatActivity {
 
             }
         });
-        
-        subjects = findViewById(R.id.subjects);
-        salary = findViewById(R.id.salary);
-        notes = findViewById(R.id.notes);
-        
+
+        salary = findViewById(R.id.tutor_salary);
+        subjects = findViewById(R.id.tutor_subjects);
+        notes = findViewById(R.id.tutor_notes);
+
         mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myref = mFirebaseDatabase.getReference();
 
         getDataFromProfile();
-        
-        post = findViewById(R.id.button_post);
+
+        post = findViewById(R.id.button_tutor_post);
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 attemptPost();
             }
         });
-        
-        
 
     }
 
+    private void getDataFromProfile() {
+        String userId = mAuth.getCurrentUser().getUid();
+
+        myref.child("Users").child("Teacher").child(userId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                fname = dataSnapshot.child("FirstName").getValue().toString();
+                lname = dataSnapshot.child("LastName").getValue().toString();
+                department = dataSnapshot.child("Department").getValue().toString();
+                year = dataSnapshot.child("Year").getValue().toString();
+                region = dataSnapshot.child("Region").getValue().toString();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     private void attemptPost() {
-        
+
         String sub = subjects.getText().toString();
         String sal = salary.getText().toString();
 
@@ -157,40 +173,19 @@ public class TuitionPostActivity extends AppCompatActivity {
         }
     }
 
-    private void getDataFromProfile() {
-        String userId = mAuth.getCurrentUser().getUid();
-
-        myref.child("Users").child("Student").child(userId).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                fname = dataSnapshot.child("FirstName").getValue().toString();
-                lname = dataSnapshot.child("LastName").getValue().toString();
-                medium = dataSnapshot.child("Medium").getValue().toString();
-                address = dataSnapshot.child("Address").getValue().toString();
-                region = dataSnapshot.child("Region").getValue().toString();
-                clas = dataSnapshot.child("Class").getValue().toString();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
-
     private void createPostInFirebase() {
 
         DateFormat df = new SimpleDateFormat("d-MM-yyyy,HH:mm:ss");
         String date = df.format(Calendar.getInstance().getTime());
 
         String userId = mAuth.getCurrentUser().getUid();
-        DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("TuitionPosts").child("StudentPosts").child(userId+" "+date);
+        DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("TuitionPosts").child("TeacherPosts").child(userId+" "+date);
 
 
         String desired_subjects = subjects.getText().toString();
         String desired_salary = salary.getText().toString();
         String desired_days = days_per_week;
-        String desired_gender = prefered_gender;
+        String desired_medium = prefered_medium;
         String desired_note = notes.getText().toString();
 
 
@@ -203,16 +198,15 @@ public class TuitionPostActivity extends AppCompatActivity {
         HashMap<String,String> offerMap = new HashMap<>();
         offerMap.put("Subjects",desired_subjects);
         offerMap.put("Days",desired_days);
-        offerMap.put("PreferredGender",desired_gender);
+        offerMap.put("PreferredMedium",desired_medium);
         offerMap.put("Salary",desired_salary);
         offerMap.put("Notes",desired_note);
 
         offerMap.put("FirstName",fname);
         offerMap.put("LastName",lname);
-        offerMap.put("Medium",medium);
-        offerMap.put("sClass",clas);
+        offerMap.put("Department",department);
+        offerMap.put("Year",year);
         offerMap.put("Region",region);
-        offerMap.put("Address",address);
 
         offerMap.put("Date",today_date);
         offerMap.put("Time",today_time);
@@ -231,7 +225,7 @@ public class TuitionPostActivity extends AppCompatActivity {
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Intent intent = new Intent(TuitionPostActivity.this, StudentLandingActivity.class);
+                        Intent intent = new Intent(TeacherOfferPostActivity.this, TeacherLandingActivity.class);
                         finish();
                         startActivity(intent);
 

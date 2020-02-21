@@ -19,7 +19,7 @@ import android.view.ViewGroup;
 public class HomeFragment_Teacher extends Fragment {
 
 
-    ConstraintLayout teacherProfile;
+    ConstraintLayout teacherProfile, tutorPostOffer;
 
     public HomeFragment_Teacher() {
         // Required empty public constructor
@@ -43,6 +43,15 @@ public class HomeFragment_Teacher extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(),TeacherProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        tutorPostOffer = getActivity().findViewById(R.id.tutor_post_offer);
+        tutorPostOffer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(),TeacherOfferPostActivity.class);
                 startActivity(intent);
             }
         });
