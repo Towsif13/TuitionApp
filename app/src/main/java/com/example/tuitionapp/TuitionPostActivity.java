@@ -198,7 +198,7 @@ public class TuitionPostActivity extends AppCompatActivity {
         DateFormat df1 = new SimpleDateFormat("d-MM-yyyy");
         String today_date = df1.format(Calendar.getInstance().getTime());
 
-        DateFormat df2 = new SimpleDateFormat("HH:mm:ss");
+        DateFormat df2 = new SimpleDateFormat("h:mm a");
         String today_time = df2.format(Calendar.getInstance().getTime());
 
         HashMap<String,String> offerMap = new HashMap<>();

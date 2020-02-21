@@ -54,7 +54,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> im
 
         //get data
 
-        String firstNameName = mDataFiltered.get(position).getFirstName();
+        String firstName = mDataFiltered.get(position).getFirstName();
         String lastName = mDataFiltered.get(position).getLastName();
         String Address = mDataFiltered.get(position).getAddress();
         String Date = mDataFiltered.get(position).getDate();
@@ -74,17 +74,35 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> im
        // String pTime = DateFormat.format("dd/MM/yyyy hh:mm aa",calender).toString();
 
         //set Data
-        holder.post_nameTV.setText(firstNameName+" "+lastName);
-        holder.post_timeTV.setText(Time);
-        holder.post_idTV.setText(firstNameName);
-        holder.post_locTV.setText(Address+Region);
-        holder.post_categoryTV.setText(Medium);
-        holder.post_salTV.setText(Salary);
-        holder.post_genderTV.setText(Gender);
+        holder.post_nameTV.setText(firstName+" "+lastName);
+        holder.post_timeTV.setText(Time+"  "+Date);
         holder.post_classTv.setText(sClass);
-        holder.post_daysTV.setText(Days);
         holder.post_subTV.setText(Subjects);
-        holder.post_notesTV.setText(Notes);
+        holder.post_mediumTV.setText(Medium);
+        holder.post_locTV.setText(Region);
+        holder.post_daysTV.setText(Days);
+        holder.post_preferenceTV.setText(Gender);
+        holder.post_salTV.setText(Salary+"TK");
+        if (Notes.length()<1){
+            holder.post_notesTV.setVisibility(View.GONE);
+            holder.note.setVisibility(View.GONE);
+        }else {
+            holder.post_notesTV.setText(Notes);
+        }
+
+
+
+
+        //holder.post_idTV.setText(firstNameName);
+
+//        holder.post_locTV.setText(Address+Region);
+//        holder.post_categoryTV.setText(Medium);
+//        holder.post_salTV.setText(Salary);
+//        holder.post_genderTV.setText(Gender);
+//        holder.post_classTv.setText(sClass);
+//        holder.post_daysTV.setText(Days);
+//        holder.post_subTV.setText(Subjects);
+//        holder.post_notesTV.setText(Notes);
 
 
 
@@ -176,7 +194,8 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> im
 
         //button and views from row_post
         ImageButton moreBtnTV,sendMsgBtn,sendReq;
-        TextView post_nameTV ,post_timeTV,post_idTV,post_locTV,post_categoryTV,post_salTV,post_genderTV ,post_classTv,post_daysTV,post_subTV,post_notesTV;
+        TextView post_nameTV ,post_timeTV,post_idTV,post_locTV,post_categoryTV,post_salTV,post_genderTV ,post_classTv,post_daysTV,post_subTV,post_notesTV
+                ,post_mediumTV,post_preferenceTV, note;
 
         public MyHolder(@NonNull View itemView){
             super(itemView);
@@ -185,17 +204,32 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> im
             moreBtnTV = itemView.findViewById(R.id.moreBtnTV);
             sendMsgBtn = itemView.findViewById(R.id.sendMsgBtn);
             sendReq = itemView.findViewById(R.id.sendReq);
+
             post_nameTV = itemView.findViewById(R.id.post_nameTV);
             post_timeTV = itemView.findViewById(R.id.post_timeTV);
-            post_idTV = itemView.findViewById(R.id.post_idTV);
-            post_locTV = itemView.findViewById(R.id.post_locTV);
-            post_categoryTV = itemView.findViewById(R.id.post_categoryTV);
-            post_salTV = itemView.findViewById(R.id.post_salTV);
-            post_genderTV = itemView.findViewById(R.id.post_genderTV);
-            post_classTv = itemView.findViewById(R.id.post_classTv);
-            post_daysTV = itemView.findViewById(R.id.post_daysTV);
-            post_subTV = itemView.findViewById(R.id.post_subTV);
+////
+            post_classTv = itemView.findViewById(R.id.class_TV);
+            post_subTV = itemView.findViewById(R.id.subjectTV);
+            post_mediumTV = itemView.findViewById(R.id.mediumTV);
+            post_locTV = itemView.findViewById(R.id.locationTV);
+            post_daysTV = itemView.findViewById(R.id.daysTV);
+            post_preferenceTV = itemView.findViewById(R.id.preferenceTV);
+            post_salTV = itemView.findViewById(R.id.salaryTV);
             post_notesTV = itemView.findViewById(R.id.post_notesTV);
+
+            note = itemView.findViewById(R.id.note);
+
+
+
+//            post_idTV = itemView.findViewById(R.id.post_idTV);
+//            post_locTV = itemView.findViewById(R.id.post_locTV);
+//            post_categoryTV = itemView.findViewById(R.id.post_categoryTV);
+//            post_salTV = itemView.findViewById(R.id.post_salTV);
+//            post_genderTV = itemView.findViewById(R.id.post_genderTV);
+//            post_classTv = itemView.findViewById(R.id.post_classTv);
+//            post_daysTV = itemView.findViewById(R.id.post_daysTV);
+//            post_subTV = itemView.findViewById(R.id.post_subTV);
+//            post_notesTV = itemView.findViewById(R.id.post_notesTV);
 
 
 

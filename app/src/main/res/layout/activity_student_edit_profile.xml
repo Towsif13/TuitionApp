@@ -193,12 +193,30 @@
                 android:layout_marginTop="35dp"
                 android:layout_marginBottom="35dp"
                 android:padding="3dp"
+                app:civ_border_width="3dp"
+                app:civ_border_color="@color/headings"
                 android:src="@drawable/userimg"
                 app:layout_constraintBottom_toTopOf="@+id/editfirstName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/headings"
+                android:elevation="0dp"
+                app:borderWidth="0dp"
+                app:fabSize="normal"
+                app:layout_constraintBottom_toBottomOf="@+id/editStudentProfileImage"
+                app:layout_constraintEnd_toEndOf="@+id/editStudentProfileImage"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/editStudentProfileImage"
+                app:layout_constraintTop_toTopOf="@+id/editStudentProfileImage"
+                app:layout_constraintVertical_bias="1.0"
+                app:srcCompat="@drawable/ic_camera_white" />
 
             <ProgressBar
                 android:id="@+id/progressBar"
