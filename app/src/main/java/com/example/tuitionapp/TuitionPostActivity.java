@@ -194,6 +194,7 @@ public class TuitionPostActivity extends AppCompatActivity {
         String desired_note = notes.getText().toString();
 
 
+
         DateFormat df1 = new SimpleDateFormat("d-MM-yyyy");
         String today_date = df1.format(Calendar.getInstance().getTime());
 
@@ -201,6 +202,7 @@ public class TuitionPostActivity extends AppCompatActivity {
         String today_time = df2.format(Calendar.getInstance().getTime());
 
         HashMap<String,String> offerMap = new HashMap<>();
+        offerMap.put("id",userId);
         offerMap.put("Subjects",desired_subjects);
         offerMap.put("Days",desired_days);
         offerMap.put("PreferredGender",desired_gender);

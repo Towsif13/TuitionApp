@@ -21,6 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 public class PublicStudentProfileActivity extends AppCompatActivity {
 
     ImageView backBtn;
+    ImageView send_req;
 
     TextView studentName , studentEmail , studentPhone , studentRegion , studentAddress , studentDOB , studentGender ,
             studentMedium , studentClass ;
@@ -57,6 +58,7 @@ public class PublicStudentProfileActivity extends AppCompatActivity {
         studentGender = findViewById(R.id.studentGender);
         studentMedium = findViewById(R.id.studentMedium);
         studentClass = findViewById(R.id.studentClass);
+        send_req = findViewById(R.id.st_send_req);
 
         mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -67,27 +69,33 @@ public class PublicStudentProfileActivity extends AppCompatActivity {
         myref.child("Users").child("Student").child(uid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String fname = dataSnapshot.child("FirstName").getValue().toString();
-                String lname = dataSnapshot.child("LastName").getValue().toString();
-                String name = fname+" "+lname;
-                String email = user.getEmail();
-                String phone = dataSnapshot.child("Phone").getValue().toString();
-                String region = dataSnapshot.child("Region").getValue().toString();
-                String address = dataSnapshot.child("Address").getValue().toString();
-                String dob = dataSnapshot.child("Birthday").getValue().toString();
-                String gender = dataSnapshot.child("Gender").getValue().toString();
-                String medium = dataSnapshot.child("Medium").getValue().toString();
-                String classs = dataSnapshot.child("Class").getValue().toString();
 
-                studentName.setText(name);
-                studentEmail.setText(email);
-                studentPhone.setText(phone);
-                studentRegion.setText(region);
-                studentAddress.setText(address);
-                studentDOB.setText(dob);
-                studentGender.setText(gender);
-                studentMedium.setText(medium);
-                studentClass.setText(classs);
+                if(dataSnapshot.exists()){
+
+                    String fname = dataSnapshot.child("FirstName").getValue().toString();
+                    String lname = dataSnapshot.child("LastName").getValue().toString();
+                    String name = fname+" "+lname;
+                    String email = user.getEmail();
+                    String phone = dataSnapshot.child("Phone").getValue().toString();
+                    String region = dataSnapshot.child("Region").getValue().toString();
+                    String address = dataSnapshot.child("Address").getValue().toString();
+                    String dob = dataSnapshot.child("Birthday").getValue().toString();
+                    String gender = dataSnapshot.child("Gender").getValue().toString();
+                    String medium = dataSnapshot.child("Medium").getValue().toString();
+                    String classs = dataSnapshot.child("Class").getValue().toString();
+
+                    studentName.setText(name);
+                    studentEmail.setText(email);
+                    studentPhone.setText(phone);
+                    studentRegion.setText(region);
+                    studentAddress.setText(address);
+                    studentDOB.setText(dob);
+                    studentGender.setText(gender);
+                    studentMedium.setText(medium);
+                    studentClass.setText(classs);
+
+                }
+
             }
 
             @Override
