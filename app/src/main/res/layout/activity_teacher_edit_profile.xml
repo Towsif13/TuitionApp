@@ -240,6 +240,21 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.373" />
 
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/headings"
+                android:elevation="0dp"
+                app:borderWidth="0dp"
+                app:fabSize="normal"
+                app:layout_constraintBottom_toBottomOf="@+id/editTeacherProfileImage"
+                app:layout_constraintEnd_toEndOf="@+id/editTeacherProfileImage"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/editTeacherProfileImage"
+                app:layout_constraintTop_toTopOf="@+id/editTeacherProfileImage"
+                app:layout_constraintVertical_bias="1.0"
+                app:srcCompat="@drawable/ic_camera_white" />
+
             <!--            <EditText-->
             <!--                android:id="@+id/userGender"-->
             <!--                android:layout_width="0dp"-->
