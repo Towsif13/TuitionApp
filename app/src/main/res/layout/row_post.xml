@@ -26,7 +26,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
-                                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                                <de.hdodenhof.circleimageview.CircleImageView
                                     android:id="@+id/profile_image"
                                     android:layout_width="50dp"
                                     android:layout_height="50dp"
@@ -46,23 +46,8 @@
                                             android:layout_height="wrap_content"
                                             android:text="NAME:"
                                             android:textColor="@color/colorPrimaryDark"
-                                            android:textSize="20sp"></TextView>
+                                            android:textSize="20sp" />
 
-                                        <TextView
-                                            android:id="@+id/post_locTV"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="LOCATION"
-                                            android:textColor="@color/colorPrimaryDark"
-                                            android:textSize="20sp"></TextView>
-
-                                        <TextView
-                                            android:id="@+id/post_classTv"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="Class"
-                                            android:textColor="@color/colorPrimaryDark"
-                                            android:textSize="15sp"></TextView>
 
                                         <TextView
                                             android:id="@+id/post_timeTV"
@@ -70,7 +55,7 @@
                                             android:layout_height="wrap_content"
                                             android:text="POSTED TIME:"
                                             android:textColor="@color/colorPrimaryDark"
-                                            android:textSize="15sp"></TextView>
+                                            android:textSize="15sp" />
 
                                 </LinearLayout>
 
@@ -108,7 +93,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="left"
-                            android:background="@drawable/layout_bg"
+                            android:background="#f0f0f0"
 
 
                             android:gravity=""
@@ -126,17 +111,16 @@
                                             android:layout_height="wrap_content"
                                             android:paddingLeft="10dp"
                                             android:paddingRight="10dp"
-                                            android:text="ID:"
+                                            android:text="Class: "
                                             android:textColor="@color/colorPrimaryDark"
-                                            android:textSize="19sp"></TextView>
+                                            android:textSize="20sp" />
 
                                         <TextView
-                                            android:id="@+id/post_idTV"
+                                            android:id="@+id/class_TV"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:text="ID"
                                             android:textColor="@color/colorPrimaryDark"
-                                            android:textSize="19sp"></TextView>
+                                            android:textSize="20sp" />
 
                                 </LinearLayout>
 
@@ -152,17 +136,16 @@
                                             android:layout_height="wrap_content"
                                             android:paddingLeft="10dp"
                                             android:paddingRight="10dp"
-                                            android:text="MEDIUM:"
+                                            android:text="Subjects: "
                                             android:textColor="@color/colorPrimaryDark"
-                                            android:textSize="19sp"></TextView>
+                                            android:textSize="20sp" />
 
                                         <TextView
-                                            android:id="@+id/post_categoryTV"
+                                            android:id="@+id/subjectTV"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:text="Medium"
                                             android:textColor="@color/colorPrimaryDark"
-                                            android:textSize="20sp"></TextView>
+                                            android:textSize="20sp" />
 
 
                                 </LinearLayout>
@@ -179,18 +162,17 @@
                                             android:layout_height="wrap_content"
                                             android:paddingLeft="10dp"
                                             android:paddingRight="10dp"
-                                            android:text="SALARY:"
+                                            android:text="Medium:"
                                             android:textColor="@color/colorPrimaryDark"
-                                            android:textSize="19sp"></TextView>
+                                            android:textSize="20sp" />
 
 
                                         <TextView
-                                            android:id="@+id/post_salTV"
+                                            android:id="@+id/mediumTV"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:text="SALARY:"
                                             android:textColor="@color/colorPrimaryDark"
-                                            android:textSize="19sp"></TextView>
+                                            android:textSize="20sp" />
 
 
                                 </LinearLayout>
@@ -206,18 +188,17 @@
                                             android:layout_height="wrap_content"
                                             android:paddingLeft="10dp"
                                             android:paddingRight="10dp"
-                                            android:text="GENDER:"
+                                            android:text="Location: "
                                             android:textColor="@color/colorPrimaryDark"
-                                            android:textSize="19sp"></TextView>
+                                            android:textSize="20sp" />
 
 
                                         <TextView
-                                            android:id="@+id/post_genderTV"
+                                            android:id="@+id/locationTV"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:text="Gender"
                                             android:textColor="@color/colorPrimaryDark"
-                                            android:textSize="19sp"></TextView>
+                                            android:textSize="20sp" />
 
 
                                 </LinearLayout>
@@ -234,18 +215,17 @@
                                             android:layout_height="wrap_content"
                                             android:paddingLeft="10dp"
                                             android:paddingRight="10dp"
-                                            android:text="DAYS:"
+                                            android:text="Days per week: "
                                             android:textColor="@color/colorPrimaryDark"
-                                            android:textSize="19sp"></TextView>
+                                            android:textSize="20sp" />
 
 
                                         <TextView
-                                            android:id="@+id/post_daysTV"
+                                            android:id="@+id/daysTV"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:text="Days"
                                             android:textColor="@color/colorPrimaryDark"
-                                            android:textSize="20sp"></TextView>
+                                            android:textSize="20sp" />
 
 
                                 </LinearLayout>
@@ -261,17 +241,41 @@
                                             android:layout_height="wrap_content"
                                             android:paddingLeft="10dp"
                                             android:paddingRight="10dp"
-                                            android:text="SUBJECTS:"
+                                            android:text="Preferred Gender: "
                                             android:textColor="@color/colorPrimaryDark"
-                                            android:textSize="19sp"></TextView>
+                                            android:textSize="19sp" />
 
                                         <TextView
-                                            android:id="@+id/post_subTV"
+                                            android:id="@+id/preferenceTV"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:text="Subject"
                                             android:textColor="@color/colorPrimaryDark"
-                                            android:textSize="19sp"></TextView>
+                                            android:textSize="20sp" />
+
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:paddingLeft="10dp"
+                                            android:paddingRight="10dp"
+                                            android:text="Salary: "
+                                            android:textColor="@color/colorPrimaryDark"
+                                            android:textSize="20sp" />
+
+                                        <TextView
+                                            android:id="@+id/salaryTV"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textColor="#F44336"
+                                            android:textSize="20sp"
+                                            android:textStyle="bold" />
 
 
                                 </LinearLayout>
@@ -288,17 +292,16 @@
                                             android:layout_height="wrap_content"
                                             android:paddingLeft="10dp"
                                             android:paddingRight="10dp"
-                                            android:text="NOTES:"
+                                            android:text="Note: "
                                             android:textColor="@color/colorPrimaryDark"
-                                            android:textSize="19sp"></TextView>
+                                            android:textSize="20sp" />
 
                                         <TextView
                                             android:id="@+id/post_notesTV"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:text="NOTE"
                                             android:textColor="@color/colorPrimaryDark"
-                                            android:textSize="20sp"></TextView>
+                                            android:textSize="20sp" />
 
 
                                 </LinearLayout>
