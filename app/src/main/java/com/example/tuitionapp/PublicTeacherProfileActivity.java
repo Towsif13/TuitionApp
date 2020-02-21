@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,11 +34,30 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
     private DatabaseReference myref;
     private String uid;
 
+    private RelativeLayout rate_btn_teacher , msg_btn_teacher;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_public_teacher_profile);
+
+        rate_btn_teacher = findViewById(R.id.rate_btn_teacher);
+        msg_btn_teacher = findViewById(R.id.msg_btn_teacher);
+
+        rate_btn_teacher.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(PublicTeacherProfileActivity.this, "RATE", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        msg_btn_teacher.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(PublicTeacherProfileActivity.this, "MSG", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         backBtn = findViewById(R.id.teacher_profile_back_btn);
         backBtn.setOnClickListener(new View.OnClickListener() {

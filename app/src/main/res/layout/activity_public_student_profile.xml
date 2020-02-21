@@ -176,6 +176,7 @@
                     android:layout_marginBottom="10sp">
 
                     <RelativeLayout
+                        android:id="@+id/add_btn_student_profile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -214,6 +215,7 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/msg_btn_student_profile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"

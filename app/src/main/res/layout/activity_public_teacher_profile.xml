@@ -176,6 +176,7 @@
                     android:layout_marginBottom="10sp">
 
                     <RelativeLayout
+                        android:id="@+id/rate_btn_teacher"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -213,6 +214,7 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/msg_btn_teacher"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"

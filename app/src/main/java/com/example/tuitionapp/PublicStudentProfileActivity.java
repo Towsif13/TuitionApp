@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,6 +37,8 @@ public class PublicStudentProfileActivity extends AppCompatActivity {
 
     FloatingActionButton floatingActionButton;
 
+    private RelativeLayout add_btn_student_profile , msg_btn_student_profile ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +49,23 @@ public class PublicStudentProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 onBackPressed();
+            }
+        });
+
+        add_btn_student_profile = findViewById(R.id.add_btn_student_profile);
+        msg_btn_student_profile = findViewById(R.id.msg_btn_student_profile);
+
+        add_btn_student_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(PublicStudentProfileActivity.this, "ADD", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        msg_btn_student_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(PublicStudentProfileActivity.this, "MSG", Toast.LENGTH_SHORT).show();
             }
         });
 
