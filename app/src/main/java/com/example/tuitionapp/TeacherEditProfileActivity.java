@@ -346,7 +346,7 @@ public class TeacherEditProfileActivity extends AppCompatActivity implements Dat
         String institution = userInstitution.getText().toString();
 
         HashMap<String,String> profileMap = new HashMap<>();
-        profileMap.put("Id",userId);
+        profileMap.put("id",userId);
         profileMap.put("FirstName",fname);
         profileMap.put("LastName",lname);
         profileMap.put("Address",address);
