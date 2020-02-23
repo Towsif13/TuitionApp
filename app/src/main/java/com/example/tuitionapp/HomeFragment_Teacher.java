@@ -44,7 +44,6 @@ public class HomeFragment_Teacher extends Fragment {
     }
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -60,7 +59,7 @@ public class HomeFragment_Teacher extends Fragment {
         teacherProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(),TeacherProfileActivity.class);
+                Intent intent = new Intent(getContext(), TeacherProfileActivity.class);
                 startActivity(intent);
             }
         });
@@ -69,7 +68,7 @@ public class HomeFragment_Teacher extends Fragment {
         tutorPostOffer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(),TeacherOfferPostActivity.class);
+                Intent intent = new Intent(getContext(), TeacherOfferPostActivity.class);
                 startActivity(intent);
             }
         });
@@ -102,5 +101,6 @@ public class HomeFragment_Teacher extends Fragment {
 
             }
         });
-    }
+            }
+
 }

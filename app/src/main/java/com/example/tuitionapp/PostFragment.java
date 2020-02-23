@@ -91,7 +91,7 @@ public class PostFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                adapterPosts.getFilter().filter(charSequence);
+//                adapterPosts.getFilter().filter(charSequence);
             }
 
             @Override

@@ -1,19 +1,24 @@
 
 package com.example.tuitionapp;
 
+import android.util.Log;
+
 public class UserContacts {
 
-    private String Id,FirstName,LastName,Address,status;//tutors_image;
+    private String Aid,FirstName,LastName,Address;//tutors_image;
 
+    public String getId() {
+        Log.d("UserContacts","Id"+ Aid);
+        return Aid;
+    }
 
     public UserContacts(String id, String FirstName, String LastName, String Address, String status )
 /* String tutors_image*/
 {
-        this.Id = id;
+        this.Aid = id;
         this.FirstName = FirstName;
         this.LastName = LastName;
         this.Address = Address;
-        this.status = status;
        // this.tutors_image = tutors_image;
 
     }
@@ -22,19 +27,9 @@ public class UserContacts {
 
     }
 
-    public String getId() {
-        return Id;
-    }
+
     public void setId(String id) {
-        Id = id;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
+        this.Aid = id;
     }
 
     public String getAddress() {

@@ -196,6 +196,7 @@ public class TeacherOfferPostActivity extends AppCompatActivity {
         String today_time = df2.format(Calendar.getInstance().getTime());
 
         HashMap<String,String> offerMap = new HashMap<>();
+        offerMap.put("id",userId);
         offerMap.put("Subjects",desired_subjects);
         offerMap.put("Days",desired_days);
         offerMap.put("PreferredMedium",desired_medium);
@@ -210,7 +211,7 @@ public class TeacherOfferPostActivity extends AppCompatActivity {
 
         offerMap.put("Date",today_date);
         offerMap.put("Time",today_time);
-        offerMap.put("Uid",userId);
+
 
 
         current_user_db.setValue(offerMap);
