@@ -96,6 +96,8 @@ public class PublicStudentProfileActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
+                if(dataSnapshot.exists()) {
+
                     String fname = dataSnapshot.child("FirstName").getValue().toString();
                     String lname = dataSnapshot.child("LastName").getValue().toString();
                     String name = fname + " " + lname;
@@ -118,7 +120,8 @@ public class PublicStudentProfileActivity extends AppCompatActivity {
                     studentMedium.setText(medium);
                     studentClass.setText(classs);
 
-//                MaintenanceOfButtons();
+                    MaintenanceOfButtons();
+                }
 
             }
 
@@ -139,17 +142,17 @@ public class PublicStudentProfileActivity extends AppCompatActivity {
         });
     }
 
-   /* private void MaintenanceOfButtons() {
+    private void MaintenanceOfButtons() {
 
         reference = FirebaseDatabase.getInstance().getReference().child("Request");
 
         reference.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.hasChild(receiverUserId)){
+                if (dataSnapshot.hasChild(receiverUserId)) {
 
                     String request_type = dataSnapshot.child(receiverUserId).child("request_type").getValue().toString();
-                    if(request_type.equals("sent")){
+                    if (request_type.equals("sent")) {
                         Current_state = "request-sent";
                         send_txt.setTag("Cancel Request");
                         send_req.setImageResource(R.drawable.ic_plus_one_black_24dp);
@@ -163,10 +166,10 @@ public class PublicStudentProfileActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });*/
+        });
 
 
-
+    }
 
 
     private void sendRequestToStudent() {
