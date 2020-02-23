@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -29,7 +30,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class HomeFragment_Teacher extends Fragment {
 
 
-    ConstraintLayout teacherProfile, tutorPostOffer ,receivedRequestsTeacher;
+    ConstraintLayout teacherProfile, tutorPostOffer;
 
     private TextView teacherName;
     private CircleImageView teacherImage;
@@ -55,61 +56,61 @@ public class HomeFragment_Teacher extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        teacherProfile = getActivity().findViewById(R.id.teacherProfile);
-        teacherProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), TeacherProfileActivity.class);
-                startActivity(intent);
-            }
-        });
+        try {
+            teacherProfile = getActivity().findViewById(R.id.teacherProfile);
+            teacherProfile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getContext(), TeacherProfileActivity.class);
+                    startActivity(intent);
+                }
+            });
 
-        tutorPostOffer = getActivity().findViewById(R.id.tutor_post_offer);
-        tutorPostOffer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), TeacherOfferPostActivity.class);
-                startActivity(intent);
-            }
-        });
+            tutorPostOffer = getActivity().findViewById(R.id.tutor_post_offer);
+            tutorPostOffer.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getContext(), TeacherOfferPostActivity.class);
+                    startActivity(intent);
+                }
+            });
 
-        receivedRequestsTeacher = getActivity().findViewById(R.id.requests_teacher);
-        receivedRequestsTeacher.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(),TeacherRecievedRequestsActivity.class);
-                startActivity(intent);
-            }
-        });
 
-        teacherName = getActivity().findViewById(R.id.userNameTeacherHome);
-        teacherImage = getActivity().findViewById(R.id.userPhotoTeacherHome);
+            teacherName = getActivity().findViewById(R.id.userNameTeacherHome);
+            teacherImage = getActivity().findViewById(R.id.userPhotoTeacherHome);
 
-        mAuth = FirebaseAuth.getInstance();
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        myref = mFirebaseDatabase.getReference();
-        uid = mAuth.getUid();
+            mAuth = FirebaseAuth.getInstance();
+            mFirebaseDatabase = FirebaseDatabase.getInstance();
+            myref = mFirebaseDatabase.getReference();
+            uid = mAuth.getUid();
 
-        myref.child("Users").child("Teacher").child(uid).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String fname = dataSnapshot.child("FirstName").getValue().toString();
-                String lname = dataSnapshot.child("LastName").getValue().toString();
-                String name = fname+" "+lname;
+            myref.child("Users").child("Teacher").child(uid).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    String fname = dataSnapshot.child("FirstName").getValue().toString();
+                    String lname = dataSnapshot.child("LastName").getValue().toString();
+                    String name = fname+" "+lname;
 
-                if (dataSnapshot.child("ProfileImage").exists()){
-                    String propic = dataSnapshot.child("ProfileImage").getValue().toString();
-                    Picasso.get().load(propic).into(teacherImage);;
+                    if (dataSnapshot.child("ProfileImage").exists()){
+                        String propic = dataSnapshot.child("ProfileImage").getValue().toString();
+                        Picasso.get().load(propic).into(teacherImage);;
+                    }
+
+                    teacherName.setText(name);
                 }
 
-                teacherName.setText(name);
-            }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                }
+            });
 
-            }
-        });
+        }catch (Exception e){
+
+            Toast.makeText(getActivity(), "Error"+ e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
+
     }
 
 }
