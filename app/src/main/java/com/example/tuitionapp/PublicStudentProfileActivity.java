@@ -286,7 +286,7 @@ public class PublicStudentProfileActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 add_btn_student_profile.setEnabled(true);
                                 Current_state = "request_sent";
-                                send_req.setImageResource(R.drawable.ic_plus_one_black_24dp);
+                            //    send_req.setImageResource(R.drawable.ic_plus_one_black_24dp);
                                 send_txt.setText("Cancel Request");
 
                             }else{

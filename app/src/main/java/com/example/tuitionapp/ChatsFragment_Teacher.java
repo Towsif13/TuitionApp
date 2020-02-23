@@ -92,17 +92,19 @@ public class ChatsFragment_Teacher extends Fragment {
                     UserContacts userContacts = dataSnapshot1.getValue(UserContacts.class);
 
                     //display user from chats
-                    for (String id :userlist){
-                        if(userContacts.getId().equals(id)){
-                            if(muser.size() != 0){
-                                for (UserContacts user : muser){
-                                    if(!userContacts.getId().equals(user.getId())){
-                                        muser.add(userContacts);
-                                    }
+                    if(userContacts.getId() != null) {
+                        for (String id : userlist) {
+                            if (userContacts.getId().equals(id)) {
+                                if (muser.size() != 0) {
+                                    for (UserContacts user : muser) {
+                                        if (!userContacts.getId().equals(user.getId())) {
+                                            muser.add(userContacts);
+                                        }
 
+                                    }
+                                } else {
+                                    muser.add(userContacts);
                                 }
-                            }else {
-                                muser.add(userContacts);
                             }
                         }
                     }
