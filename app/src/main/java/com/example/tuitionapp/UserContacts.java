@@ -5,17 +5,17 @@ import android.util.Log;
 
 public class UserContacts {
 
-    private String Aid,FirstName,LastName,Address;//tutors_image;
+    private String id,FirstName,LastName,Address;//tutors_image;
 
     public String getId() {
-        Log.d("UserContacts","Id"+ Aid);
-        return Aid;
+        Log.d("UserContacts","Id"+ id);
+        return id;
     }
 
     public UserContacts(String id, String FirstName, String LastName, String Address, String status )
 /* String tutors_image*/
 {
-        this.Aid = id;
+        this.id = id;
         this.FirstName = FirstName;
         this.LastName = LastName;
         this.Address = Address;
@@ -29,7 +29,7 @@ public class UserContacts {
 
 
     public void setId(String id) {
-        this.Aid = id;
+        this.id = id;
     }
 
     public String getAddress() {

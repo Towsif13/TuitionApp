@@ -41,6 +41,7 @@ public class MessageActivity extends AppCompatActivity {
     ArrayList<Chat>chats;
     RecyclerView recyclerView;
     ValueEventListener valueEventListener;
+    String userid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,18 +71,19 @@ public class MessageActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
 
 
-        final String userid = getIntent().getExtras().getString("userId");
+
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference();
         String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        userid = getIntent().getExtras().getString("userId");
 
         databaseReference.child("Users").child("Student").child(currentuser).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()){
 
-                 /*   databaseReference.child("Users").child("Teacher").child(userid)
+                 databaseReference.child("Users").child("Teacher").child(userid)
                             .addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -153,13 +155,12 @@ public class MessageActivity extends AppCompatActivity {
                             }
                             msg_send.setText("");
                         }
-                    });*/
+                    });
 
 
                     // Toast.makeText(UserActivity.this, "not working", Toast.LENGTH_SHORT).show();
 
                 }
-
 
             }
 
