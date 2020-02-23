@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.DatabaseReference;
 
 public class SigninActivity extends AppCompatActivity {
+
+    private ProgressBar progressBarSignIn;
 
     TextView register , resetPassword;
     EditText userEmail , userPassword;
@@ -71,6 +74,9 @@ public class SigninActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        progressBarSignIn = findViewById(R.id.progressBarSignIn);
+        progressBarSignIn.setVisibility(View.GONE);
     }
 
     private void signInExistingUser() {
@@ -104,13 +110,15 @@ public class SigninActivity extends AppCompatActivity {
         String password = userPassword.getText().toString();
 
         if(email.equals("") || password.equals("")) return;
-        Toast.makeText(this,"Loging in...",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this,"Logging in...",Toast.LENGTH_SHORT).show();
+        progressBarSignIn.setVisibility(View.VISIBLE);
 
         mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (!task.isSuccessful()){
                     //Toast.makeText(LoginActivity.this, "There was a problem", Toast.LENGTH_SHORT).show();
+                    progressBarSignIn.setVisibility(View.GONE);
                     showErrorDialog("There was a problem");
                 }else {
                     if (mAuth.getCurrentUser().isEmailVerified()){
@@ -119,11 +127,13 @@ public class SigninActivity extends AppCompatActivity {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 if (dataSnapshot.exists()){
+                                    progressBarSignIn.setVisibility(View.GONE);
                                     Intent intent = new Intent(SigninActivity.this,StudentLandingActivity.class);
                                     finish();
                                     startActivity(intent);
                                 }
                                 else {
+                                    progressBarSignIn.setVisibility(View.GONE);
                                     Intent intent = new Intent(SigninActivity.this,TeacherLandingActivity.class);
                                     finish();
                                     startActivity(intent);

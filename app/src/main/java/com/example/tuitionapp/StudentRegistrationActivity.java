@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -32,6 +33,8 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 public class StudentRegistrationActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+
+    private ProgressBar progressBarStudentReg;
 
     TextView login;
     TextView dateOfBirth;
@@ -58,6 +61,9 @@ public class StudentRegistrationActivity extends AppCompatActivity implements Da
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_registration);
+
+        progressBarStudentReg = findViewById(R.id.progressBarStudentReg);
+        progressBarStudentReg.setVisibility(View.GONE);
 
         login = findViewById(R.id.signintext);
         login.setOnClickListener(new View.OnClickListener() {
@@ -268,6 +274,9 @@ public class StudentRegistrationActivity extends AppCompatActivity implements Da
     private void createFirebaseUser(){
         String uemail = userEmail.getText().toString();
         String upassword = userPassword.getText().toString();
+
+        progressBarStudentReg.setVisibility(View.VISIBLE);
+
         mAuth.createUserWithEmailAndPassword(uemail,upassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -302,16 +311,19 @@ public class StudentRegistrationActivity extends AppCompatActivity implements Da
                                 profileMap.put("Phone",phone);
                                 current_user_db.setValue(profileMap);
 
+                                progressBarStudentReg.setVisibility(View.GONE);
                                 Toast.makeText(StudentRegistrationActivity.this, "Registration Complete Verify Email", Toast.LENGTH_SHORT).show();
                                 showSuccessDialog("Registration complete verify email");
                             }
                             else {
+                                progressBarStudentReg.setVisibility(View.GONE);
                                 Toast.makeText(StudentRegistrationActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
                 }
                 if (!task.isSuccessful()){
+                    progressBarStudentReg.setVisibility(View.GONE);
                     //Toast.makeText(RegisterActivity.this, "Error", Toast.LENGTH_SHORT).show();
                     showErrorDialog("Registration failed");
                 }

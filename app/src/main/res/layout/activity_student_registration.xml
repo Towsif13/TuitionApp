@@ -186,6 +186,15 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/dateOfBirth" />
 
+            <Spinner
+                android:id="@+id/spinner_region"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="25dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/phone" />
+
             <TextView
                 android:id="@+id/dateOfBirth"
                 android:layout_width="0dp"
@@ -262,15 +271,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/userAddress"
                 app:srcCompat="@drawable/ic_arrow_forward" />
 
-            <Spinner
-                android:id="@+id/spinner_region"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginEnd="25dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/phone" />
-
             <!--            <EditText-->
             <!--                android:id="@+id/userGender"-->
             <!--                android:layout_width="0dp"-->
@@ -286,5 +286,14 @@
 
 
     </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressBarStudentReg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
