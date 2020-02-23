@@ -9,10 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TeacherRecievedRequestsActivity"></activity>
         <activity android:name=".StudentReceivedRequestsActivity" />
         <activity android:name=".TeacherOfferPostActivity" />
-        <activity android:name=".PublicStudentProfileActivity" />
+        <activity android:name=".PublicStudentProfile" />
         <activity android:name=".PublicTeacherProfileActivity" />
         <activity android:name=".TeacherEditProfileActivity" />
         <activity android:name=".StudentEditProfileActivity" />

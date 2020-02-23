@@ -23,20 +23,19 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.HashMap;
 
-public class PublicStudentProfileActivity extends AppCompatActivity {
+public class PublicStudentProfile extends AppCompatActivity {
 
     ImageView backBtn;
     ImageView send_req;
+    Boolean b = false;
 
     TextView studentName,send_txt,studentEmail, studentPhone, studentRegion, studentAddress, studentDOB, studentGender,
             studentMedium, studentClass;
 
     private FirebaseAuth mAuth;
+    String name,Stname;
     private FirebaseDatabase mFirebaseDatabase;
 
     private FirebaseAuth.AuthStateListener mAuthListner;
@@ -68,7 +67,7 @@ public class PublicStudentProfileActivity extends AppCompatActivity {
         msg_btn_student_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(PublicStudentProfileActivity.this, "MSG", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PublicStudentProfile.this, "MSG", Toast.LENGTH_SHORT).show();
             }
         });
         send_txt = findViewById(R.id.send_txt);
@@ -82,70 +81,55 @@ public class PublicStudentProfileActivity extends AppCompatActivity {
         studentMedium = findViewById(R.id.studentMedium);
         studentClass = findViewById(R.id.studentClass);
         send_req = findViewById(R.id.st_send_req);
-        try {
-            mAuth = FirebaseAuth.getInstance();
-            mFirebaseDatabase = FirebaseDatabase.getInstance();
-            myref = mFirebaseDatabase.getReference();
-            sturef = mFirebaseDatabase.getReference().child("AcceptStudent");
-            final FirebaseUser user = mAuth.getCurrentUser();
-            try {
-                uid = user.getUid();
-                Intent intent = getIntent();
-                receiverUserId = getIntent().getExtras().getString("userid");
-            }catch (Exception e){
-                Toast.makeText(this, "Error"+e.getMessage(), Toast.LENGTH_SHORT).show();
+
+        mAuth = FirebaseAuth.getInstance();
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        myref = mFirebaseDatabase.getReference();
+        sturef = mFirebaseDatabase.getReference().child("AcceptStudent");
+        final FirebaseUser user = mAuth.getCurrentUser();
+        uid = user.getUid();
+        Intent intent = getIntent();
+        receiverUserId = getIntent().getExtras().getString("userid");
+
+
+        myref.child("Users").child("Student").child(receiverUserId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if(dataSnapshot.exists()) {
+
+                    String fname = dataSnapshot.child("FirstName").getValue().toString();
+                    String lname = dataSnapshot.child("LastName").getValue().toString();
+                    name = fname + " " + lname;
+                    String email = user.getEmail();
+                    String phone = dataSnapshot.child("Phone").getValue().toString();
+                    String region = dataSnapshot.child("Region").getValue().toString();
+                    String address = dataSnapshot.child("Address").getValue().toString();
+                    String dob = dataSnapshot.child("Birthday").getValue().toString();
+                    String gender = dataSnapshot.child("Gender").getValue().toString();
+                    String medium = dataSnapshot.child("Medium").getValue().toString();
+                    String classs = dataSnapshot.child("Class").getValue().toString();
+
+                    studentName.setText(name);
+                    studentEmail.setText(email);
+                    studentPhone.setText(phone);
+                    studentRegion.setText(region);
+                    studentAddress.setText(address);
+                    studentDOB.setText(dob);
+                    studentGender.setText(gender);
+                    studentMedium.setText(medium);
+                    studentClass.setText(classs);
+
+                    MaintenanceOfButtons();
+                }
+
             }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-
-            myref.child("Users").child("Student").child(receiverUserId).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                    if(dataSnapshot.exists()) {
-                        try {
-                            String fname = dataSnapshot.child("FirstName").getValue().toString();
-                            String lname = dataSnapshot.child("LastName").getValue().toString();
-                            String name = fname + " " + lname;
-                            String email = user.getEmail();
-                            String phone = dataSnapshot.child("Phone").getValue().toString();
-                            String region = dataSnapshot.child("Region").getValue().toString();
-                            String address = dataSnapshot.child("Address").getValue().toString();
-                            String dob = dataSnapshot.child("Birthday").getValue().toString();
-                            String gender = dataSnapshot.child("Gender").getValue().toString();
-                            String medium = dataSnapshot.child("Medium").getValue().toString();
-                            String classs = dataSnapshot.child("Class").getValue().toString();
-
-                            studentName.setText(name);
-                            studentEmail.setText(email);
-                            studentPhone.setText(phone);
-                            studentRegion.setText(region);
-                            studentAddress.setText(address);
-                            studentDOB.setText(dob);
-                            studentGender.setText(gender);
-                            studentMedium.setText(medium);
-                            studentClass.setText(classs);
-
-                            MaintenanceOfButtons();
-
-                        }catch (Exception e){
-                            Toast.makeText(getApplication(), "Error"+e.getMessage(), Toast.LENGTH_SHORT).show();
-
-                        }
-
-                    }
-
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
-        }catch (Exception e){
-            Toast.makeText(this, "Error"+e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-
+            }
+        });
 
 
         add_btn_student_profile.setOnClickListener(new View.OnClickListener() {
@@ -153,6 +137,7 @@ public class PublicStudentProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(Current_state.equals("not_student")){
+                    b = false;
                     sendRequestToStudent();
                 }
 
@@ -259,22 +244,17 @@ public class PublicStudentProfileActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChild(receiverUserId)) {
-                    try {
-                        String request_type = dataSnapshot.child(receiverUserId).child("request_type").getValue().toString();
-                        if (request_type.equals("sent")) {
-                            Current_state = "request_sent";
-                            send_txt.setTag("Cancel Request");
-                            send_req.setImageResource(R.drawable.ic_plus_one_black_24dp);
-                        }else if(request_type.equals("received")){
-                            Current_state = "request_received";
-                            send_txt.setTag("Accept Request");
 
-                        }
+                    String request_type = dataSnapshot.child(receiverUserId).child("request_type").getValue().toString();
+                    if (request_type.equals("sent")) {
+                        Current_state = "request_sent";
+                        send_txt.setTag("Cancel Request");
+                        send_req.setImageResource(R.drawable.ic_plus_one_black_24dp);
+                    }else if(request_type.equals("received")){
+                        Current_state = "request_received";
+                        send_txt.setTag("Accept Request");
 
-                    }catch (Exception e){
-                        Toast.makeText(PublicStudentProfileActivity.this, "Error"+e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
-
                 }
             }
 
@@ -290,6 +270,29 @@ public class PublicStudentProfileActivity extends AppCompatActivity {
 
     private void sendRequestToStudent() {
 
+        myref.child("Users").child("Teacher").child(uid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if(dataSnapshot.exists()) {
+
+                    String fname = dataSnapshot.child("FirstName").getValue().toString();
+                    String lname = dataSnapshot.child("LastName").getValue().toString();
+                    name = fname + " " + lname;
+
+                    reference = FirebaseDatabase.getInstance().getReference().child("Request");
+                    HashMap<String,Object> hashMap = new HashMap<>();
+                    hashMap.put("Sent_Name",name);
+                    hashMap.put("request_type","sent");
+                    reference.child(uid).child(receiverUserId).setValue(hashMap);
+                }}
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         reference = FirebaseDatabase.getInstance().getReference().child("Request");
 
         reference.child(uid).child(receiverUserId).child("request_type")
@@ -297,24 +300,30 @@ public class PublicStudentProfileActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
 
-                if (task.isSuccessful()) {
-                    reference.child(receiverUserId).child(uid).child("request_type")
-                            .setValue("received").addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
+                if(b == false){
 
-                            if (task.isSuccessful()) {
-                                add_btn_student_profile.setEnabled(true);
-                                Current_state = "request_sent";
-                            //    send_req.setImageResource(R.drawable.ic_plus_one_black_24dp);
-                                send_txt.setText("Cancel Request");
+                    if (task.isSuccessful()) {
+                        reference.child(receiverUserId).child(uid).child("request_type")
+                                .setValue("received").addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
 
-                            }else{
-                                send_req.setImageResource(R.drawable.ic_person_white);
+                                if (task.isSuccessful()) {
+                                    b = true;
+                                    add_btn_student_profile.setEnabled(true);
+                                    Current_state = "request_sent";
+                                    //    send_req.setImageResource(R.drawable.ic_plus_one_black_24dp);
+                                    send_txt.setText("Cancel Request");
+
+                                }else{
+                                    send_req.setImageResource(R.drawable.ic_person_white);
+                                }
                             }
-                        }
 
-                    });
+                        });
+                    }
+
+
                 }
             }
         });

@@ -2,7 +2,6 @@ package com.example.tuitionapp;
 
 import android.content.Context;
 import android.content.Intent;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,15 +13,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.database.core.Tag;
-
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 
 public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> implements Filterable {
 
@@ -144,7 +138,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> im
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(context,PublicStudentProfileActivity.class);
+                Intent intent = new Intent(context, PublicStudentProfile.class);
                 intent.putExtra("userid",id);
                 Log.d("AdapterPosts","ji"+id);
                 context.startActivity(intent);
