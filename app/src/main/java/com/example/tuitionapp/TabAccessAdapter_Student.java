@@ -23,6 +23,9 @@ public class TabAccessAdapter_Student extends FragmentStatePagerAdapter{
                 HomeFragment_Student homeFragment_student = new HomeFragment_Student();
                 return homeFragment_student;
             case 1:
+                PostFragment_Student postFragment_student = new PostFragment_Student();
+                return postFragment_student;
+            case 2:
                 ChatsFragment_Student chatsFragment = new ChatsFragment_Student();
                 return chatsFragment;
             default:

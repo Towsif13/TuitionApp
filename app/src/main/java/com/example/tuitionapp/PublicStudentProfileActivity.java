@@ -23,6 +23,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 
 public class PublicStudentProfileActivity extends AppCompatActivity {
@@ -30,14 +33,14 @@ public class PublicStudentProfileActivity extends AppCompatActivity {
     ImageView backBtn;
     ImageView send_req;
 
-    TextView studentName,send_txt, studentEmail, studentPhone, studentRegion, studentAddress, studentDOB, studentGender,
+    TextView studentName,send_txt,studentEmail, studentPhone, studentRegion, studentAddress, studentDOB, studentGender,
             studentMedium, studentClass;
 
     private FirebaseAuth mAuth;
     private FirebaseDatabase mFirebaseDatabase;
 
     private FirebaseAuth.AuthStateListener mAuthListner;
-    private DatabaseReference reference, myref;
+    private DatabaseReference reference, myref,sturef;
     private String uid, receiverUserId, Current_state;
 
     FloatingActionButton floatingActionButton;
@@ -57,7 +60,6 @@ public class PublicStudentProfileActivity extends AppCompatActivity {
             }
         });
         Current_state = "not_student";
-
 
         add_btn_student_profile = findViewById(R.id.add_btn_student_profile);
         msg_btn_student_profile = findViewById(R.id.msg_btn_student_profile);
@@ -84,12 +86,11 @@ public class PublicStudentProfileActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myref = mFirebaseDatabase.getReference();
+        sturef = mFirebaseDatabase.getReference().child("AcceptStudent");
         final FirebaseUser user = mAuth.getCurrentUser();
         uid = user.getUid();
         Intent intent = getIntent();
         receiverUserId = getIntent().getExtras().getString("userid");
-
-
 
 
         myref.child("Users").child("Student").child(receiverUserId).addValueEventListener(new ValueEventListener() {
@@ -136,15 +137,73 @@ public class PublicStudentProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                sendRequestToStudent();
+                if(Current_state.equals("not_student")){
+                    sendRequestToStudent();
+                }
 
                 if(Current_state.equals("request_sent")){
                     CancelRequest();
                 }
 
+                if(Current_state.equals("request_received")){
+                    //AcceptRequest();
+                }
+
+
             }
         });
     }
+
+  /*  private void AcceptRequest() {
+
+
+        SimpleDateFormat df1 = new SimpleDateFormat("d-MM-yyyy");
+        final String today_date = df1.format(Calendar.getInstance().getTime());
+        sturef.child(uid).child(receiverUserId).child("date").setValue(today_date).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    sturef.child(receiverUserId).child(uid).child("date").setValue(today_date).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful()){
+
+                                reference = FirebaseDatabase.getInstance().getReference().child("Request");
+
+                                reference.child(uid).child(receiverUserId).removeValue()
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                                if (task.isSuccessful()) {
+                                                    reference.child(receiverUserId).child(uid).removeValue()
+                                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                @Override
+                                                                public void onComplete(@NonNull Task<Void> task) {
+
+                                                                    if (task.isSuccessful()) {
+                                                                        add_btn_student_profile.setEnabled(true);
+                                                                        Current_state = "student";
+                                                                        send_req.setImageResource(R.drawable.ic_person_white);
+                                                                        send_txt.setText("Student");
+
+                                                                    }
+                                                                }
+
+                                                            });
+                                                }
+                                            }
+                                        });
+
+
+                            }
+                        }
+                    });
+
+                }
+            }
+        });
+    }*/
 
     private void CancelRequest() {
 
@@ -166,7 +225,6 @@ public class PublicStudentProfileActivity extends AppCompatActivity {
                                     Current_state = "not_student";
                                     send_req.setImageResource(R.drawable.ic_person_white);
                                     send_txt.setText("Add");
-
                                 }
                             }
 
@@ -192,7 +250,9 @@ public class PublicStudentProfileActivity extends AppCompatActivity {
                         Current_state = "request_sent";
                         send_txt.setTag("Cancel Request");
                         send_req.setImageResource(R.drawable.ic_plus_one_black_24dp);
-
+                    }else if(request_type.equals("received")){
+                        Current_state = "request_received";
+                        send_txt.setTag("Accept Request");
 
                     }
                 }
