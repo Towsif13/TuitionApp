@@ -46,7 +46,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
 
         final UserContacts user = profiles.get(position);
 
-        final String id = profiles.get(position).getFirstName();
         holder.name.setText(profiles.get(position).getFirstName());
         holder.lname.setText(profiles.get(position).getLastName());
       //  holder.last_message.setText(profiles.get(position).getAddress());
@@ -61,7 +60,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
 
                Intent intent = new Intent(context,MessageActivity.class);
                intent.putExtra("userId",user.getId());
-               Log.d("UserAdapter","AdapteriD"+id);
                context.startActivity(intent);
            }
        });

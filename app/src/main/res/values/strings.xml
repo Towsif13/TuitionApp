@@ -41,4 +41,10 @@
         <item>O level</item>
         <item>A level</item>
     </string-array>
+    <string name="title_activity_teacher_received_request">TeacherReceivedRequest</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
 </resources>

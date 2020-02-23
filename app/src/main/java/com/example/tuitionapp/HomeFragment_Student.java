@@ -72,7 +72,7 @@ public class HomeFragment_Student extends Fragment {
         receivedRequestsStudent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(),StudentReceivedRequestsActivity.class);
+                Intent intent = new Intent(getContext(),TeacherReceivedRequest.class);
                 startActivity(intent);
             }
         });

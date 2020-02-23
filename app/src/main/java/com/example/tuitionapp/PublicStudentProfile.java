@@ -282,9 +282,11 @@ public class PublicStudentProfile extends AppCompatActivity {
 
                     reference = FirebaseDatabase.getInstance().getReference().child("Request");
                     HashMap<String,Object> hashMap = new HashMap<>();
+                    hashMap.put("sent_id",uid);
+                    hashMap.put("receive_id",receiverUserId);
                     hashMap.put("Sent_Name",name);
                     hashMap.put("request_type","sent");
-                    reference.child(uid).child(receiverUserId).setValue(hashMap);
+                    reference.child(uid).setValue(hashMap);
                 }}
 
             @Override

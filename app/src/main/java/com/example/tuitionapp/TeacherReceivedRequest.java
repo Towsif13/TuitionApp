@@ -1,13 +1,15 @@
 package com.example.tuitionapp;
 
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Bundle;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -17,65 +19,81 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class UserActivity extends AppCompatActivity {
+public class TeacherReceivedRequest extends AppCompatActivity {
+
     FirebaseAuth mAuth;
     DatabaseReference reference;
     RecyclerView recyclerView;
-    ArrayList<UserContacts> list;
-    UserAdapter adapter;
+    List<Request> list;
+    RequestAdapter adapter;
     Toolbar mtoolbar;
+    String receiverId,senderId,req_type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user);
+        setContentView(R.layout.activity_teacher_received_request);
 
-        recyclerView = findViewById(R.id.user_recycler_list);
+        recyclerView = findViewById(R.id.user_request_recycler_list);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         mtoolbar = findViewById(R.id.user_toolbar);
         setSupportActionBar(mtoolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        recyclerView.setAdapter(adapter);
-
-        reference = FirebaseDatabase.getInstance().getReference();
-
-        // getting the current user
-        String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        recyclerView.setHasFixedSize(true);
+       // recyclerView.setAdapter(adapter);
 
 
-        // checking the current user is  in the studnet node or teacher node
-        reference.child("Users").child("Student").child( currentuser).addValueEventListener(new ValueEventListener() {
+        reference = FirebaseDatabase.getInstance().getReference().child("Request");
+
+        final String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        Log.d("RequestAdapter", "hello");
+        Bundle extras = getIntent().getExtras();
+        //  String foo = extras.getString("FOO");
+        if (extras != null) {
+            receiverId = getIntent().getExtras().getString("ReceiverId");
+        }
+
+
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()){
-                    getSupportActionBar().setTitle("Tutors List");
+                if (dataSnapshot.exists()) {
+                    getSupportActionBar().setTitle("Requests List");
+
+                    list = new ArrayList<Request>();
+                    list.clear();
+                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                        Log.d("RequestAdapter", "bye");
+                        Request p = dataSnapshot1.getValue(Request.class);
+                        list.add(p);
+                    }
+                    adapter = new RequestAdapter(TeacherReceivedRequest.this, list);
                     recyclerView.setAdapter(adapter);
-                    reference.child("Users").child("Teacher").addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            list = new ArrayList<UserContacts>();
-                            for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
-                            {
-                                UserContacts p = dataSnapshot1.getValue(UserContacts.class);
-                                list.add(p);
-                            }
-
-                            adapter = new UserAdapter(UserActivity.this,list);
-                            recyclerView.setAdapter(adapter);
-                            adapter.notifyDataSetChanged();
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-                            Toast.makeText(UserActivity.this, "Opsss.... Something is wrong", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                 //   Toast.makeText(UserActivity.this, "working", Toast.LENGTH_SHORT).show();
+                    adapter.notifyDataSetChanged();
                 }
-                else {
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
+
+
+
+                    //   Toast.makeText(UserActivity.this, "working", Toast.LENGTH_SHORT).show();
+                }
+              /*  else {
                     getSupportActionBar().setTitle("Student List");
 
 
@@ -101,22 +119,17 @@ public class UserActivity extends AppCompatActivity {
                         }
                     });
 
-                   // Toast.makeText(UserActivity.this, "not working", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(UserActivity.this, "not working", Toast.LENGTH_SHORT).show();
 
                 }
 
-                }
+            }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                }
-            });
+            }
+        });
 
+*/
 
-
-
-
-
-    }
-}
