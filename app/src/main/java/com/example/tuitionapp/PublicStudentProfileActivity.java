@@ -138,8 +138,44 @@ public class PublicStudentProfileActivity extends AppCompatActivity {
 
                 sendRequestToStudent();
 
+                if(Current_state.equals("request_sent")){
+                    CancelRequest();
+                }
+
             }
         });
+    }
+
+    private void CancelRequest() {
+
+            reference = FirebaseDatabase.getInstance().getReference().child("Request");
+
+            reference.child(uid).child(receiverUserId).removeValue()
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+
+                    if (task.isSuccessful()) {
+                        reference.child(receiverUserId).child(uid).removeValue()
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+
+                                if (task.isSuccessful()) {
+                                    add_btn_student_profile.setEnabled(true);
+                                    Current_state = "not_student";
+                                    send_req.setImageResource(R.drawable.ic_person_white);
+                                    send_txt.setText("Add");
+
+                                }
+                            }
+
+                        });
+                    }
+                }
+            });
+
+
     }
 
     private void MaintenanceOfButtons() {
@@ -153,7 +189,7 @@ public class PublicStudentProfileActivity extends AppCompatActivity {
 
                     String request_type = dataSnapshot.child(receiverUserId).child("request_type").getValue().toString();
                     if (request_type.equals("sent")) {
-                        Current_state = "request-sent";
+                        Current_state = "request_sent";
                         send_txt.setTag("Cancel Request");
                         send_req.setImageResource(R.drawable.ic_plus_one_black_24dp);
 
@@ -193,6 +229,8 @@ public class PublicStudentProfileActivity extends AppCompatActivity {
                                 send_req.setImageResource(R.drawable.ic_plus_one_black_24dp);
                                 send_txt.setText("Cancel Request");
 
+                            }else{
+                                send_req.setImageResource(R.drawable.ic_person_white);
                             }
                         }
 
