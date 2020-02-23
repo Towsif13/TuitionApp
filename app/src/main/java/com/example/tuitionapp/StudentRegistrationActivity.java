@@ -290,7 +290,7 @@ public class StudentRegistrationActivity extends AppCompatActivity implements Da
                                 String phone = userPhone.getText().toString();
 
                                 HashMap<String,String> profileMap = new HashMap<>();
-                                profileMap.put("Id",userId);
+                                profileMap.put("Aid",userId);
                                 profileMap.put("FirstName",fname);
                                 profileMap.put("LastName",lname);
                                 profileMap.put("Address",address);

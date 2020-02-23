@@ -206,6 +206,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="sans-serif-light"
                                 android:text="Add"
+                                android:id="@+id/send_txt"
                                 android:textAllCaps="true"
                                 android:textColor="@color/colorWhite"
                                 android:textSize="13sp" />

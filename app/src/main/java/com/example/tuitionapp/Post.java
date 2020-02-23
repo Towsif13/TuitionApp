@@ -1,11 +1,9 @@
 package com.example.tuitionapp;
 
-import android.graphics.Region;
-import android.location.Address;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import java.security.acl.LastOwnerException;
 
 public class Post {
     private String id, FirstName,LastName ,Address , sClass, Date , Time, Days, Region ,Salary, PreferredGender ,Subjects, Notes , Medium;
@@ -14,11 +12,14 @@ public class Post {
     }
 
     public String getId() {
+
+        Log.d("Post","ji"+ id);
         return id;
+
     }
 
     public void setId(String id) {
-        id = id;
+        this.id = id;
     }
 
     public Post( String Id, String FirstName, String LastName, String address, String sClass, String date, String time, String days, String region, String salary, String gender, String subjects, String notes, String medium) {

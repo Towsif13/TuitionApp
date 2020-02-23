@@ -3,6 +3,7 @@ package com.example.tuitionapp;
 import android.content.Context;
 import android.content.Intent;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.core.Tag;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -26,6 +29,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> im
     Context context;
     List<Post> postList;
     List<Post> mDataFiltered;
+    ArrayList<Post> posts;
 
 
     public AdapterPosts (Context c , List<Post> p){
@@ -50,9 +54,10 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> im
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
 
         // bind data here
-        final Post post = mDataFiltered.get(position);
+        final String id = mDataFiltered.get(position).getId();
+        Log.d("AdapterPosts","ji"+id);
 
-        //get data
+                //get data
 
         String firstName = mDataFiltered.get(position).getFirstName();
         String lastName = mDataFiltered.get(position).getLastName();
@@ -135,12 +140,13 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> im
             }
         });
 
-        holder.sendReq.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 Intent intent = new Intent(context,PublicStudentProfileActivity.class);
-                intent.putExtra("visit_user_id",post.getId());
+                intent.putExtra("userid",id);
+                Log.d("AdapterPosts","ji"+id);
                 context.startActivity(intent);
 
                // Toast.makeText(context, "send req", Toast.LENGTH_SHORT).show();

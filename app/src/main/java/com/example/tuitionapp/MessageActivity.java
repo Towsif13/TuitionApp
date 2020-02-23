@@ -70,20 +70,19 @@ public class MessageActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
 
 
-        Intent intent = getIntent();
-        final String userid = intent.getStringExtra("userId");
+        final String userid = getIntent().getExtras().getString("userId");
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference();
         String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        databaseReference.child("Users").child("Student").child( currentuser).addValueEventListener(new ValueEventListener() {
+        databaseReference.child("Users").child("Student").child(currentuser).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()){
 
-                    databaseReference.child("Users")
-                            .child("Teacher").child(userid).addValueEventListener(new ValueEventListener() {
+                 /*   databaseReference.child("Users").child("Teacher").child(userid)
+                            .addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -121,8 +120,7 @@ public class MessageActivity extends AppCompatActivity {
                 }
                 else {
 
-                    databaseReference.child("Users")
-                            .child("Student").child(userid).addValueEventListener(new ValueEventListener()  {
+                    databaseReference.child("Users").child("Student").child(userid).addValueEventListener(new ValueEventListener()  {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -155,7 +153,7 @@ public class MessageActivity extends AppCompatActivity {
                             }
                             msg_send.setText("");
                         }
-                    });
+                    });*/
 
 
                     // Toast.makeText(UserActivity.this, "not working", Toast.LENGTH_SHORT).show();
