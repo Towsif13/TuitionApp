@@ -19,6 +19,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.hsalf.smilerating.BaseRating;
+import com.hsalf.smilerating.SmileRating;
 
 public class PublicTeacherProfileActivity extends AppCompatActivity {
 
@@ -48,7 +50,9 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
         rate_btn_teacher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(PublicTeacherProfileActivity.this, "RATE", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(PublicTeacherProfileActivity.this , TeacherRatingActivity.class);
+                startActivity(intent);
+                //Toast.makeText(PublicTeacherProfileActivity.this, "RATE", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -128,5 +132,33 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
 
             }
         });
+
+//        SmileRating smileRating = findViewById(R.id.smile_rating);
+//
+//        smileRating.setOnSmileySelectionListener(new SmileRating.OnSmileySelectionListener() {
+//            @Override
+//            public void onSmileySelected(@BaseRating.Smiley int smiley, boolean reselected) {
+//                // reselected is false when user selects different smiley that previously selected one
+//                // true when the same smiley is selected.
+//                // Except if it first time, then the value will be false.
+//                switch (smiley) {
+//                    case SmileRating.BAD:
+//                        Toast.makeText(PublicTeacherProfileActivity.this, "Bad", Toast.LENGTH_SHORT).show();
+//                        break;
+//                    case SmileRating.GOOD:
+//                        Toast.makeText(PublicTeacherProfileActivity.this, "Good", Toast.LENGTH_SHORT).show();
+//                        break;
+//                    case SmileRating.GREAT:
+//                        Toast.makeText(PublicTeacherProfileActivity.this, "Great", Toast.LENGTH_SHORT).show();
+//                        break;
+//                    case SmileRating.OKAY:
+//                        Toast.makeText(PublicTeacherProfileActivity.this, "Okay", Toast.LENGTH_SHORT).show();
+//                        break;
+//                    case SmileRating.TERRIBLE:
+//                        Toast.makeText(PublicTeacherProfileActivity.this, "Terrible", Toast.LENGTH_SHORT).show();
+//                        break;
+//                }
+//            }
+//        });
     }
 }
