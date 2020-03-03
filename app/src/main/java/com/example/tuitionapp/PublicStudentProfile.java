@@ -270,34 +270,10 @@ public class PublicStudentProfile extends AppCompatActivity {
 
     private void sendRequestToStudent() {
 
-        myref.child("Users").child("Teacher").child(uid).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                if(dataSnapshot.exists()) {
-
-                    String fname = dataSnapshot.child("FirstName").getValue().toString();
-                    String lname = dataSnapshot.child("LastName").getValue().toString();
-                    name = fname + " " + lname;
-
-                    reference = FirebaseDatabase.getInstance().getReference().child("Request");
-                    HashMap<String,Object> hashMap = new HashMap<>();
-                    hashMap.put("sent_id",uid);
-                    hashMap.put("receive_id",receiverUserId);
-                    hashMap.put("Sent_Name",name);
-                    hashMap.put("request_type","sent");
-                    reference.child(uid).setValue(hashMap);
-                }}
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
         reference = FirebaseDatabase.getInstance().getReference().child("Request");
 
-        reference.child(uid).child(receiverUserId).child("request_type")
+        reference.child(uid)
+                .child(receiverUserId).child("request_type")
                 .setValue("sent").addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -314,7 +290,7 @@ public class PublicStudentProfile extends AppCompatActivity {
                                     b = true;
                                     add_btn_student_profile.setEnabled(true);
                                     Current_state = "request_sent";
-                                    //    send_req.setImageResource(R.drawable.ic_plus_one_black_24dp);
+                                    send_req.setImageResource(R.drawable.ic_plus_one_black_24dp);
                                     send_txt.setText("Cancel Request");
 
                                 }else{

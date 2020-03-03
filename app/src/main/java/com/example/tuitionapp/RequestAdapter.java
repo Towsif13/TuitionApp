@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,7 +19,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /*
  * ------FOR REQUEST FRAGMENT------
@@ -26,12 +32,12 @@ import java.util.List;
 
 public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestViewHolder>{
 
-    private List<Request> requestList;
+    private ArrayList<UserContacts> requestList;
     private FirebaseAuth mAuth;
-    DatabaseReference mDatabaseReference ;
+    DatabaseReference mRootRef;
     private Context ctx;
 
-    public RequestAdapter(Context ctx,List<Request> requestList) {
+    public RequestAdapter(Context ctx,ArrayList<UserContacts>requestList) {
         this.ctx = ctx;
         this.requestList = requestList;
     }
@@ -40,28 +46,14 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
     public RequestViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.req_row_layout,parent,false);
-        Log.d("RequestAdapter","hi");
         return new RequestViewHolder(view);
 
     }
 
     @Override
     public void onBindViewHolder(final RequestViewHolder holder, final int position) {
+       holder.displayName.setText(requestList.get(position).getFirstName() +  " " +requestList.get(position).getLastName());
 
-        final String rt= requestList.get(position).getRequest_type();
-        final String rid= requestList.get(position).getReceive_id();
-        final String sid= requestList.get(position).getSent_id();
-
-
-        Intent intent = new Intent(ctx,TeacherReceivedRequest.class);
-
-        intent.putExtra("ReceiverId",rid);
-        Log.d("RequestAdapter","hi" + rid);
-        intent.putExtra("SentId",sid);
-        intent.putExtra("Request_Type",rt);
-       // ctx.startActivity(intent);
-
-        holder.displayName.setText(requestList.get(position).getSent_Name());
 
         // Picasso.get().load(profiles.get(position).getProfilePic()).into(holder.profilePic);
        /* if(profiles.get(position).getPermission()) {
@@ -89,16 +81,19 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
             }
         });*/
 
-       /* holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(ctx,ProfileActivity.class);
-                intent.putExtra("user_id",requestList.get(position));
+                Intent intent = new Intent(ctx,PublicTeacherProfileActivity.class);
+                intent.putExtra("user_id",requestList.get(position).getId());
+                ctx.startActivity(intent);
 
 
             }
-        }); */
+        });
+
+
 
 
     }
@@ -107,6 +102,8 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
     public class RequestViewHolder extends RecyclerView.ViewHolder {
 
         public TextView displayName;
+        View mView;
+        Button request_accept,request_decline;
         //public CircleImageView displayImage;
         public ImageView imageView;
 
@@ -114,20 +111,12 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
             super(itemView);
 
             ctx = itemView.getContext();
+            mView = itemView;
 
             displayName = (TextView)itemView.findViewById(R.id.user_firstName);
             //displayImage = (CircleImageView)itemView.findViewById(R.id.circleImageViewUserImage);
            // imageView = (ImageView)itemView.findViewById(R.id.userSingleOnlineIcon);
             //imageView.setVisibility(View.INVISIBLE);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int pos = getAdapterPosition();
-                    Intent intent = new Intent(ctx, PublicStudentProfile.class);
-                   // intent.putExtra("user_id",requestList.get(pos));
-                    ctx.startActivity(intent);
-                }
-            });
         }
     }
 

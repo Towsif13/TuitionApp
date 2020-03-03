@@ -18,7 +18,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="2dp"
             android:layout_marginBottom="2dp"
-            android:src="@drawable/userimg"
+            android:src="@drawable/ic_account_circle_blue_24dp"
             app:civ_border_color="@color/followingBg"
             app:civ_border_width="2dp" />
 
@@ -44,29 +44,6 @@
                     android:textSize="20sp"/>
 
 
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="45dp"
-                    android:layout_margin="5dp"
-                    android:textColor="#fff"
-                    android:textStyle="bold"
-                    android:background="@drawable/accept_btn_bg"
-                    android:text="Accept"/>
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="45dp"
-                    android:layout_margin="5dp"
-                    android:textColor="#fff"
-                    android:textStyle="bold"
-                    android:background="@drawable/reject_btn_bg"
-                    android:text="Reject"/>
             </LinearLayout>
 
         </LinearLayout>

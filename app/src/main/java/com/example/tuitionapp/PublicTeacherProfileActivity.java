@@ -32,7 +32,7 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
 
     private FirebaseAuth.AuthStateListener mAuthListner;
     private DatabaseReference myref;
-    private String uid;
+    private String uid, receiverUserId;
 
     private RelativeLayout rate_btn_teacher , msg_btn_teacher;
 
@@ -84,8 +84,9 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
         myref = mFirebaseDatabase.getReference();
         final FirebaseUser user = mAuth.getCurrentUser();
         uid = user.getUid();
+        receiverUserId = getIntent().getExtras().getString("user_id");
 
-        myref.child("Users").child("Teacher").child(uid).addValueEventListener(new ValueEventListener() {
+        myref.child("Users").child("Teacher").child(receiverUserId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()){
