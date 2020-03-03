@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +31,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class HomeFragment_Teacher extends Fragment {
 
 
-    ConstraintLayout teacherProfile, tutorPostOffer;
+    ConstraintLayout teacherProfile, tutorPostOffer, receivedRequestsTeacher;
 
     private TextView teacherName;
     private CircleImageView teacherImage;
@@ -74,6 +75,15 @@ public class HomeFragment_Teacher extends Fragment {
                     startActivity(intent);
                 }
             });
+            receivedRequestsTeacher = getActivity().findViewById(R.id.requests_teacher);
+            receivedRequestsTeacher.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getContext(),TeacherReceivedRequest.class);
+                    startActivity(intent);
+                }
+            });
+
 
 
             teacherName = getActivity().findViewById(R.id.userNameTeacherHome);

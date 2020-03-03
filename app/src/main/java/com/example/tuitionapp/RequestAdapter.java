@@ -89,7 +89,6 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
                 intent.putExtra("user_id",requestList.get(position).getId());
                 ctx.startActivity(intent);
 
-
             }
         });
 

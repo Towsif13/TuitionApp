@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,7 +30,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeFragment_Student extends Fragment {
 
-    ConstraintLayout postOffer , studentProfile , receivedRequestsStudent;
+    ConstraintLayout postOffer , studentProfile,receivedRequestsStudent;
 
     private TextView studentName;
     private CircleImageView studentImage;

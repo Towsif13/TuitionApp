@@ -176,7 +176,7 @@
                     android:layout_marginBottom="10sp">
 
                     <RelativeLayout
-                        android:id="@+id/rate_btn_teacher"
+                        android:id="@+id/add_btn_teacher"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -198,13 +198,54 @@
                             <ImageView
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"
-                                android:src="@drawable/ic_rate_review_white"/>
+                                android:id="@+id/t_send_req"
+                                android:src="@drawable/ic_person_white"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="sans-serif-light"
-                                android:text="Rate"
+                                android:text="Add"
+                                android:id="@+id/send_txt_t"
+                                android:textAllCaps="true"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="13sp" />
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/decline_btn_teacher_profile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp">
+
+                            <ImageView
+                                android:layout_width="55dp"
+                                android:layout_height="35dp"
+                                android:id="@+id/t_decline_req"
+                                android:src="@drawable/ic_cancel_black_24dp"/>
+                            <TextView
+                                android:layout_width="50dp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-light"
+                                android:text="Decline"
+                                android:id="@+id/t_decline_txt"
                                 android:textAllCaps="true"
                                 android:textColor="@color/colorWhite"
                                 android:textSize="13sp" />

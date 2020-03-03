@@ -23,6 +23,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 
 public class PublicStudentProfile extends AppCompatActivity {
@@ -35,7 +37,7 @@ public class PublicStudentProfile extends AppCompatActivity {
             studentMedium, studentClass;
 
     private FirebaseAuth mAuth;
-    String name,Stname;
+    String name;
     private FirebaseDatabase mFirebaseDatabase;
 
     private FirebaseAuth.AuthStateListener mAuthListner;
@@ -146,7 +148,7 @@ public class PublicStudentProfile extends AppCompatActivity {
                 }
 
                 if(Current_state.equals("request_received")){
-                    //AcceptRequest();
+                    AcceptRequest();
                 }
 
 
@@ -154,7 +156,7 @@ public class PublicStudentProfile extends AppCompatActivity {
         });
     }
 
-  /*  private void AcceptRequest() {
+   private void AcceptRequest() {
 
 
         SimpleDateFormat df1 = new SimpleDateFormat("d-MM-yyyy");
@@ -203,7 +205,7 @@ public class PublicStudentProfile extends AppCompatActivity {
                 }
             }
         });
-    }*/
+    }
 
     private void CancelRequest() {
 

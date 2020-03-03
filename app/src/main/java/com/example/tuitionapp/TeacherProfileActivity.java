@@ -38,7 +38,7 @@ public class TeacherProfileActivity extends AppCompatActivity {
     FloatingActionButton floatingActionButton;
 
     private CircleImageView teacherProPic;
-    private String teacherpropiclink,receiverUserId;
+    private String teacherpropiclink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,9 +81,9 @@ public class TeacherProfileActivity extends AppCompatActivity {
         myref = mFirebaseDatabase.getReference();
         final FirebaseUser user = mAuth.getCurrentUser();
         uid = user.getUid();
-        receiverUserId = getIntent().getExtras().getString("user_id");
 
-        myref.child("Users").child("Teacher").child(receiverUserId).addValueEventListener(new ValueEventListener() {
+
+        myref.child("Users").child("Teacher").child(uid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {

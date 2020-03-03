@@ -11,6 +11,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -22,21 +24,25 @@ import com.google.firebase.database.ValueEventListener;
 import com.hsalf.smilerating.BaseRating;
 import com.hsalf.smilerating.SmileRating;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class PublicTeacherProfileActivity extends AppCompatActivity {
 
     ImageView backBtn;
+    ImageView send_req;
 
     TextView teacherName , teacherEmail , teacherPhone , teacherRegion , teacherAddress , teacherDOB , teacherGender ,
-            teacherInstitution , teacherDepartment , teacherYear;
+            teacherInstitution , teacherDepartment , teacherYear,send_txt;
 
     private FirebaseAuth mAuth;
     private FirebaseDatabase mFirebaseDatabase;
 
     private FirebaseAuth.AuthStateListener mAuthListner;
-    private DatabaseReference myref;
-    private String uid, receiverUserId;
+    private DatabaseReference myref,reference,sturef;
+    private String uid, receiverUserId, Current_state;
 
-    private RelativeLayout rate_btn_teacher , msg_btn_teacher;
+    private RelativeLayout add_btn_teacher , msg_btn_teacher, dec_btn;
 
 
     @Override
@@ -44,17 +50,11 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_public_teacher_profile);
 
-        rate_btn_teacher = findViewById(R.id.rate_btn_teacher);
+        add_btn_teacher = findViewById(R.id.add_btn_teacher);
         msg_btn_teacher = findViewById(R.id.msg_btn_teacher);
+        dec_btn = findViewById(R.id.decline_btn_teacher_profile);
 
-        rate_btn_teacher.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(PublicTeacherProfileActivity.this , TeacherRatingActivity.class);
-                startActivity(intent);
-                //Toast.makeText(PublicTeacherProfileActivity.this, "RATE", Toast.LENGTH_SHORT).show();
-            }
-        });
+        Current_state = "not_student";
 
         msg_btn_teacher.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,12 +82,15 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
         teacherInstitution = findViewById(R.id.teacherInstitution);
         teacherDepartment = findViewById(R.id.teacherDepartment);
         teacherYear = findViewById(R.id.teacherYear);
+        send_req = findViewById(R.id.t_send_req);
+        send_txt = findViewById(R.id.send_txt_t);
 
         mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myref = mFirebaseDatabase.getReference();
         final FirebaseUser user = mAuth.getCurrentUser();
         uid = user.getUid();
+        sturef = mFirebaseDatabase.getReference("Friends");
         receiverUserId = getIntent().getExtras().getString("user_id");
 
         myref.child("Users").child("Teacher").child(receiverUserId).addValueEventListener(new ValueEventListener() {
@@ -119,6 +122,11 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
                     teacherDepartment.setText(department);
                     teacherYear.setText(year);
 
+                    dec_btn.setEnabled(false);
+                    dec_btn.setVisibility(View.INVISIBLE);
+
+
+                    MaintenanceOfButtons();
 
 
                 }
@@ -132,6 +140,187 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
 
             }
         });
+
+        add_btn_teacher.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(Current_state.equals("not_student")){
+                    sendRequestToStudent();
+                }
+
+                if(Current_state.equals("request_sent")){
+                    CancelRequest();
+                }
+
+                if(Current_state.equals("request_received")){
+                    AcceptRequest();
+                }
+
+
+            }
+        });
+
+    }
+
+    private void AcceptRequest() {
+
+
+        SimpleDateFormat df1 = new SimpleDateFormat("d-MM-yyyy");
+        final String today_date = df1.format(Calendar.getInstance().getTime());
+        sturef.child(uid).child(receiverUserId).child("date").setValue(today_date).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    sturef.child(receiverUserId).child(uid).child("date").setValue(today_date).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful()){
+
+                                reference = FirebaseDatabase.getInstance().getReference().child("Request");
+
+                                reference.child(uid).child(receiverUserId).removeValue()
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                                if (task.isSuccessful()) {
+                                                    reference.child(receiverUserId).child(uid).removeValue()
+                                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                @Override
+                                                                public void onComplete(@NonNull Task<Void> task) {
+
+                                                                    if (task.isSuccessful()) {
+                                                                        add_btn_teacher.setEnabled(true);
+                                                                        Current_state = "student";
+                                                                        send_req.setImageResource(R.drawable.ic_peoples_white);
+                                                                        send_txt.setText("Teacher");
+
+                                                                    }
+                                                                }
+
+                                                            });
+                                                }
+                                            }
+                                        });
+
+
+                            }
+                        }
+                    });
+
+                }
+            }
+        });
+    }
+
+
+    private void CancelRequest() {
+
+        reference = FirebaseDatabase.getInstance().getReference().child("Request");
+
+        reference.child(uid).child(receiverUserId).removeValue()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                        if (task.isSuccessful()) {
+                            reference.child(receiverUserId).child(uid).removeValue()
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+
+                                            if (task.isSuccessful()) {
+                                                add_btn_teacher.setEnabled(true);
+                                                Current_state = "not_student";
+                                                send_req.setImageResource(R.drawable.ic_person_white);
+                                                send_txt.setText("Add");
+                                            }
+                                        }
+
+                                    });
+                        }
+                    }
+                });
+
+
+    }
+
+    private void MaintenanceOfButtons() {
+
+        reference = FirebaseDatabase.getInstance().getReference().child("Request");
+
+        reference.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChild(receiverUserId)) {
+
+                    String request_type = dataSnapshot.child(receiverUserId).child("request_type").getValue().toString();
+                    if (request_type.equals("sent")) {
+                        Current_state = "request_sent";
+                        send_txt.setTag("Cancel Request");
+                        send_req.setImageResource(R.drawable.ic_plus_one_black_24dp);
+                    }else if(request_type.equals("received")){
+                        Current_state = "request_received";
+                        send_txt.setTag("Accept Request");
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
+
+    private void sendRequestToStudent() {
+
+        reference = FirebaseDatabase.getInstance().getReference().child("Request");
+
+        reference.child(uid)
+                .child(receiverUserId).child("request_type")
+                .setValue("sent").addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+                    if (task.isSuccessful()) {
+                        reference.child(receiverUserId).child(uid).child("request_type")
+                                .setValue("received").addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+
+                                if (task.isSuccessful()) {
+
+                                    add_btn_teacher.setEnabled(true);
+                                    Current_state = "request_sent";
+                                    send_req.setImageResource(R.drawable.ic_plus_one_black_24dp);
+                                    send_txt.setText("Cancel Request");
+
+                                }else{
+                                    send_req.setImageResource(R.drawable.ic_person_white);
+                                }
+                            }
+
+                        });
+                    }
+
+
+                }
+            });
+        }
+    }
+
+
+
+
+
+
+
+
+
 
 //        SmileRating smileRating = findViewById(R.id.smile_rating);
 //
@@ -160,5 +349,5 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
 //                }
 //            }
 //        });
-    }
-}
+
+
