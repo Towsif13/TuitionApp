@@ -188,7 +188,7 @@
                         android:layout_marginRight="15dp">
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="120dp"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
                             android:orientation="vertical"
@@ -206,6 +206,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="sans-serif-light"
                                 android:text="Add"
+                                android:textAlignment="center"
                                 android:id="@+id/send_txt_t"
                                 android:textAllCaps="true"
                                 android:textColor="@color/colorWhite"
@@ -228,7 +229,7 @@
                         android:layout_marginRight="15dp">
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="120dp"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
                             android:orientation="vertical"
@@ -241,12 +242,13 @@
                                 android:id="@+id/t_decline_req"
                                 android:src="@drawable/ic_cancel_black_24dp"/>
                             <TextView
-                                android:layout_width="50dp"
+                                android:layout_width="80dp"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="sans-serif-light"
                                 android:text="Decline"
                                 android:id="@+id/t_decline_txt"
                                 android:textAllCaps="true"
+                                android:textAlignment="center"
                                 android:textColor="@color/colorWhite"
                                 android:textSize="13sp" />
 

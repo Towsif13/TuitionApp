@@ -98,8 +98,9 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
     }
 
 
-    public class RequestViewHolder extends RecyclerView.ViewHolder {
+    public static class RequestViewHolder extends RecyclerView.ViewHolder {
 
+        private final Context ctx;
         public TextView displayName;
         View mView;
         Button request_accept,request_decline;

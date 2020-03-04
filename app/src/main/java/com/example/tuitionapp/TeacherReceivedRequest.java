@@ -62,6 +62,7 @@ public class TeacherReceivedRequest extends AppCompatActivity {
         setSupportActionBar(mtoolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
         mRequestList = findViewById(R.id.user_request_recycler_list);
         mRootRef = FirebaseDatabase.getInstance().getReference();
         mCurrent_user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -100,6 +101,7 @@ public class TeacherReceivedRequest extends AppCompatActivity {
                         }
                     });
                 }
+
 
             }
 

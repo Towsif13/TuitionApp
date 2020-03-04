@@ -31,7 +31,7 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
 
     ImageView backBtn;
     ImageView send_req;
-
+    Boolean b =false;
     TextView teacherName , teacherEmail , teacherPhone , teacherRegion , teacherAddress , teacherDOB , teacherGender ,
             teacherInstitution , teacherDepartment , teacherYear,send_txt;
 
@@ -90,7 +90,7 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
         myref = mFirebaseDatabase.getReference();
         final FirebaseUser user = mAuth.getCurrentUser();
         uid = user.getUid();
-        sturef = mFirebaseDatabase.getReference("Friends");
+        sturef = mFirebaseDatabase.getReference().child("AcceptStudent");
         receiverUserId = getIntent().getExtras().getString("user_id");
 
         myref.child("Users").child("Teacher").child(receiverUserId).addValueEventListener(new ValueEventListener() {
@@ -101,9 +101,9 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
                     String fname = dataSnapshot.child("FirstName").getValue().toString();
                     String lname = dataSnapshot.child("LastName").getValue().toString();
                     String name = fname+" "+lname;
-                    String email = user.getEmail();
+                   // String email = receiverUserId;
                     String phone = dataSnapshot.child("Phone").getValue().toString();
-                    String region = dataSnapshot.child("Region").getValue().toString();
+                   // String region = dataSnapshot.child("Region").getValue().toString();
                     String address = dataSnapshot.child("Address").getValue().toString();
                     String dob = dataSnapshot.child("Birthday").getValue().toString();
                     String gender = dataSnapshot.child("Gender").getValue().toString();
@@ -112,9 +112,9 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
                     String year = dataSnapshot.child("Year").getValue().toString();
 
                     teacherName.setText(name);
-                    teacherEmail.setText(email);
+                   // teacherEmail.setText(email);
                     teacherPhone.setText(phone);
-                    teacherRegion.setText(region);
+                    //teacherRegion.setText(region);
                     teacherAddress.setText(address);
                     teacherDOB.setText(dob);
                     teacherGender.setText(gender);
@@ -123,8 +123,7 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
                     teacherYear.setText(year);
 
                     dec_btn.setEnabled(false);
-                    dec_btn.setVisibility(View.INVISIBLE);
-
+                    dec_btn.setVisibility(View.GONE);
 
                     MaintenanceOfButtons();
 
@@ -145,6 +144,7 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(Current_state.equals("not_student")){
+                    b = false;
                     sendRequestToStudent();
                 }
 
@@ -155,6 +155,11 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
                 if(Current_state.equals("request_received")){
                     AcceptRequest();
                 }
+                if(Current_state.equals("connected")){
+
+                    RemoveTeacher();
+                }
+
 
 
             }
@@ -191,9 +196,9 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
 
                                                                     if (task.isSuccessful()) {
                                                                         add_btn_teacher.setEnabled(true);
-                                                                        Current_state = "student";
-                                                                        send_req.setImageResource(R.drawable.ic_peoples_white);
-                                                                        send_txt.setText("Teacher");
+                                                                        Current_state = "connected";
+                                                                        send_req.setImageResource(R.drawable.ic_person_add);
+                                                                        send_txt.setText("Remove Student");
 
                                                                     }
                                                                 }
@@ -232,8 +237,8 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
                                             if (task.isSuccessful()) {
                                                 add_btn_teacher.setEnabled(true);
                                                 Current_state = "not_student";
-                                                send_req.setImageResource(R.drawable.ic_person_white);
-                                                send_txt.setText("Add");
+                                                 send_req.setImageResource(R.drawable.ic_person_white);
+                                                 send_txt.setText("Send Request");
                                             }
                                         }
 
@@ -257,14 +262,49 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
                     String request_type = dataSnapshot.child(receiverUserId).child("request_type").getValue().toString();
                     if (request_type.equals("sent")) {
                         Current_state = "request_sent";
-                        send_txt.setTag("Cancel Request");
+                        send_txt.setText("Cancel Request");
                         send_req.setImageResource(R.drawable.ic_plus_one_black_24dp);
                     }else if(request_type.equals("received")){
                         Current_state = "request_received";
-                        send_txt.setTag("Accept Request");
+                        send_txt.setText("Accept Request");
+
+                        dec_btn.setVisibility(View.VISIBLE);
+                        dec_btn.setEnabled(true);
+
+                        dec_btn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                CancelRequest();
+                            }
+                        });
+
+
 
                     }
                 }
+                else{
+                    reference.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                            if(dataSnapshot.hasChild(receiverUserId)){
+
+                                Current_state = "connected";
+                                send_txt.setText("Remove Student");
+
+                                dec_btn.setVisibility(View.GONE);
+                                dec_btn.setEnabled(false);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+
             }
 
             @Override
@@ -275,6 +315,36 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
 
 
     }
+    private void RemoveTeacher() {
+
+        sturef.child(uid).child(receiverUserId).removeValue()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                        if (task.isSuccessful()) {
+                            sturef.child(receiverUserId).child(uid).removeValue()
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+
+                                            if (task.isSuccessful()) {
+                                                add_btn_teacher.setEnabled(true);
+                                                Current_state = "not_student";
+                                                send_req.setImageResource(R.drawable.ic_person_white);
+                                                send_txt.setText("Send Request");
+                                            }
+                                        }
+
+                                    });
+                        }
+                    }
+                });
+
+
+
+    }
+
 
     private void sendRequestToStudent() {
 
@@ -285,6 +355,8 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
                 .setValue("sent").addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
+
+                if(b == false){
 
                     if (task.isSuccessful()) {
                         reference.child(receiverUserId).child(uid).child("request_type")
@@ -299,13 +371,15 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
                                     send_req.setImageResource(R.drawable.ic_plus_one_black_24dp);
                                     send_txt.setText("Cancel Request");
 
-                                }else{
+                                } else {
                                     send_req.setImageResource(R.drawable.ic_person_white);
                                 }
                             }
 
                         });
+
                     }
+                }
 
 
                 }
