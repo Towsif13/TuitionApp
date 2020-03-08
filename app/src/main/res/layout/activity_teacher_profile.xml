@@ -163,7 +163,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="2sp"
                     android:fontFamily="sans-serif-light"
-                    android:text="Towsif Chowdhury"
+                    android:text=" "
                     android:textColor="@color/colorWhite"
                     android:textSize="32sp"
 
@@ -203,7 +203,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-light"
-                            android:text="towsif@gmail.com"
+                            android:text=" "
                             android:textColor="#000000"
                             android:textSize="18sp" />
 
@@ -233,7 +233,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-light"
-                            android:text="01965287811"
+                            android:text=" "
                             android:textColor="#000000"
                             android:textSize="18sp" />
 
@@ -263,7 +263,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-light"
-                            android:text="Dhaka"
+                            android:text=" "
                             android:textColor="#000000"
                             android:textSize="18sp" />
 
@@ -293,7 +293,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-light"
-                            android:text="Moghbazar"
+                            android:text=" "
                             android:textColor="#000000"
                             android:textSize="18sp" />
 
@@ -323,7 +323,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-light"
-                            android:text="23-12-1997"
+                            android:text=" "
                             android:textColor="#000000"
                             android:textSize="18sp" />
 
@@ -353,7 +353,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-light"
-                            android:text="Male"
+                            android:text=""
                             android:textColor="#000000"
                             android:textSize="18sp" />
 
@@ -383,7 +383,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-light"
-                            android:text="NSU"
+                            android:text=""
                             android:textColor="#000000"
                             android:textSize="18sp" />
 
@@ -413,7 +413,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-light"
-                            android:text="CSE"
+                            android:text=""
                             android:textColor="#000000"
                             android:textSize="18sp" />
 
@@ -443,7 +443,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-light"
-                            android:text="4th"
+                            android:text=""
                             android:textColor="#000000"
                             android:textSize="18sp" />
 
