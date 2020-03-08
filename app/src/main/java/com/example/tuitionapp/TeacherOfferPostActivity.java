@@ -42,7 +42,7 @@ public class TeacherOfferPostActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
-    private String fname , lname , department , year , region;
+    private String fname , lname , department , year , region, propic;
 
     private String date;
 
@@ -126,6 +126,7 @@ public class TeacherOfferPostActivity extends AppCompatActivity {
                 department = dataSnapshot.child("Department").getValue().toString();
                 year = dataSnapshot.child("Year").getValue().toString();
                 region = dataSnapshot.child("Region").getValue().toString();
+                propic = dataSnapshot.child("ProfileImage").getValue().toString();
             }
 
             @Override
@@ -211,6 +212,7 @@ public class TeacherOfferPostActivity extends AppCompatActivity {
 
         offerMap.put("Date",today_date);
         offerMap.put("Time",today_time);
+        offerMap.put("ProfileImage",propic);
 
 
 

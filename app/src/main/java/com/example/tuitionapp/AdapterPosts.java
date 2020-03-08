@@ -128,20 +128,20 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> im
         // handle button click
 
         // will implement later
-        holder.moreBtnTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Toast.makeText(context, "More ", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        holder.sendMsgBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(context, "Send msg ", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        holder.moreBtnTV.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Toast.makeText(context, "More ", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//
+//        holder.sendMsgBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(context, "Send msg ", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
 
 
@@ -200,9 +200,9 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> im
 
             //init views
             ProfileImage = itemView.findViewById(R.id.profile_image);
-            moreBtnTV = itemView.findViewById(R.id.moreBtnTV);
-            sendMsgBtn = itemView.findViewById(R.id.sendMsgBtn);
-            sendReq = itemView.findViewById(R.id.sendReq);
+//            moreBtnTV = itemView.findViewById(R.id.moreBtnTV);
+//            sendMsgBtn = itemView.findViewById(R.id.sendMsgBtn);
+//            sendReq = itemView.findViewById(R.id.sendReq);
 
             post_nameTV = itemView.findViewById(R.id.post_nameTV);
             post_timeTV = itemView.findViewById(R.id.post_timeTV);

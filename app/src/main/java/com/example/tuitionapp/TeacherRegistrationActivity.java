@@ -225,7 +225,11 @@ public class TeacherRegistrationActivity extends AppCompatActivity implements Da
             userEmail.setError(getString(R.string.error_invalid_email));
             focusView = userEmail;
             cancel = true;
-        }
+        } else if (!email.contains(".edu")){
+            userEmail.setError("You must use university email");
+            focusView = userEmail;
+            cancel = true;
+        }//checks for university email
         if(TextUtils.isEmpty(fname)){
             userfirstname.setError(getString(R.string.error_field_required));
             focusView = userfirstname;

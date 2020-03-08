@@ -82,11 +82,6 @@ public class StudentLandingActivity extends AppCompatActivity {
             Intent intent = new Intent(StudentLandingActivity.this, UserActivity.class);
             startActivity(intent);
         }
-        if (item.getItemId() == R.id.main_menu_public_profile){
-            Intent intent = new Intent(StudentLandingActivity.this, PublicStudentProfile.class);
-            startActivity(intent);
-
-        }
 
 
         return true;

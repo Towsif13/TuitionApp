@@ -44,7 +44,7 @@ public class TuitionPostActivity extends AppCompatActivity {
     
     private FirebaseAuth mAuth;
 
-    String fname , lname , medium , address , region , clas;
+    String fname , lname , medium , address , region , clas , propic;
 
     String date;
 
@@ -169,6 +169,7 @@ public class TuitionPostActivity extends AppCompatActivity {
                 address = dataSnapshot.child("Address").getValue().toString();
                 region = dataSnapshot.child("Region").getValue().toString();
                 clas = dataSnapshot.child("Class").getValue().toString();
+                propic = dataSnapshot.child("ProfileImage").getValue().toString();
             }
 
             @Override
@@ -218,6 +219,7 @@ public class TuitionPostActivity extends AppCompatActivity {
 
         offerMap.put("Date",today_date);
         offerMap.put("Time",today_time);
+        offerMap.put("ProfileImage",propic);
 
 
 
