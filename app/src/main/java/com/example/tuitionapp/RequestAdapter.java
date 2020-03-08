@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -25,6 +26,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /*
  * ------FOR REQUEST FRAGMENT------
@@ -55,11 +58,10 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
        holder.displayName.setText(requestList.get(position).getFirstName() +  " " +requestList.get(position).getLastName());
 
 
-        // Picasso.get().load(profiles.get(position).getProfilePic()).into(holder.profilePic);
-       /* if(profiles.get(position).getPermission()) {
-            holder.btn.setVisibility(View.VISIBLE);
-            holder.onClick(position);
-        }*/
+
+       if(requestList.get(position).getProfileImage() != null) {
+           Picasso.get().load(requestList.get(position).getProfileImage()).into(holder.displayImage);
+       }
 
 
         //String user_id = requestList.get(position);
@@ -72,7 +74,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
                // String userStatus =dataSnapshot.child("status").getValue().toString();
 
                 holder.displayName.setText(userName);
-                //Picasso.with(holder.displayImage.getContext()).load(userThumbImage).placeholder(R.drawable.user_img).into(holder.displayImage);
+                Picasso.with(holder.displayImage.getContext()).load(userThumbImage).placeholder(R.drawable.user_img).into(holder.displayImage);
             }
 
             @Override
@@ -104,8 +106,8 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
         public TextView displayName;
         View mView;
         Button request_accept,request_decline;
-        //public CircleImageView displayImage;
-        public ImageView imageView;
+        public ImageView displayImage;
+        //public ImageView imageView;
 
         public RequestViewHolder(View itemView) {
             super(itemView);
@@ -114,8 +116,8 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
             mView = itemView;
 
             displayName = (TextView)itemView.findViewById(R.id.user_firstName);
-            //displayImage = (CircleImageView)itemView.findViewById(R.id.circleImageViewUserImage);
-           // imageView = (ImageView)itemView.findViewById(R.id.userSingleOnlineIcon);
+            displayImage = (CircleImageView)itemView.findViewById(R.id.profile_image);
+            //imageView = (ImageView)itemView.findViewById(R.id.userSingleOnlineIcon);
             //imageView.setVisibility(View.INVISIBLE);
         }
     }

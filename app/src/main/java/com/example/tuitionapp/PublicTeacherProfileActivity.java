@@ -23,9 +23,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.hsalf.smilerating.BaseRating;
 import com.hsalf.smilerating.SmileRating;
+import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PublicTeacherProfileActivity extends AppCompatActivity {
 
@@ -44,11 +47,15 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
 
     private RelativeLayout add_btn_teacher , msg_btn_teacher, dec_btn;
 
+    CircleImageView propic;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_public_teacher_profile);
+
+        propic = findViewById(R.id.publicProPic);
 
         add_btn_teacher = findViewById(R.id.add_btn_teacher);
         msg_btn_teacher = findViewById(R.id.msg_btn_teacher);
@@ -110,6 +117,12 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
                     String institution = dataSnapshot.child("Institution").getValue().toString();
                     String department = dataSnapshot.child("Department").getValue().toString();
                     String year = dataSnapshot.child("Year").getValue().toString();
+
+                    if (dataSnapshot.child("ProfileImage").exists()){
+                        String propicc = dataSnapshot.child("ProfileImage").getValue().toString();
+                        Picasso.get().load(propicc).into(propic);
+                        //Toast.makeText(PublicStudentProfile.this, propicc, Toast.LENGTH_LONG).show();
+                    }
 
                     teacherName.setText(name);
                    // teacherEmail.setText(email);

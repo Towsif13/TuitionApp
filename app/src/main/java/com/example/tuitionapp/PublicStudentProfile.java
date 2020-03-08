@@ -22,10 +22,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PublicStudentProfile extends AppCompatActivity {
 
@@ -35,6 +38,8 @@ public class PublicStudentProfile extends AppCompatActivity {
 
     TextView studentName,send_txt,studentEmail, studentPhone, studentRegion, studentAddress, studentDOB, studentGender,
             studentMedium, studentClass;
+
+    CircleImageView propic;
 
     private FirebaseAuth mAuth;
     String name;
@@ -52,6 +57,8 @@ public class PublicStudentProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_public_student_profile);
+
+        propic = findViewById(R.id.publicProPic);
 
         backBtn = findViewById(R.id.student_profile_back_btn);
         backBtn.setOnClickListener(new View.OnClickListener() {
@@ -111,6 +118,12 @@ public class PublicStudentProfile extends AppCompatActivity {
                     String gender = dataSnapshot.child("Gender").getValue().toString();
                     String medium = dataSnapshot.child("Medium").getValue().toString();
                     String classs = dataSnapshot.child("Class").getValue().toString();
+
+                    if (dataSnapshot.child("ProfileImage").exists()){
+                        String propicc = dataSnapshot.child("ProfileImage").getValue().toString();
+                        Picasso.get().load(propicc).into(propic);
+                        //Toast.makeText(PublicStudentProfile.this, propicc, Toast.LENGTH_LONG).show();
+                    }
 
                     studentName.setText(name);
                    // studentEmail.setText(email);

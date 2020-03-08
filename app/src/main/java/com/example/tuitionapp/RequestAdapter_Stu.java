@@ -14,14 +14,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class RequestAdapter_Stu extends RecyclerView.Adapter<RequestAdapter.RequestViewHolder>{
 
-    private ArrayList<UserContacts> requestList;
+    private ArrayList<UserContacts>requestList;
     private FirebaseAuth mAuth;
     DatabaseReference mRootRef;
     private Context ctx;
@@ -44,6 +46,10 @@ public class RequestAdapter_Stu extends RecyclerView.Adapter<RequestAdapter.Requ
 
         holder.displayName.setText(requestList.get(position).getFirstName() +  " " +requestList.get(position).getLastName());
 
+        if(requestList.get(position).getProfileImage() != null) {
+            Picasso.get().load(requestList.get(position).getProfileImage()).into(holder.displayImage);
+        }
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,9 +71,9 @@ public class RequestAdapter_Stu extends RecyclerView.Adapter<RequestAdapter.Requ
 
         public TextView displayName;
         View mView;
-        Button request_accept,request_decline;
-        //public CircleImageView displayImage;
-        public ImageView imageView;
+
+        public ImageView displayImage;
+        //public ImageView imageView;
 
         public RequestViewHolder(View itemView) {
             super(itemView);
@@ -76,7 +82,7 @@ public class RequestAdapter_Stu extends RecyclerView.Adapter<RequestAdapter.Requ
             mView = itemView;
 
             displayName = (TextView)itemView.findViewById(R.id.user_firstName);
-            //displayImage = (CircleImageView)itemView.findViewById(R.id.circleImageViewUserImage);
+            displayImage = (ImageView)itemView.findViewById(R.id.profile_image);
             // imageView = (ImageView)itemView.findViewById(R.id.userSingleOnlineIcon);
             //imageView.setVisibility(View.INVISIBLE);
         }
