@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+
         >
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,14 +41,15 @@
                     android:orientation="vertical"
                     android:paddingLeft="10dp">
 
+
                     <TextView
                         android:id="@+id/post_nameTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="NAME:"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="20sp" />
-
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/post_timeTV"
@@ -55,29 +57,16 @@
                         android:layout_height="wrap_content"
                         android:text="POSTED TIME:"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        />
 
                 </LinearLayout>
 
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:gravity="right">
 
-                <ImageButton
-                    android:id="@+id/deleteBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:src="@drawable/ic_delete_btn">
-
-                </ImageButton>
-
-            </LinearLayout>
 
 
         </LinearLayout>
@@ -93,7 +82,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="left"
-                android:background="#f0f0f0"
 
 
                 android:gravity=""
@@ -113,6 +101,7 @@
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:text="Subjects: "
+                        android:textStyle="bold"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="20sp" />
 
@@ -120,6 +109,8 @@
                         android:id="@+id/subjectTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textStyle="bold"
+
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="20sp" />
 
@@ -127,31 +118,6 @@
                 </LinearLayout>
 
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/loc_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:text="Medium:"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="20sp" />
-
-
-                    <TextView
-                        android:id="@+id/mediumTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="20sp" />
-
-
-                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -165,6 +131,8 @@
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:text="Location: "
+                        android:textStyle="bold"
+
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="20sp" />
 
@@ -192,6 +160,8 @@
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:text="Days per week: "
+                        android:textStyle="bold"
+
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="20sp" />
 
@@ -217,6 +187,8 @@
                         android:layout_height="wrap_content"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
+                        android:textStyle="bold"
+
                         android:text="Department:"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="19sp" />
@@ -242,6 +214,8 @@
                         android:layout_height="wrap_content"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
+                        android:textStyle="bold"
+
                         android:text="Year:"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="19sp" />
@@ -267,6 +241,8 @@
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:text="Prefered mideum:"
+                        android:textStyle="bold"
+
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="19sp" />
 
@@ -293,6 +269,8 @@
                         android:layout_height="wrap_content"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
+                        android:textStyle="bold"
+
                         android:text="Salary: "
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="20sp" />
@@ -319,6 +297,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="10dp"
+                        android:textStyle="bold"
+
                         android:paddingRight="10dp"
                         android:text="Note: "
                         android:textColor="@color/colorPrimaryDark"
@@ -348,54 +328,7 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="3"
-            android:padding="5dp"
-            >
 
-
-
-            <ImageButton
-                android:id="@+id/moreBtnTV"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@null"
-                android:src="@drawable/ic_more_black_btn"
-                android:layout_weight="1">
-
-            </ImageButton>
-
-
-
-
-            <ImageButton
-                android:id="@+id/sendMsgBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:layout_weight="1"
-
-                android:src="@drawable/ic_more_msg_btn">
-
-            </ImageButton>
-
-            <ImageButton
-
-                android:id="@+id/sendReq"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:layout_weight="1"
-
-                android:src="@drawable/ic_person_black_24dp">
-
-            </ImageButton>
-
-
-        </LinearLayout>
 
 
     </LinearLayout>
