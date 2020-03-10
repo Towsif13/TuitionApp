@@ -1,9 +1,5 @@
 package com.example.tuitionapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -127,6 +127,8 @@ public class TeacherOfferPostActivity extends AppCompatActivity {
                 year = dataSnapshot.child("Year").getValue().toString();
                 region = dataSnapshot.child("Region").getValue().toString();
                 propic = dataSnapshot.child("ProfileImage").getValue().toString();
+
+
             }
 
             @Override

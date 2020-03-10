@@ -19,15 +19,13 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> implements Filterable {
-
+public class AdapterPostTeacher extends RecyclerView.Adapter<AdapterPostTeacher.MyHolder> implements Filterable {
     Context context;
     List<Post> postList;
     List<Post> mDataFiltered;
-    ArrayList<Post> posts;
 
 
-    public AdapterPosts (Context c , List<Post> p){
+    public AdapterPostTeacher (Context c , List<Post> p){
 
         this.context = c;
         this.postList = p;
@@ -41,13 +39,12 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> im
     public MyHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         //inflate laout row_post.xml
 
-        View view = LayoutInflater.from(context).inflate(R.layout.row_post,viewGroup,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.row_post_teacher,viewGroup,false);
         return new MyHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
-
         // bind data here
         final String id = mDataFiltered.get(position).getId();
         Log.d("AdapterPosts","ji"+id);
@@ -59,7 +56,10 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> im
         String Address = mDataFiltered.get(position).getAddress();
         String Date = mDataFiltered.get(position).getDate();
         String Days = mDataFiltered.get(position).getDays();
-        String Gender = mDataFiltered.get(position).getPreferredGender();
+        String Year = mDataFiltered.get(position).getYear();
+        String Dept = mDataFiltered.get(position).getDepartment();
+        String PreferedMed = mDataFiltered.get(position).getPreferredMedium();
+
         String Medium = mDataFiltered.get(position).getMedium();
         String Notes = mDataFiltered.get(position).getNotes();
         String Region = mDataFiltered.get(position).getRegion();
@@ -68,19 +68,21 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> im
         String Subjects = mDataFiltered.get(position).getSubjects();
         String Time = mDataFiltered.get(position).getTime();
 
-
         if(mDataFiltered.get(position).getProfileImage() != null) {
             Picasso.get().load(mDataFiltered.get(position).getProfileImage()).into(holder.ProfileImage);
         }
 
+
+        //set Data
         holder.post_nameTV.setText(firstName+" "+lastName);
         holder.post_timeTV.setText(Time+"  "+Date);
-        holder.post_classTv.setText(sClass);
         holder.post_subTV.setText(Subjects);
         holder.post_mediumTV.setText(Medium);
         holder.post_locTV.setText(Region);
         holder.post_daysTV.setText(Days);
-        holder.post_preferenceTV.setText(Gender);
+        holder.YearTV.setText(Year);
+        holder.preferedMedTv.setText(PreferedMed);
+        holder.DeptTv.setText(Dept);
         holder.post_salTV.setText(Salary+"TK");
         if (Notes.length()<1){
             holder.post_notesTV.setVisibility(View.GONE);
@@ -107,18 +109,13 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> im
 
 
 
-        //userDpr later task
-        try{
 
 
-        }catch (Exception e){
-
-        }
 
 
-        // handle button click
-
-        // will implement later
+//        // handle button click
+//
+//        // will implement later
 //        holder.moreBtnTV.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -133,14 +130,31 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> im
 //                Toast.makeText(context, "Send msg ", Toast.LENGTH_SHORT).show();
 //            }
 //        });
-
-
+//
+//        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Intent intent = new Intent(context, PublicStudentProfile.class);
+//                intent.putExtra("userid",id);
+//                Log.d("AdapterPosts","ji"+id);
+//                context.startActivity(intent);
+//
+//                // Toast.makeText(context, "send req", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
     }
 
+
+
     @Override
     public int getItemCount() {
-        return mDataFiltered.size();
+        if(mDataFiltered != null){
+            return mDataFiltered.size();
+        }
+        return 0;
+
     }
 
     @Override
@@ -155,7 +169,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> im
                 }else {
                     List <Post> listFiltered = new ArrayList<>();
                     for(Post row : postList){
-                        if(row.getPreferredGender().toLowerCase().contains(key.toLowerCase())|| row.getsClass().toLowerCase().contains(key.toLowerCase())){
+                        if(row.getRegion().toLowerCase().contains(key.toLowerCase())|| row.getDepartment().toLowerCase().contains(key.toLowerCase())){
                             listFiltered.add(row);
                         }
                     }
@@ -184,20 +198,23 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> im
         ImageView ProfileImage;
         ImageButton moreBtnTV,sendMsgBtn,sendReq;
         TextView post_nameTV ,post_timeTV,post_idTV,post_locTV,post_categoryTV,post_salTV,post_genderTV ,post_classTv,post_daysTV,post_subTV,post_notesTV
-                ,post_mediumTV,post_preferenceTV, note;
+                ,post_mediumTV,post_preferenceTV, note, YearTV, DeptTv,preferedMedTv;
 
         public MyHolder(@NonNull View itemView){
             super(itemView);
 
             //init views
             ProfileImage = itemView.findViewById(R.id.profile_image);
-//            moreBtnTV = itemView.findViewById(R.id.moreBtnTV);
-//            sendMsgBtn = itemView.findViewById(R.id.sendMsgBtn);
-//            sendReq = itemView.findViewById(R.id.sendReq);
 
+            moreBtnTV = itemView.findViewById(R.id.moreBtnTV);
+            sendMsgBtn = itemView.findViewById(R.id.sendMsgBtn);
+            sendReq = itemView.findViewById(R.id.sendReq);
+            YearTV = itemView.findViewById(R.id.Yeartv);
             post_nameTV = itemView.findViewById(R.id.post_nameTV);
             post_timeTV = itemView.findViewById(R.id.post_timeTV);
 ////
+            DeptTv = itemView.findViewById(R.id.deptTV);
+            preferedMedTv = itemView.findViewById(R.id.PreferMediumTV);
             post_classTv = itemView.findViewById(R.id.class_TV);
             post_subTV = itemView.findViewById(R.id.subjectTV);
             post_mediumTV = itemView.findViewById(R.id.mediumTV);
@@ -206,6 +223,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> im
             post_preferenceTV = itemView.findViewById(R.id.preferenceTV);
             post_salTV = itemView.findViewById(R.id.salaryTV);
             post_notesTV = itemView.findViewById(R.id.post_notesTV);
+
 
             note = itemView.findViewById(R.id.note);
 
@@ -227,6 +245,4 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> im
 
         }
     }
-
-
 }

@@ -1,27 +1,18 @@
 package com.example.tuitionapp;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.widget.SearchView;
-import androidx.core.view.MenuItemCompat;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -29,8 +20,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import androidx.fragment.app.FragmentActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,7 +70,8 @@ public class PostFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         postList = new ArrayList<>();
-        loadPosts();
+
+        loadPostsStudent();
         seachInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -93,6 +83,7 @@ public class PostFragment extends Fragment {
                 if(adapterPosts!= null){
                     adapterPosts.getFilter().filter(charSequence);
                 }
+
 
             }
 
@@ -107,54 +98,11 @@ public class PostFragment extends Fragment {
 
 
     }
-//    // inflate option menu
-//    public void onCreatOptionsMenu(Menu menu, MenuInflater inflater){
-//
-//        inflater.inflate(R.menu.menu_options,menu);
-//
-//        //searchview to search posts by by category
-//      //  MenuItem item =menu.findItem(R.id.searchAction);
-//
-//       // SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
-////        search listener
-////        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-////            @Override
-////            public boolean onQueryTextSubmit(String query) {
-////                //called when user press search button
-////
-////                if(!TextUtils.isEmpty(query)){
-////
-////                    searchPosts(query);
-////                }else{
-////                    loadPosts();
-////                }
-////
-////                return false;
-////            }
-////
-////            @Override
-////            public boolean onQueryTextChange(String newText) {
-////                //called as and when user oress any letter
-////
-////                if(!TextUtils.isEmpty(newText)){
-////
-////                    searchPosts(newText);
-////                }else{
-////                    loadPosts();
-////                }
-////                return false;
-////            }
-////        });
-//
-//
-//        super.onCreateOptionsMenu(menu,inflater);
-//
-//    }
 
 
 
 
-    private void loadPosts(){
+    private void loadPostsStudent(){
         // path of all posts
        // String userId = mAuth.getCurrentUser().getUid();
         // FirebaseDatabase.getInstance().getReference().child("TuitionPosts").child(userId).child(userId+"-"+date);
@@ -188,6 +136,11 @@ public class PostFragment extends Fragment {
         });
 
     }
+
+
+
+
+
 
     // search option isnt fully done yet
 
@@ -233,6 +186,8 @@ public class PostFragment extends Fragment {
 
 
     }
+
+
 
 
 }
