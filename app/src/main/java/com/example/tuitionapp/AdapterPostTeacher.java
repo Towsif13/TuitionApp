@@ -77,7 +77,7 @@ public class AdapterPostTeacher extends RecyclerView.Adapter<AdapterPostTeacher.
         holder.post_nameTV.setText(firstName+" "+lastName);
         holder.post_timeTV.setText(Time+"  "+Date);
         holder.post_subTV.setText(Subjects);
-        holder.post_mediumTV.setText(Medium);
+        //holder.post_mediumTV.setText(Medium);
         holder.post_locTV.setText(Region);
         holder.post_daysTV.setText(Days);
         holder.YearTV.setText(Year);
@@ -206,9 +206,9 @@ public class AdapterPostTeacher extends RecyclerView.Adapter<AdapterPostTeacher.
             //init views
             ProfileImage = itemView.findViewById(R.id.profile_image);
 
-            moreBtnTV = itemView.findViewById(R.id.moreBtnTV);
-            sendMsgBtn = itemView.findViewById(R.id.sendMsgBtn);
-            sendReq = itemView.findViewById(R.id.sendReq);
+            //moreBtnTV = itemView.findViewById(R.id.moreBtnTV);
+            //sendMsgBtn = itemView.findViewById(R.id.sendMsgBtn);
+            //sendReq = itemView.findViewById(R.id.sendReq);
             YearTV = itemView.findViewById(R.id.Yeartv);
             post_nameTV = itemView.findViewById(R.id.post_nameTV);
             post_timeTV = itemView.findViewById(R.id.post_timeTV);
