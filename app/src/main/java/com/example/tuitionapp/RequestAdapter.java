@@ -1,8 +1,7 @@
 package com.example.tuitionapp;
+
 import android.content.Context;
 import android.content.Intent;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,19 +12,10 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -35,12 +25,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestViewHolder>{
 
-    private ArrayList<UserContacts> requestList;
+    private ArrayList<com.example.tuitionapp.UserContacts> requestList;
     private FirebaseAuth mAuth;
     DatabaseReference mRootRef;
     private Context ctx;
 
-    public RequestAdapter(Context ctx,ArrayList<UserContacts>requestList) {
+    public RequestAdapter(Context ctx,ArrayList<com.example.tuitionapp.UserContacts>requestList) {
         this.ctx = ctx;
         this.requestList = requestList;
     }
@@ -87,7 +77,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(ctx,PublicTeacherProfileActivity.class);
+                Intent intent = new Intent(ctx, com.example.tuitionapp.PublicTeacherProfileActivity.class);
                 intent.putExtra("user_id",requestList.get(position).getId());
                 ctx.startActivity(intent);
 
