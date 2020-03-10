@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".PostFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="2dp"
+        android:background="#EEEEEE">
+
+
+        <EditText
+            android:background="@drawable/edittext_style"
+            android:layout_margin="5dp"
+            android:hint="Search"
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/ic_search_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/search_item">
+
+
+        </EditText>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:paddingTop="0dp"
+            android:background="#EEEEEE"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/postRecyclerView">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </LinearLayout>
+
+</FrameLayout>

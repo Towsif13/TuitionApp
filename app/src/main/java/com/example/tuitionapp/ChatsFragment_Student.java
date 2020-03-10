@@ -87,7 +87,7 @@ public class ChatsFragment_Student extends Fragment {
 
                 for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
                 {
-                    com.example.tuitionapp.UserContacts userContacts = dataSnapshot1.getValue(com.example.tuitionapp.UserContacts.class);
+                    UserContacts userContacts = dataSnapshot1.getValue(UserContacts.class);
 
                     //display user from chats
                     if(userContacts.getId() != null){
