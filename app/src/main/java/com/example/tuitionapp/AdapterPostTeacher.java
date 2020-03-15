@@ -147,6 +147,9 @@ public class AdapterPostTeacher extends RecyclerView.Adapter<AdapterPostTeacher.
 
 
     @Override
+
+
+
     public int getItemCount() {
         if(mDataFiltered != null){
             return mDataFiltered.size();
@@ -157,6 +160,7 @@ public class AdapterPostTeacher extends RecyclerView.Adapter<AdapterPostTeacher.
         return 0;
 
     }
+
 
     @Override
     public Filter getFilter() {
