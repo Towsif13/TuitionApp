@@ -151,6 +151,9 @@ public class AdapterPostTeacher extends RecyclerView.Adapter<AdapterPostTeacher.
         if(mDataFiltered != null){
             return mDataFiltered.size();
         }
+
+
+
         return 0;
 
     }
