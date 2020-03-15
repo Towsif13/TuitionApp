@@ -1,21 +1,17 @@
 package com.example.tuitionapp;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -31,7 +27,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class HomeFragment_Teacher extends Fragment {
 
 
-    ConstraintLayout teacherProfile, tutorPostOffer, receivedRequestsTeacher;
+    ConstraintLayout teacherProfile, tutorPostOffer, receivedRequestsTeacher ,yourPostteacherCL;
 
     private TextView teacherName;
     private CircleImageView teacherImage;
@@ -84,6 +80,15 @@ public class HomeFragment_Teacher extends Fragment {
                 }
             });
 
+
+            yourPostteacherCL=getActivity().findViewById(R.id.yourPostteacherCL);
+            yourPostteacherCL.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getContext(), yourPostActivity.class);
+                    startActivity(intent);
+                }
+            });
 
 
             teacherName = getActivity().findViewById(R.id.userNameTeacherHome);

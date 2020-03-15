@@ -1,17 +1,14 @@
 package com.example.tuitionapp;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -28,8 +25,8 @@ import java.util.List;
 public class ChatsFragment_Teacher extends Fragment {
 
     private RecyclerView recyclerView;
-    private UserAdapter userAdapter;
-    private ArrayList<UserContacts> muser;
+    private com.example.tuitionapp.UserAdapter userAdapter;
+    private ArrayList<com.example.tuitionapp.UserContacts> muser;
     FirebaseUser firebaseUser;
     DatabaseReference databaseReference;
     private List<String> userlist;
@@ -89,14 +86,14 @@ public class ChatsFragment_Teacher extends Fragment {
 
                 for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
                 {
-                    UserContacts userContacts = dataSnapshot1.getValue(UserContacts.class);
+                    com.example.tuitionapp.UserContacts userContacts = dataSnapshot1.getValue(com.example.tuitionapp.UserContacts.class);
 
                     //display user from chats
                     if(userContacts.getId() != null) {
                         for (String id : userlist) {
                             if (userContacts.getId().equals(id)) {
                                 if (muser.size() != 0) {
-                                    for (UserContacts user : new ArrayList<UserContacts>(muser)) {
+                                    for (com.example.tuitionapp.UserContacts user : new ArrayList<com.example.tuitionapp.UserContacts>(muser)) {
                                         if (!userContacts.getId().equals(user.getId())) {
                                             muser.add(userContacts);
                                         }
@@ -109,7 +106,7 @@ public class ChatsFragment_Teacher extends Fragment {
                         }
                     }
                 }
-                userAdapter = new UserAdapter(getContext(),muser);
+                userAdapter = new com.example.tuitionapp.UserAdapter(getContext(),muser);
                 recyclerView.setAdapter(userAdapter);
 
             }

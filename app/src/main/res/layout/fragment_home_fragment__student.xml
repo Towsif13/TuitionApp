@@ -207,12 +207,14 @@
                     android:layout_weight="1">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/yourPostStudentCL"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+
                         android:padding="8dp">
 
                         <ImageView
-                            android:id="@+id/imageView4"
+                            android:id="@+id/yourPostStudentIV"
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:background="@drawable/circle_bg_green"
@@ -227,7 +229,7 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
-                            android:id="@+id/textView2"
+                            android:id="@+id/yourPostStudentTV"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="36dp"
@@ -239,7 +241,7 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+                            app:layout_constraintTop_toBottomOf="@+id/yourPostStudentIV" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 

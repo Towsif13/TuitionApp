@@ -20,7 +20,7 @@ public class TabAccessAdapter_Student extends FragmentStatePagerAdapter{
 
         switch(position){
             case 0:
-                HomeFragment_Student homeFragment_student = new HomeFragment_Student();
+                com.example.tuitionapp.HomeFragment_Student homeFragment_student = new com.example.tuitionapp.HomeFragment_Student();
                 return homeFragment_student;
             case 1:
                 PostFragment_Student postFragment_student = new PostFragment_Student();

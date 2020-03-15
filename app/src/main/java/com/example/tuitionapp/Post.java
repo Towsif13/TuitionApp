@@ -6,7 +6,9 @@ import androidx.annotation.NonNull;
 
 
 public class Post {
-    private String id, FirstName,LastName ,Address , sClass, Date , Time, Days, Region ,Salary, PreferredGender ,Subjects, Notes , Medium;
+    private String id, ProfileImage ,FirstName,LastName ,Address , sClass, Date , Time, Days, Region ,Salary, PreferredGender ,Subjects, Notes , Medium;
+    private String Department , PreferredMedium, Year;
+
     // creating model class for recylerView
     public Post() {
     }
@@ -18,11 +20,35 @@ public class Post {
 
     }
 
+
     public void setId(String id) {
         this.id = id;
     }
 
-    public Post( String Id, String FirstName, String LastName, String address, String sClass, String date, String time, String days, String region, String salary, String gender, String subjects, String notes, String medium) {
+    public Post(String Id, String ProfileImage, String Department , String Year, String PreferredMedium, String FirstName, String LastName, String address, String sClass, String date, String time, String days, String region, String salary, String gender, String subjects, String notes, String medium) {
+
+        this.id = Id;
+        this.FirstName = FirstName;
+        this.LastName = LastName;
+        this.Address = address;
+        this.sClass = sClass;
+        this.Date = date;
+        this.Time = time;
+        this.Days = days;
+        this.Region = region;
+        this.Salary = salary;
+        this.PreferredGender = gender;
+        this.Subjects = subjects;
+        this.Notes = notes;
+        this.Medium = medium;
+        this.Department = Department;
+        this.PreferredMedium = PreferredMedium;
+        this.Year = Year;
+        this.ProfileImage = ProfileImage;
+    }
+
+
+    public Post( String Id, String FirstName, String ProfileImage,String LastName, String address, String sClass, String date, String time, String days, String region, String salary, String gender, String subjects, String notes, String medium) {
 
         this.id = Id;
         this.FirstName = FirstName;
@@ -39,12 +65,23 @@ public class Post {
         this.Subjects = subjects;
         this.Notes = notes;
         this.Medium = medium;
+        this.ProfileImage = ProfileImage;
+    }
+
+    public void setProfileImage(String profileImage) {
+        ProfileImage = profileImage;
+    }
+    public String getProfileImage() {
+        return ProfileImage;
     }
 
     public String getFirstName() {
         return FirstName;
     }
 
+    public String getDepartment(){ return Department;};
+    public String getPreferredMedium(){return PreferredMedium;}
+    public String getYear(){return Year;}
     public String getLastName() {
         return LastName;
     }

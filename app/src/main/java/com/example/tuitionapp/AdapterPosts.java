@@ -1,7 +1,6 @@
 package com.example.tuitionapp;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,11 +8,13 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +52,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> im
         final String id = mDataFiltered.get(position).getId();
         Log.d("AdapterPosts","ji"+id);
 
-                //get data
+        //get data
 
         String firstName = mDataFiltered.get(position).getFirstName();
         String lastName = mDataFiltered.get(position).getLastName();
@@ -67,12 +68,11 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> im
         String Subjects = mDataFiltered.get(position).getSubjects();
         String Time = mDataFiltered.get(position).getTime();
 
-        // convert Time stap to dd/mm/yyyy hh:mm am/pm
-        //Calendar calender = Calendar.getInstance(Locale.getDefault());
-        //calender.setTimeInMillis(Long.parseLong(Time));
-       // String pTime = DateFormat.format("dd/MM/yyyy hh:mm aa",calender).toString();
 
-        //set Data
+        if(mDataFiltered.get(position).getProfileImage() != null) {
+            Picasso.get().load(mDataFiltered.get(position).getProfileImage()).into(holder.ProfileImage);
+        }
+
         holder.post_nameTV.setText(firstName+" "+lastName);
         holder.post_timeTV.setText(Time+"  "+Date);
         holder.post_classTv.setText(sClass);
@@ -119,33 +119,21 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> im
         // handle button click
 
         // will implement later
-        holder.moreBtnTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+//        holder.moreBtnTV.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Toast.makeText(context, "More ", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//
+//        holder.sendMsgBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(context, "Send msg ", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
-                Toast.makeText(context, "More ", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        holder.sendMsgBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(context, "Send msg ", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent intent = new Intent(context, PublicStudentProfile.class);
-                intent.putExtra("userid",id);
-                Log.d("AdapterPosts","ji"+id);
-                context.startActivity(intent);
-
-               // Toast.makeText(context, "send req", Toast.LENGTH_SHORT).show();
-            }
-        });
 
 
     }
@@ -193,6 +181,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> im
     class MyHolder extends RecyclerView.ViewHolder{
 
         //button and views from row_post
+        ImageView ProfileImage;
         ImageButton moreBtnTV,sendMsgBtn,sendReq;
         TextView post_nameTV ,post_timeTV,post_idTV,post_locTV,post_categoryTV,post_salTV,post_genderTV ,post_classTv,post_daysTV,post_subTV,post_notesTV
                 ,post_mediumTV,post_preferenceTV, note;
@@ -201,9 +190,10 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> im
             super(itemView);
 
             //init views
-            moreBtnTV = itemView.findViewById(R.id.moreBtnTV);
-            sendMsgBtn = itemView.findViewById(R.id.sendMsgBtn);
-            sendReq = itemView.findViewById(R.id.sendReq);
+            ProfileImage = itemView.findViewById(R.id.profile_image);
+//            moreBtnTV = itemView.findViewById(R.id.moreBtnTV);
+//            sendMsgBtn = itemView.findViewById(R.id.sendMsgBtn);
+//            sendReq = itemView.findViewById(R.id.sendReq);
 
             post_nameTV = itemView.findViewById(R.id.post_nameTV);
             post_timeTV = itemView.findViewById(R.id.post_timeTV);

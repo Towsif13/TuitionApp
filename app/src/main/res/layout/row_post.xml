@@ -24,20 +24,20 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
                             android:orientation="horizontal">
 
                                 <de.hdodenhof.circleimageview.CircleImageView
                                     android:id="@+id/profile_image"
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
-                                    android:src="@drawable/userimg"
-                                    app:civ_border_color="#FF000000"
-                                    app:civ_border_width="2dp" />
+                                    android:layout_width="60dp"
+                                    android:layout_height="60dp"
+                                    android:src="@drawable/userimg"/>
 
                                 <LinearLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:orientation="vertical"
+                                    android:layout_gravity="center_horizontal"
                                     android:paddingLeft="10dp">
 
                                         <TextView
@@ -46,7 +46,8 @@
                                             android:layout_height="wrap_content"
                                             android:text="NAME:"
                                             android:textColor="@color/colorPrimaryDark"
-                                            android:textSize="20sp" />
+                                            android:textSize="22sp"
+                                            android:textStyle="bold"/>
 
 
                                         <TextView
@@ -55,29 +56,30 @@
                                             android:layout_height="wrap_content"
                                             android:text="POSTED TIME:"
                                             android:textColor="@color/colorPrimaryDark"
-                                            android:textSize="15sp" />
+                                            android:textSize="17sp"
+                                            android:textStyle="normal"/>
 
                                 </LinearLayout>
 
 
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="right"
-                            android:gravity="right">
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="right"-->
+<!--                            android:gravity="right">-->
 
-                                <ImageButton
-                                    android:id="@+id/deleteBtn"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:background="@null"
-                                    android:src="@drawable/ic_delete_btn">
+<!--                                <ImageButton-->
+<!--                                    android:id="@+id/deleteBtn"-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:background="@null"-->
+<!--                                    android:src="@drawable/ic_delete_btn">-->
 
-                                </ImageButton>
+<!--                                </ImageButton>-->
 
-                        </LinearLayout>
+<!--                        </LinearLayout>-->
 
 
                 </LinearLayout>
@@ -93,7 +95,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="left"
-                            android:background="#f0f0f0"
 
 
                             android:gravity=""
@@ -113,7 +114,8 @@
                                             android:paddingRight="10dp"
                                             android:text="Class: "
                                             android:textColor="@color/colorPrimaryDark"
-                                            android:textSize="20sp" />
+                                            android:textSize="20sp"
+                                            android:textStyle="bold" />
 
                                         <TextView
                                             android:id="@+id/class_TV"
@@ -138,7 +140,8 @@
                                             android:paddingRight="10dp"
                                             android:text="Subjects: "
                                             android:textColor="@color/colorPrimaryDark"
-                                            android:textSize="20sp" />
+                                            android:textSize="20sp"
+                                            android:textStyle="bold" />
 
                                         <TextView
                                             android:id="@+id/subjectTV"
@@ -164,7 +167,8 @@
                                             android:paddingRight="10dp"
                                             android:text="Medium:"
                                             android:textColor="@color/colorPrimaryDark"
-                                            android:textSize="20sp" />
+                                            android:textSize="20sp"
+                                            android:textStyle="bold" />
 
 
                                         <TextView
@@ -190,7 +194,8 @@
                                             android:paddingRight="10dp"
                                             android:text="Location: "
                                             android:textColor="@color/colorPrimaryDark"
-                                            android:textSize="20sp" />
+                                            android:textSize="20sp"
+                                            android:textStyle="bold" />
 
 
                                         <TextView
@@ -217,7 +222,8 @@
                                             android:paddingRight="10dp"
                                             android:text="Days per week: "
                                             android:textColor="@color/colorPrimaryDark"
-                                            android:textSize="20sp" />
+                                            android:textSize="20sp"
+                                            android:textStyle="bold" />
 
 
                                         <TextView
@@ -243,7 +249,8 @@
                                             android:paddingRight="10dp"
                                             android:text="Preferred Gender: "
                                             android:textColor="@color/colorPrimaryDark"
-                                            android:textSize="19sp" />
+                                            android:textSize="19sp"
+                                            android:textStyle="bold" />
 
                                         <TextView
                                             android:id="@+id/preferenceTV"
@@ -267,7 +274,8 @@
                                             android:paddingRight="10dp"
                                             android:text="Salary: "
                                             android:textColor="@color/colorPrimaryDark"
-                                            android:textSize="20sp" />
+                                            android:textSize="20sp"
+                                            android:textStyle="bold" />
 
                                         <TextView
                                             android:id="@+id/salaryTV"
@@ -294,7 +302,8 @@
                                             android:paddingRight="10dp"
                                             android:text="Note: "
                                             android:textColor="@color/colorPrimaryDark"
-                                            android:textSize="20sp" />
+                                            android:textSize="20sp"
+                                            android:textStyle="bold" />
 
                                         <TextView
                                             android:id="@+id/post_notesTV"
@@ -320,54 +329,54 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="3"
-                    android:padding="5dp"
-                    >
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:weightSum="3"-->
+<!--                    android:padding="5dp"-->
+<!--                    >-->
 
 
 
-                        <ImageButton
-                            android:id="@+id/moreBtnTV"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:background="@null"
-                            android:src="@drawable/ic_more_black_btn"
-                            android:layout_weight="1">
+<!--                        <ImageButton-->
+<!--                            android:id="@+id/moreBtnTV"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:background="@null"-->
+<!--                            android:src="@drawable/ic_more_black_btn"-->
+<!--                            android:layout_weight="1">-->
 
-                        </ImageButton>
-
-
+<!--                        </ImageButton>-->
 
 
-                        <ImageButton
-                            android:id="@+id/sendMsgBtn"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@null"
-                            android:layout_weight="1"
-
-                            android:src="@drawable/ic_more_msg_btn">
-
-                        </ImageButton>
-
-                        <ImageButton
-
-                            android:id="@+id/sendReq"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@null"
-                            android:layout_weight="1"
-
-                            android:src="@drawable/ic_person_black_24dp">
-
-                        </ImageButton>
 
 
-                </LinearLayout>
+<!--                        <ImageButton-->
+<!--                            android:id="@+id/sendMsgBtn"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:background="@null"-->
+<!--                            android:layout_weight="1"-->
+
+<!--                            android:src="@drawable/ic_more_msg_btn">-->
+
+<!--                        </ImageButton>-->
+
+<!--                        <ImageButton-->
+
+<!--                            android:id="@+id/sendReq"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:background="@null"-->
+<!--                            android:layout_weight="1"-->
+
+<!--                            android:src="@drawable/ic_person_black_24dp">-->
+
+<!--                        </ImageButton>-->
+
+
+<!--                </LinearLayout>-->
 
 
         </LinearLayout>

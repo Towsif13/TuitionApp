@@ -5,20 +5,29 @@ import android.util.Log;
 
 public class UserContacts {
 
-    private String id,FirstName,LastName,Address;//tutors_image;
+    private String id,FirstName,LastName,Address,ProfileImage;
 
     public String getId() {
         Log.d("UserContacts","Id"+ id);
         return id;
     }
 
-    public UserContacts(String id, String FirstName, String LastName, String Address, String status )
+    public String getProfileImage() {
+        return ProfileImage;
+    }
+
+    public void setProfileImage(String profileImage) {
+        ProfileImage = profileImage;
+    }
+
+    public UserContacts(String id, String FirstName, String LastName, String Address, String status , String ProfileImage)
 /* String tutors_image*/
 {
         this.id = id;
         this.FirstName = FirstName;
         this.LastName = LastName;
         this.Address = Address;
+        this.ProfileImage = ProfileImage;
        // this.tutors_image = tutors_image;
 
     }

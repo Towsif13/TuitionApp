@@ -1,13 +1,13 @@
 package com.example.tuitionapp;
 
+import android.os.Bundle;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Bundle;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -22,8 +22,8 @@ public class UserActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     DatabaseReference reference;
     RecyclerView recyclerView;
-    ArrayList<UserContacts> list;
-    UserAdapter adapter;
+    ArrayList<com.example.tuitionapp.UserContacts> list;
+    com.example.tuitionapp.UserAdapter adapter;
     Toolbar mtoolbar;
 
     @Override
@@ -56,14 +56,14 @@ public class UserActivity extends AppCompatActivity {
                     reference.child("Users").child("Teacher").addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            list = new ArrayList<UserContacts>();
+                            list = new ArrayList<com.example.tuitionapp.UserContacts>();
                             for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
                             {
-                                UserContacts p = dataSnapshot1.getValue(UserContacts.class);
+                                com.example.tuitionapp.UserContacts p = dataSnapshot1.getValue(com.example.tuitionapp.UserContacts.class);
                                 list.add(p);
                             }
 
-                            adapter = new UserAdapter(UserActivity.this,list);
+                            adapter = new com.example.tuitionapp.UserAdapter(UserActivity.this,list);
                             recyclerView.setAdapter(adapter);
                             adapter.notifyDataSetChanged();
                         }
@@ -83,14 +83,14 @@ public class UserActivity extends AppCompatActivity {
                     reference.child("Users").child("Student").addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            list = new ArrayList<UserContacts>();
+                            list = new ArrayList<com.example.tuitionapp.UserContacts>();
                             for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
                             {
-                                UserContacts p = dataSnapshot1.getValue(UserContacts.class);
+                                com.example.tuitionapp.UserContacts p = dataSnapshot1.getValue(com.example.tuitionapp.UserContacts.class);
                                 list.add(p);
                             }
 
-                            adapter = new UserAdapter(UserActivity.this,list);
+                            adapter = new com.example.tuitionapp.UserAdapter(UserActivity.this,list);
                             recyclerView.setAdapter(adapter);
                             adapter.notifyDataSetChanged();
                         }
