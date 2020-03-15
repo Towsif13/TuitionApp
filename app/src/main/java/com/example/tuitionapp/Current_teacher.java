@@ -1,5 +1,6 @@
 package com.example.tuitionapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -100,7 +101,14 @@ public class Current_teacher extends AppCompatActivity {
                                     findFriendViewHolder.userName2.setText(lname);
                                     findFriendViewHolder.userStatus.setVisibility(View.GONE);
 
-                                  //  findFriendViewHolder.itemView.setOnClickListener();
+                                  findFriendViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                                      @Override
+                                      public void onClick(View v) {
+                                          Intent intent = new Intent(Current_teacher.this,MessageActivity.class);
+                                          intent.putExtra("userId",userId);
+                                          startActivity(intent);
+                                      }
+                                  });
 
                                     //holder.userStatus.setText(model.getStatus());
                                  //  Picasso.get().load(pimg).placeholder(R.drawable.ic_account_circle_black_24dp).into(findFriendViewHolder.profileImage);

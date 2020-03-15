@@ -1,6 +1,7 @@
 package com.example.tuitionapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,7 +45,7 @@ public class AdapterPostTeacher extends RecyclerView.Adapter<AdapterPostTeacher.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyHolder holder, final int position) {
         // bind data here
         final String id = mDataFiltered.get(position).getId();
         Log.d("AdapterPosts","ji"+id);
@@ -88,6 +89,16 @@ public class AdapterPostTeacher extends RecyclerView.Adapter<AdapterPostTeacher.
         }else {
             holder.post_notesTV.setText(Notes);
         }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,PublicTeacherProfileActivity.class);
+                intent.putExtra("userid",mDataFiltered.get(position).getId());
+                context.startActivity(intent);
+            }
+        });
+
 
 
 

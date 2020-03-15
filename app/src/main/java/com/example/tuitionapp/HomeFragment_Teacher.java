@@ -81,7 +81,7 @@ public class HomeFragment_Teacher extends Fragment {
             });
 
 
-            yourPostteacherCL=getActivity().findViewById(R.id.yourPostteacherCL);
+          yourPostteacherCL=getActivity().findViewById(R.id.yourPostteacherCL);
             yourPostteacherCL.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
