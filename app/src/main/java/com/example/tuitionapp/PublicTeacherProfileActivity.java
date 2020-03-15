@@ -247,7 +247,7 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
                                                 add_btn_teacher.setEnabled(true);
                                                 Current_state = "not_student";
                                                  send_req.setImageResource(R.drawable.ic_add_person_req);
-                                                 send_txt.setText("Add");
+                                                 send_txt.setText("SEND REQUEST");
                                             }
                                         }
 
@@ -341,7 +341,7 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
                                                 add_btn_teacher.setEnabled(true);
                                                 Current_state = "not_student";
                                                 send_req.setImageResource(R.drawable.ic_add_person_req);
-                                                send_txt.setText("Add");
+                                                send_txt.setText("SEND REQUEST");
                                             }
                                         }
 

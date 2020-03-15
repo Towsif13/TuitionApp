@@ -132,8 +132,8 @@
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/publicProPic"
-                        android:layout_width="200dp"
-                        android:layout_height="200dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:layout_margin="1dp"
                         android:padding="1dp"
                         android:src="@drawable/userimg"
