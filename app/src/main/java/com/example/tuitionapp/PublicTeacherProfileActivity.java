@@ -91,7 +91,7 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
         final FirebaseUser user = mAuth.getCurrentUser();
         uid = user.getUid();
         sturef = mFirebaseDatabase.getReference().child("AcceptStudent");
-        receiverUserId = getIntent().getExtras().getString("user_id");
+        receiverUserId = getIntent().getExtras().getString("userid");
 
         myref.child("Users").child("Teacher").child(receiverUserId).addValueEventListener(new ValueEventListener() {
             @Override

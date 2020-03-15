@@ -54,16 +54,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
             holder.btn.setVisibility(View.VISIBLE);
             holder.onClick(position);
         }*/
-       holder.itemView.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
 
-               Intent intent = new Intent(context,MessageActivity.class);
-               intent.putExtra("userId",user.getId());
-               context.startActivity(intent);
-           }
-       });
-       lastMessage(user.getId(),holder.last_message);
+       Intent intent = new Intent(context,Current_teacher.class);
+       intent.putExtra("userId",user.getId());
+       context.startActivity(intent);
+
+
     }
 
 
