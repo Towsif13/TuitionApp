@@ -202,7 +202,7 @@
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"
                                 android:id="@+id/t_send_req"
-                                android:src="@drawable/ic_person_white"/>
+                                android:src="@drawable/ic_add_person_req"/>
 
                             <TextView
                                 android:layout_width="wrap_content"

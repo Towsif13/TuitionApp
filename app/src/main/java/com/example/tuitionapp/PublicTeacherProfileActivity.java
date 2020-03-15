@@ -246,8 +246,8 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
                                             if (task.isSuccessful()) {
                                                 add_btn_teacher.setEnabled(true);
                                                 Current_state = "not_student";
-                                                 send_req.setImageResource(R.drawable.ic_person_white);
-                                                 send_txt.setText("Send Request");
+                                                 send_req.setImageResource(R.drawable.ic_add_person_req);
+                                                 send_txt.setText("Add");
                                             }
                                         }
 
@@ -272,7 +272,7 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
                     if (request_type.equals("sent")) {
                         Current_state = "request_sent";
                         send_txt.setText("Cancel Request");
-                        send_req.setImageResource(R.drawable.ic_plus_one_black_24dp);
+                        send_req.setImageResource(R.drawable.ic_cancel_req);
                     }else if(request_type.equals("received")){
                         Current_state = "request_received";
                         send_txt.setText("Accept Request");
@@ -340,8 +340,8 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
                                             if (task.isSuccessful()) {
                                                 add_btn_teacher.setEnabled(true);
                                                 Current_state = "not_student";
-                                                send_req.setImageResource(R.drawable.ic_person_white);
-                                                send_txt.setText("Send Request");
+                                                send_req.setImageResource(R.drawable.ic_add_person_req);
+                                                send_txt.setText("Add");
                                             }
                                         }
 
@@ -377,11 +377,11 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
 
                                     add_btn_teacher.setEnabled(true);
                                     Current_state = "request_sent";
-                                    send_req.setImageResource(R.drawable.ic_plus_one_black_24dp);
+                                    send_req.setImageResource(R.drawable.ic_cancel_req);
                                     send_txt.setText("Cancel Request");
 
                                 } else {
-                                    send_req.setImageResource(R.drawable.ic_person_white);
+                                    send_req.setImageResource(R.drawable.ic_add_person_req);
                                 }
                             }
 

@@ -153,7 +153,7 @@
                     android:text="Student"
                     android:textAllCaps="true"
                     android:textColor="@color/address"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"/>
 
                 <TextView
                     android:id="@+id/studentName"
@@ -176,6 +176,7 @@
                     android:layout_below="@id/tv_address"
                     android:layout_centerInParent="true"
                     android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="10sp">
 
                     <RelativeLayout
@@ -202,13 +203,13 @@
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
                                 android:id="@+id/st_send_req"
-                                android:src="@drawable/ic_person_white"/>
+                                android:src="@drawable/ic_add_person_req"/>
 
                             <TextView
-                                android:layout_width="150dp"
-                                android:layout_height="70dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:fontFamily="sans-serif-light"
-                                android:text="Add"
+                                android:text="Send Request"
                                 android:textAlignment="center"
                                 android:id="@+id/send_txt"
                                 android:textAllCaps="true"
@@ -245,8 +246,8 @@
                                 android:id="@+id/st_decline_req"
                                 android:src="@drawable/ic_cancel_black_24dp"/>
                             <TextView
-                                android:layout_width="120dp"
-                                android:layout_height="70dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:fontFamily="sans-serif-light"
                                 android:text="Decline"
                                 android:id="@+id/st_decline_txt"
