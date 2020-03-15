@@ -30,7 +30,9 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -139,11 +141,13 @@ public class StudentReceivedRequestsActivity extends AppCompatActivity {
                                 public void onClick(View v) {
 
                                     findFriendViewHolder.request_accept.setEnabled(false);
-                                    final String CurrentDate = DateFormat.getDateTimeInstance().format(new Date());
+                                    SimpleDateFormat df1 = new SimpleDateFormat("d-MM-yyyy");
+                                    final String CurrentDate= df1.format(Calendar.getInstance().getTime());
+
 
                                     Map friendsMap = new HashMap();
-                                    friendsMap.put("Friends/" + mCurrent_user_id + "/" + userId + "/date", CurrentDate);
-                                    friendsMap.put("Friends/" + userId + "/" + mCurrent_user_id + "/date", CurrentDate);
+                                    friendsMap.put("AcceptStudent/" + mCurrent_user_id + "/" + userId + "/date", CurrentDate);
+                                    friendsMap.put("AcceptStudent/" + userId + "/" + mCurrent_user_id + "/date", CurrentDate);
 
                                     friendsMap.put("Friend_req/" + mCurrent_user_id + "/" + userId, null);
                                     friendsMap.put("Friend_req/" + userId + "/" + mCurrent_user_id, null);
