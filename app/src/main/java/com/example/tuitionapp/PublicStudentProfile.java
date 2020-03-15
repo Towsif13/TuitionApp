@@ -98,7 +98,7 @@ public class PublicStudentProfile extends AppCompatActivity {
         sturef = mFirebaseDatabase.getReference().child("AcceptStudent");
         final FirebaseUser user = mAuth.getCurrentUser();
         uid = user.getUid();
-        receiverUserId = getIntent().getExtras().getString("user_id");
+        receiverUserId = getIntent().getExtras().getString("userid");
 
 
         myref.child("Users").child("Student").child(receiverUserId).addValueEventListener(new ValueEventListener() {
