@@ -55,7 +55,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
             holder.onClick(position);
         }*/
 
-       Intent intent = new Intent(context,Current_teacher.class);
+       Intent intent = new Intent(context,MessageActivity.class);
        intent.putExtra("userId",user.getId());
        context.startActivity(intent);
 

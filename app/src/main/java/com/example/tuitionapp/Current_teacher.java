@@ -100,6 +100,8 @@ public class Current_teacher extends AppCompatActivity {
                                     findFriendViewHolder.userName2.setText(lname);
                                     findFriendViewHolder.userStatus.setVisibility(View.GONE);
 
+                                  //  findFriendViewHolder.itemView.setOnClickListener();
+
                                     //holder.userStatus.setText(model.getStatus());
                                  //  Picasso.get().load(pimg).placeholder(R.drawable.ic_account_circle_black_24dp).into(findFriendViewHolder.profileImage);
 
