@@ -10,14 +10,26 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.hsalf.smilerating.BaseRating;
 import com.hsalf.smilerating.SmileRating;
+import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
+import java.util.HashMap;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class TeacherRatingActivity extends AppCompatActivity {
 
-    private String userid;
+    private String teacherUserid;
 
     private SmileRating smileRatingTeaching , smileRatingTimeliness, smileRatingProfessionalism ;
     private Button submitBtn;
@@ -29,13 +41,23 @@ public class TeacherRatingActivity extends AppCompatActivity {
 
     private EditText tutorReview;
 
+    private FirebaseAuth mAuth;
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference myref;
+    private String uid;
+
+    private CircleImageView teacherProPic;
+    private TextView teacherName;
+
+    String mOverallRating;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_rating);
 
-        userid = getIntent().getExtras().getString("userId");
-        Toast.makeText(this, userid, Toast.LENGTH_LONG).show();
+        teacherUserid = getIntent().getExtras().getString("userId");
+        //Toast.makeText(this, teacherUserid, Toast.LENGTH_LONG).show();
 
         toolbar = findViewById(R.id.user_toolbar);
         setSupportActionBar(toolbar);
@@ -43,12 +65,41 @@ public class TeacherRatingActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        teacherProPic = findViewById(R.id.teacher_propic_review);
+        teacherName = findViewById(R.id.teacher_name_review);
+
         teachScr = findViewById(R.id.teaching_score);
         timeScr = findViewById(R.id.timeliness_score);
         profScr = findViewById(R.id.professionalism_score);
         overallScr = findViewById(R.id.overall_score);
         comment = findViewById(R.id.comment);
         tutorReview = findViewById(R.id.tutor_review);
+
+        mAuth = FirebaseAuth.getInstance();
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        myref = mFirebaseDatabase.getReference();
+        final FirebaseUser user = mAuth.getCurrentUser();
+        uid = user.getUid();
+
+        myref.child("Users").child("Teacher").child(teacherUserid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String fname = dataSnapshot.child("FirstName").getValue().toString();
+                String lname = dataSnapshot.child("LastName").getValue().toString();
+                String name = fname+" "+lname;
+                teacherName.setText(name);
+
+                if (dataSnapshot.child("ProfileImage").exists()){
+                    String propic = dataSnapshot.child("ProfileImage").getValue().toString();
+                    Picasso.get().load(propic).into(teacherProPic);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         smileRatingTeaching = findViewById(R.id.smile_rating_teaching);
         smileRatingTeaching.setSelectedSmile(BaseRating.OKAY);
@@ -119,6 +170,35 @@ public class TeacherRatingActivity extends AppCompatActivity {
                 //Toast.makeText(TeacherRatingActivity.this, "Pint "+ mlevel, Toast.LENGTH_SHORT).show();
 
                 //TODO: Database work
+                String comment = tutorReview.getText().toString();
+                DecimalFormat df2 = new DecimalFormat();
+                df2.setMaximumFractionDigits(1);
+                Float ov = overall;
+                String overall = String.valueOf(df2.format(ov));
+                mOverallRating = overall;
+//
+//                DatabaseReference rating_db = FirebaseDatabase.getInstance().getReference().child("Review").child(teacherUserid);
+//                HashMap<String,String> rateMap = new HashMap<>();
+//                rateMap.put("Overall",overall);
+//                rating_db.setValue(rateMap);
+
+                DatabaseReference review_db = FirebaseDatabase.getInstance().getReference().child("Review").child(teacherUserid).child(uid);
+                HashMap<String,String> reviewMap = new HashMap<>();
+                reviewMap.put("Review",comment);
+                reviewMap.put("Overall",overall);
+                reviewMap.put("Teaching",String.valueOf(mTeachingLevel));
+                reviewMap.put("Timeliness",String.valueOf(mTimeLevel));
+                reviewMap.put("Professionalism",String.valueOf(mProfessionalismLevel));
+                review_db.setValue(reviewMap);
+
+
+//                DatabaseReference rating_db = FirebaseDatabase.getInstance().getReference().child("Rating").child(teacherUserid);
+//                HashMap<String,String> rateMap = new HashMap<>();
+//                rateMap.put("Rating",overall);
+//                rating_db.setValue(rateMap);
+
+
+
             }
         });
     }

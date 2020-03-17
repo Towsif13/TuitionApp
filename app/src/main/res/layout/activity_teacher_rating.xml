@@ -39,12 +39,14 @@
                 android:layout_marginTop="10dp">
 
                 <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/teacher_propic_review"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:src="@drawable/userimg"
                     android:layout_gravity="center_horizontal"/>
 
                 <TextView
+                    android:id="@+id/teacher_name_review"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Towsif Chowdhury"

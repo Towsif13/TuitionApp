@@ -38,7 +38,7 @@ public class ReviewCurrentTutorsActivity extends AppCompatActivity {
         currentTutors = findViewById(R.id.currentTutorReviewRecycler);
 
         currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        reference = FirebaseDatabase.getInstance().getReference().child("AcceptStudent").child(currentuser);
+        reference = FirebaseDatabase.getInstance().getReference().child("AcceptTeacher").child(currentuser);
         userref = FirebaseDatabase.getInstance().getReference().child("Users").child("Teacher");
 
         currentTutors.setLayoutManager(new LinearLayoutManager(this));
