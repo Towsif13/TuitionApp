@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -47,11 +49,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
         holder.name.setText(profiles.get(position).getFirstName());
         holder.lname.setText(profiles.get(position).getLastName());
         lastMessage(user.getId(),holder.last_message);
-       // Picasso.get().load(profiles.get(position).getProfilePic()).into(holder.profilePic);
-       /* if(profiles.get(position).getPermission()) {
-            holder.btn.setVisibility(View.VISIBLE);
-            holder.onClick(position);
-        }*/
+
+        if(profiles.get(position).getProfileImage() != null) {
+            Picasso.get().load(profiles.get(position).getProfileImage()).into(holder.profilePic);
+        }
 
        Intent intent = new Intent(context,MessageActivity.class);
        intent.putExtra("userId",user.getId());
@@ -70,15 +71,15 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
     class MyViewHolder extends RecyclerView.ViewHolder
     {
         TextView name,lname, last_message;
-      //  ImageView profilePic;
+        ImageView profilePic;
       //  Button btn;
         public MyViewHolder(View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.user_profile_name);
             lname = (TextView)itemView.findViewById(R.id.user_profile_lastName);
             last_message = (TextView) itemView.findViewById(R.id.last_message);
-           /* profilePic = (ImageView) itemView.findViewById(R.id.profilePic);
-            btn = (Button) itemView.findViewById(R.id.checkDetails);*/
+            profilePic = (ImageView) itemView.findViewById(R.id.user_profile_image);
+            //btn = (Button) itemView.findViewById(R.id.checkDetails);*/
         }
     }
 

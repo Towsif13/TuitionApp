@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -63,19 +65,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyViewHo
             holder.msg_seen.setVisibility(View.GONE);
         }
 
-        // Picasso.get().load(profiles.get(position).getProfilePic()).into(holder.profilePic);
-       /* if(profiles.get(position).getPermission()) {
-            holder.btn.setVisibility(View.VISIBLE);
-            holder.onClick(position);
-        }*/
-       /* holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(context,MessageActivity.class);
-                context.startActivity(intent);
-            }
-        });*/
     }
 
     @Override
@@ -86,15 +75,14 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyViewHo
     class MyViewHolder extends RecyclerView.ViewHolder
     {
         TextView show_msg,msg_seen;
-        //  ImageView profilePic;
-        //  Button btn;
+        ImageView profilePic;
+
         public MyViewHolder(View itemView) {
             super(itemView);
             show_msg = (TextView) itemView.findViewById(R.id.show_msg);
             msg_seen = itemView.findViewById(R.id.msg_seen);
 
-           /* profilePic = (ImageView) itemView.findViewById(R.id.profilePic);
-            btn = (Button) itemView.findViewById(R.id.checkDetails);*/
+           profilePic = (ImageView) itemView.findViewById(R.id.msg_profile_image);
         }
     }
     @Override

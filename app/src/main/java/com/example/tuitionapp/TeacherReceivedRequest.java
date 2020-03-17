@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -125,11 +127,9 @@ public class TeacherReceivedRequest extends AppCompatActivity {
                                         final String pimg = dataSnapshot.child("ProfileImage").getValue().toString();
 
                                         findFriendViewHolder.userName.setText(fname + " " + lname);
-
-                                        //holder.userStatus.setText(model.getStatus());
-
-                                        //Picasso.get().load(pimg).placeholder(R.drawable.ic_account_circle_black_24dp).into(findFriendViewHolder.profileImage);
-
+                                        if(dataSnapshot.child("ProfileImage").getValue() != null) {
+                                            Picasso.get().load(dataSnapshot.child("ProfileImage").getValue().toString()).into(findFriendViewHolder.profileImage);
+                                        }
                                     }
                                 }
 
@@ -155,8 +155,8 @@ public class TeacherReceivedRequest extends AppCompatActivity {
                                     friendsMap.put("AcceptTeacher/" + mCurrent_user_id + "/" + userId + "/date", CurrentDate);
                                     friendsMap.put("AcceptTeacher/" + userId + "/" + mCurrent_user_id + "/date", CurrentDate);
 
-                                    friendsMap.put("Friend_req/" + mCurrent_user_id + "/" + userId, null);
-                                    friendsMap.put("Friend_req/" + userId + "/" + mCurrent_user_id, null);
+                                    friendsMap.put("Request/" + mCurrent_user_id + "/" + userId, null);
+                                    friendsMap.put("Request/" + userId + "/" + mCurrent_user_id, null);
 
                                     mRootRef.updateChildren(friendsMap, new DatabaseReference.CompletionListener() {
                                         @Override
@@ -244,47 +244,11 @@ public class TeacherReceivedRequest extends AppCompatActivity {
 
 
     // checking the current user is  in the studnet node or teacher node
-/*
-        mRequestDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    getSupportActionBar().setTitle("Request");
 
-                    mUserDatabase.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            list = new ArrayList<UserContacts>();
-                            for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                                UserContacts p = dataSnapshot1.getValue(UserContacts.class);
-                                list.add(p);
-                            }
-                            adapter = new RequestAdapter(TeacherReceivedRequest.this, list);
-                            mRequestList.setAdapter(adapter);
-                            adapter.notifyDataSetChanged();
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-                            Toast.makeText(TeacherReceivedRequest.this, "Opsss.... Something is wrong", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-
-        });
-*/
     public static class FindFriendViewHolder extends RecyclerView.ViewHolder
     {
         TextView userName ,txt;
-        CircleImageView profileImage;
+        ImageView profileImage;
         Button request_accept,request_decline;
 
 
@@ -296,7 +260,7 @@ public class TeacherReceivedRequest extends AppCompatActivity {
             userName = itemView.findViewById(R.id.user_firstName);
             request_accept = itemView.findViewById(R.id.acpt);
             request_decline = itemView.findViewById(R.id.dec);
-            profileImage = itemView.findViewById(R.id.user_profile_image);
+            profileImage = itemView.findViewById(R.id.profile_image);
         }
     }
 

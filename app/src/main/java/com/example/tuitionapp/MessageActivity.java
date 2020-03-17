@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -93,6 +94,9 @@ public class MessageActivity extends AppCompatActivity {
                             //list.add(p);
                             msg_user_name.setText(p.getFirstName());
                             msg_user_lastName.setText(p.getLastName());
+                            if(dataSnapshot.child("ProfileImage").getValue() != null) {
+                                Picasso.get().load(p.getProfileImage()).into(circleImageView);
+                            }
 
                             readMessage(firebaseUser.getUid(),userid);
                             seenMessage(userid);
@@ -118,7 +122,7 @@ public class MessageActivity extends AppCompatActivity {
                             msg_send.setText("");
                         }
                     });
-                    //   Toast.makeText(UserActivity.this, "working", Toast.LENGTH_SHORT).show();
+
                 }
                 else {
 
@@ -131,6 +135,10 @@ public class MessageActivity extends AppCompatActivity {
                             //list.add(p);
                             msg_user_name.setText(p.getFirstName());
                             msg_user_lastName.setText(p.getLastName());
+
+                            if(dataSnapshot.child("ProfileImage").getValue() != null) {
+                                Picasso.get().load(p.getProfileImage()).into(circleImageView);
+                            }
 
                             readMessage(firebaseUser.getUid(),userid);
                             Toast.makeText(MessageActivity.this, userid, Toast.LENGTH_SHORT).show();

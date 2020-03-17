@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -115,6 +116,9 @@ public class StudentReceivedRequestsActivity extends AppCompatActivity {
                                         final String lname = dataSnapshot.child("LastName").getValue().toString();
                                         final String pimg = dataSnapshot.child("ProfileImage").getValue().toString();
                                         findFriendViewHolder.userName.setText(fname + " " + lname);
+                                        if(dataSnapshot.child("ProfileImage").getValue() != null) {
+                                            Picasso.get().load(dataSnapshot.child("ProfileImage").getValue().toString()).into(findFriendViewHolder.profileImage);
+                                        }
                                     }
                                 }
                                 @Override
@@ -123,9 +127,6 @@ public class StudentReceivedRequestsActivity extends AppCompatActivity {
                                 }
                             });
 
-                            //holder.userStatus.setText(model.getStatus());
-
-                            //Picasso.get().load(pimg).placeholder(R.drawable.ic_account_circle_black_24dp).into(findFriendViewHolder.profileImage);
 
 
                             findFriendViewHolder.request_accept.setOnClickListener(new View.OnClickListener() {
@@ -141,8 +142,8 @@ public class StudentReceivedRequestsActivity extends AppCompatActivity {
                                     friendsMap.put("AcceptStudent/" + mCurrent_user_id + "/" + userId + "/date", CurrentDate);
                                     friendsMap.put("AcceptStudent/" + userId + "/" + mCurrent_user_id + "/date", CurrentDate);
 
-                                    friendsMap.put("Friend_req/" + mCurrent_user_id + "/" + userId, null);
-                                    friendsMap.put("Friend_req/" + userId + "/" + mCurrent_user_id, null);
+                                    friendsMap.put("Request/" + mCurrent_user_id + "/" + userId, null);
+                                    friendsMap.put("Request/" + userId + "/" + mCurrent_user_id, null);
 
                                     mRootRef.updateChildren(friendsMap, new DatabaseReference.CompletionListener() {
                                         @Override
@@ -163,7 +164,9 @@ public class StudentReceivedRequestsActivity extends AppCompatActivity {
                                     findFriendViewHolder.txt.setText(" You are now connected");
                                     findFriendViewHolder.request_accept.setVisibility(View.GONE);
 
-                                }
+
+                                    }
+
                             });
 
                             findFriendViewHolder.request_decline.setOnClickListener(new View.OnClickListener() {
@@ -231,7 +234,7 @@ public class StudentReceivedRequestsActivity extends AppCompatActivity {
     public static class FindFriendViewHolder extends RecyclerView.ViewHolder
     {
         TextView userName ,txt;
-        CircleImageView profileImage;
+        ImageView profileImage;
         Button request_accept,request_decline;
 
 
@@ -243,7 +246,7 @@ public class StudentReceivedRequestsActivity extends AppCompatActivity {
             userName = itemView.findViewById(R.id.user_firstName);
             request_accept = itemView.findViewById(R.id.acpt);
             request_decline = itemView.findViewById(R.id.dec);
-            profileImage = itemView.findViewById(R.id.user_profile_image);
+            profileImage = itemView.findViewById(R.id.profile_image);
         }
     }
 }

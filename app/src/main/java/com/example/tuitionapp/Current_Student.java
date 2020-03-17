@@ -26,7 +26,7 @@ import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class Current_teacher extends AppCompatActivity {
+public class Current_Student extends AppCompatActivity {
 
     FirebaseAuth mAuth;
     DatabaseReference reference, userref;
@@ -38,26 +38,26 @@ public class Current_teacher extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_current_teacher);
+        setContentView(R.layout.activity_current__student);
 
-        recyclerView = findViewById(R.id.user_Cur_recycler_list);
+        recyclerView = findViewById(R.id.user_Cur_S_recycler_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         mtoolbar = findViewById(R.id.user_toolbar);
         setSupportActionBar(mtoolbar);
-        getSupportActionBar().setTitle("My Tutors");
+        getSupportActionBar().setTitle("My Students");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        reference = FirebaseDatabase.getInstance().getReference().child("AcceptTeacher").child(currentuser);
-        userref = FirebaseDatabase.getInstance().getReference().child("Users").child("Teacher");
+        reference = FirebaseDatabase.getInstance().getReference().child("AcceptStudent").child(currentuser);
+        userref = FirebaseDatabase.getInstance().getReference().child("Users").child("Student");
 
         // getting the current user
 
 
-       //
-        
+        //
+
         DisplayAllTeachers();
     }
 
@@ -94,28 +94,27 @@ public class Current_teacher extends AppCompatActivity {
                                     findFriendViewHolder.userName.setText(fname);
                                     findFriendViewHolder.userName2.setText(lname);
                                     findFriendViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-                                      @Override
-                                      public void onClick(View v) {
-                                          Intent intent = new Intent(Current_teacher.this,MessageActivity.class);
-                                          intent.putExtra("userId",userId);
-                                          startActivity(intent);
-                                      }
-                                  });
+                                        @Override
+                                        public void onClick(View v) {
+                                            Intent intent = new Intent(Current_Student.this,MessageActivity.class);
+                                            intent.putExtra("userId",userId);
+                                            startActivity(intent);
+                                        }
+                                    });
                                     if(dataSnapshot.child("ProfileImage").getValue() != null) {
                                         Picasso.get().load(dataSnapshot.child("ProfileImage").getValue().toString()).into(findFriendViewHolder.profileImage);
                                     }
 
                                     findFriendViewHolder.userStatus.setVisibility(View.GONE);
+                                }
                             }
-                        }
 
                             @Override
                             public void onCancelled(DatabaseError databaseError) {
 
                             }
 
-                            });
-
+                        });
 
 
 
@@ -126,23 +125,23 @@ public class Current_teacher extends AppCompatActivity {
 
 
 
-}
-
-
-public static class FindFriendViewHolder extends RecyclerView.ViewHolder
-{
-    TextView userName, userName2 , userStatus;
-    CircleImageView profileImage;
-
-
-    public FindFriendViewHolder(@NonNull View itemView)
-    {
-        super(itemView);
-
-        userName = itemView.findViewById(R.id.user_profile_name);
-        userName2 = itemView.findViewById(R.id.user_profile_lastName);
-        userStatus = itemView.findViewById(R.id.last_message);
-        profileImage = itemView.findViewById(R.id.user_profile_image);
     }
-}
+
+
+    public static class FindFriendViewHolder extends RecyclerView.ViewHolder
+    {
+        TextView userName, userName2 , userStatus;
+        CircleImageView profileImage;
+
+
+        public FindFriendViewHolder(@NonNull View itemView)
+        {
+            super(itemView);
+
+            userName = itemView.findViewById(R.id.user_profile_name);
+            userName2 = itemView.findViewById(R.id.user_profile_lastName);
+            userStatus = itemView.findViewById(R.id.last_message);
+            profileImage = itemView.findViewById(R.id.user_profile_image);
+        }
+    }
 }
