@@ -4,10 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".HomeFragment_Teacher">
+    tools:context=".HomeFragment_Student">
 
     <!-- TODO: Update blank fragment layout -->
-
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -34,37 +33,36 @@
                     android:orientation="horizontal"
                     android:paddingLeft="17dp"
                     android:paddingRight="17dp"
-                    android:paddingTop="15dp"
-                    android:paddingBottom="15dp">
+                    android:paddingTop="30dp"
+                    android:paddingBottom="30dp">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
                         <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/userPhotoTeacherHome"
                             app:civ_border_width="2dp"
                             app:civ_border_color="#fff"
+                            android:id="@+id/userPhotoStudentHome"
                             android:layout_width="70dp"
                             android:layout_height="70dp"
-                            android:fontFamily="@font/archivo_narrow_bold"
                             android:layout_marginStart="2dp"
                             android:layout_marginTop="2dp"
-                            android:src="@drawable/uimg"
+                            android:src="@drawable/userimg"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"/>
 
                         <TextView
-                            android:id="@+id/userNameTeacherHome"
+                            android:id="@+id/userNameStudent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="4dp"
-                            android:text=""
                             android:fontFamily="@font/archivo_narrow_bold"
+                            android:text=""
                             android:textColor="#fff"
                             android:textSize="25sp"
-                            app:layout_constraintStart_toEndOf="@+id/userPhotoTeacherHome"
+                            app:layout_constraintStart_toEndOf="@+id/userPhotoStudentHome"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
@@ -73,12 +71,12 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="36dp"
-                            android:text="Welcome Teacher"
                             android:fontFamily="@font/archivo_narrow_bold"
+                            android:text="Welcome Student"
                             android:textColor="#fff"
                             android:textSize="22sp"
-                            app:layout_constraintStart_toEndOf="@+id/userPhotoTeacherHome"
-                            app:layout_constraintTop_toTopOf="@+id/userNameTeacherHome" />
+                            app:layout_constraintStart_toEndOf="@+id/userPhotoStudentHome"
+                            app:layout_constraintTop_toTopOf="@+id/userNameStudent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -103,7 +101,7 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:id="@+id/curr_student"
+                        android:id="@+id/student_curr_tutor"
                         android:padding="8dp">
 
                         <ImageView
@@ -128,7 +126,7 @@
                             android:layout_marginBottom="36dp"
                             android:fontFamily="@font/archivo_narrow_bold"
                             android:padding="5dp"
-                            android:text="Your Students"
+                            android:text="Your Tutors"
                             android:textColor="#000000"
                             android:textSize="19sp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -150,7 +148,7 @@
                     android:layout_weight="1">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/tutor_post_offer"
+                        android:id="@+id/PostOfferLayout"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:padding="8dp">
@@ -209,13 +207,14 @@
                     android:layout_weight="1">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/yourPostteacherCL"
+                        android:id="@+id/yourPostStudentCL"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+
                         android:padding="8dp">
 
                         <ImageView
-                            android:id="@+id/yourPostteacherIV"
+                            android:id="@+id/yourPostStudentIV"
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:background="@drawable/circle_bg_green"
@@ -230,7 +229,7 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
-                            android:id="@+id/yourPostteacherTV"
+                            android:id="@+id/yourPostStudentTV"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="36dp"
@@ -259,7 +258,7 @@
                     android:layout_weight="1">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/teacherProfile"
+                        android:id="@+id/studentProfile"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:padding="8dp">
@@ -319,7 +318,7 @@
                     android:layout_weight="1">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/requests_teacher"
+                        android:id="@+id/requests_student"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:padding="8dp">
@@ -370,6 +369,7 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:id="@+id/review_tutor"
                         android:padding="8dp">
 
                         <ImageView
@@ -394,7 +394,7 @@
                             android:layout_marginBottom="36dp"
                             android:fontFamily="@font/archivo_narrow_bold"
                             android:padding="5dp"
-                            android:text="Text"
+                            android:text="Review Teacher"
                             android:textColor="#000000"
                             android:textSize="19sp"
                             app:layout_constraintBottom_toBottomOf="parent"

@@ -42,9 +42,6 @@
         <activity android:name=".SigninActivity" />
         <activity android:name=".yourPostStudentActivity" />
         <activity android:name=".yourPostActivity" />
-        <activity
-            android:name=".UserActivity"
-            android:parentActivityName=".StudentLandingActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

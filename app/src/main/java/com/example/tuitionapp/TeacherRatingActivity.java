@@ -73,6 +73,7 @@ public class TeacherRatingActivity extends AppCompatActivity {
         profScr = findViewById(R.id.professionalism_score);
         overallScr = findViewById(R.id.overall_score);
         comment = findViewById(R.id.comment);
+
         tutorReview = findViewById(R.id.tutor_review);
 
         mAuth = FirebaseAuth.getInstance();
@@ -190,6 +191,22 @@ public class TeacherRatingActivity extends AppCompatActivity {
                 reviewMap.put("Timeliness",String.valueOf(mTimeLevel));
                 reviewMap.put("Professionalism",String.valueOf(mProfessionalismLevel));
                 review_db.setValue(reviewMap);
+                myref.child(teacherUserid).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        if(dataSnapshot.child(teacherUserid).exists()){
+                            Toast.makeText(TeacherRatingActivity.this, "exists", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(TeacherRatingActivity.this, "exists", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
 
 
 //                DatabaseReference rating_db = FirebaseDatabase.getInstance().getReference().child("Rating").child(teacherUserid);

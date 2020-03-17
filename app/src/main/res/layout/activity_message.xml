@@ -7,7 +7,7 @@
     tools:context=".MessageActivity">
 
     <include
-        layout="@layout/app_bar_layout"
+        layout="@layout/app_toolbar"
         android:id="@+id/user_msg_toolbar">
     </include>
 

@@ -34,6 +34,8 @@ public class StudentLandingActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Porao");
 
+        ;
+
         viewPager = findViewById(R.id.main_tabs_pager);
         tabLayout = findViewById(R.id.main_tabs);
         //Adapter for fragments
