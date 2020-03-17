@@ -301,11 +301,28 @@
 
             </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/rellay2"
+                android:layout_below="@+id/linlay1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/review_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+
+            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/linlay1">
+                android:layout_below="@+id/rellay2">
 
                 <LinearLayout
                     android:layout_width="match_parent"

@@ -1,10 +1,12 @@
 package com.example.tuitionapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,22 +17,38 @@ import java.text.DecimalFormat;
 
 public class TeacherRatingActivity extends AppCompatActivity {
 
+    private String userid;
+
     private SmileRating smileRatingTeaching , smileRatingTimeliness, smileRatingProfessionalism ;
     private Button submitBtn;
     int mTeachingLevel , mTimeLevel , mProfessionalismLevel ;
     private float overall;
 
-    private TextView teachScr , timeScr , profScr , overallScr;
+    private Toolbar toolbar;
+    private TextView teachScr , timeScr , profScr , overallScr , comment;
+
+    private EditText tutorReview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_rating);
 
+        userid = getIntent().getExtras().getString("userId");
+        Toast.makeText(this, userid, Toast.LENGTH_LONG).show();
+
+        toolbar = findViewById(R.id.user_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Rate");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         teachScr = findViewById(R.id.teaching_score);
         timeScr = findViewById(R.id.timeliness_score);
         profScr = findViewById(R.id.professionalism_score);
         overallScr = findViewById(R.id.overall_score);
+        comment = findViewById(R.id.comment);
+        tutorReview = findViewById(R.id.tutor_review);
 
         smileRatingTeaching = findViewById(R.id.smile_rating_teaching);
         smileRatingTeaching.setSelectedSmile(BaseRating.OKAY);
@@ -97,6 +115,7 @@ public class TeacherRatingActivity extends AppCompatActivity {
                 DecimalFormat df = new DecimalFormat();
                 df.setMaximumFractionDigits(1);
                 overallScr.setText(String.valueOf(df.format(overall)));
+                comment.setText(tutorReview.getText());
                 //Toast.makeText(TeacherRatingActivity.this, "Pint "+ mlevel, Toast.LENGTH_SHORT).show();
 
                 //TODO: Database work
