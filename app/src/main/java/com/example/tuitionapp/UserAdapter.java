@@ -3,12 +3,10 @@ package com.example.tuitionapp;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,7 +46,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
 
         holder.name.setText(profiles.get(position).getFirstName());
         holder.lname.setText(profiles.get(position).getLastName());
-      //  holder.last_message.setText(profiles.get(position).getAddress());
+        lastMessage(user.getId(),holder.last_message);
        // Picasso.get().load(profiles.get(position).getProfilePic()).into(holder.profilePic);
        /* if(profiles.get(position).getPermission()) {
             holder.btn.setVisibility(View.VISIBLE);

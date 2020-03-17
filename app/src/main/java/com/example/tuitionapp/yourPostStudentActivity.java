@@ -97,7 +97,7 @@ public class yourPostStudentActivity extends AppCompatActivity {
                         postList.add(post);
 
                         //adapter
-                        adapterPosts = new com.example.tuitionapp.AdapterPosts(yourPostStudentActivity.this, postList);
+                        adapterPosts = new AdapterPosts(yourPostStudentActivity.this, postList);
                         // set adapter to recycleview
 
                         recyclerView.setAdapter(adapterPosts);

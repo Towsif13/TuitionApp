@@ -30,7 +30,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeFragment_Student extends Fragment {
 
-    ConstraintLayout postOffer , curr_tutor,studentProfile,receivedRequestsStudent, reviewTutor;
+    ConstraintLayout postOffer , curr_tutor,studentProfile,receivedRequestsStudent, reviewTutor,yourPostStudentCL;
 
     private TextView studentName;
     private CircleImageView studentImage;
@@ -85,7 +85,14 @@ public class HomeFragment_Student extends Fragment {
                 startActivity(intent);
             }
         });
-
+        yourPostStudentCL = getActivity().findViewById(R.id.yourPostStudentCL);
+        yourPostStudentCL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), yourPostStudentActivity.class);
+                startActivity(intent);
+            }
+        });
         reviewTutor = getActivity().findViewById(R.id.review_tutor);
         reviewTutor.setOnClickListener(new View.OnClickListener() {
             @Override

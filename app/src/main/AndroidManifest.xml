@@ -34,6 +34,8 @@
         <activity android:name=".StudentRegistrationActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".SigninActivity" />
+        <activity android:name=".yourPostStudentActivity"/>
+        <activity android:name=".yourPostActivity"/>
         <activity
             android:name=".UserActivity"
             android:parentActivityName=".StudentLandingActivity" />
