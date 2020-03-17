@@ -107,33 +107,25 @@ public class StudentReceivedRequestsActivity extends AppCompatActivity {
                         Log.d("LOG","Request Type: "+Request_type);
 
                         if(Request_type.equals("received")) {
-
                             mUserDatabase.child(userId).addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
-
                                     if (dataSnapshot.exists()) {
-
                                         final String fname = dataSnapshot.child("FirstName").getValue().toString();
                                         final String lname = dataSnapshot.child("LastName").getValue().toString();
                                         final String pimg = dataSnapshot.child("ProfileImage").getValue().toString();
-
                                         findFriendViewHolder.userName.setText(fname + " " + lname);
-
-                                        //holder.userStatus.setText(model.getStatus());
-
-                                        //Picasso.get().load(pimg).placeholder(R.drawable.ic_account_circle_black_24dp).into(findFriendViewHolder.profileImage);
-
                                     }
                                 }
-
-
                                 @Override
                                 public void onCancelled(DatabaseError databaseError) {
 
                                 }
-
                             });
+
+                            //holder.userStatus.setText(model.getStatus());
+
+                            //Picasso.get().load(pimg).placeholder(R.drawable.ic_account_circle_black_24dp).into(findFriendViewHolder.profileImage);
 
 
                             findFriendViewHolder.request_accept.setOnClickListener(new View.OnClickListener() {

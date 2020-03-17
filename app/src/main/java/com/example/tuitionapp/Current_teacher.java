@@ -83,24 +83,16 @@ public class Current_teacher extends AppCompatActivity {
 
                     @Override
                     protected void onBindViewHolder(@NonNull final FindFriendViewHolder findFriendViewHolder, int i, @NonNull Teachers teachers) {
-
                         Log.d("Msg", "Hi");
                         final  String userId = getRef(i).getKey();
-
                         userref.child(userId).addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
-
                                 if(dataSnapshot.exists()){
-
                                     final  String fname = dataSnapshot.child("FirstName").getValue().toString();
                                     final  String lname = dataSnapshot.child("LastName").getValue().toString();
-                                    final  String pimg= dataSnapshot.child("ProfileImage").getValue().toString();
-
                                     findFriendViewHolder.userName.setText(fname);
                                     findFriendViewHolder.userName2.setText(lname);
-                                    findFriendViewHolder.userStatus.setVisibility(View.GONE);
-
                                   findFriendViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                                       @Override
                                       public void onClick(View v) {
@@ -110,10 +102,12 @@ public class Current_teacher extends AppCompatActivity {
                                       }
                                   });
 
+
                                     //holder.userStatus.setText(model.getStatus());
                                  //  Picasso.get().load(pimg).placeholder(R.drawable.ic_account_circle_black_24dp).into(findFriendViewHolder.profileImage);
 
-
+                                    //final  String pimg= dataSnapshot.child("ProfileImage").getValue().toString();
+                                    //findFriendViewHolder.userStatus.setVisibility(View.GONE);
                             }
                         }
 
