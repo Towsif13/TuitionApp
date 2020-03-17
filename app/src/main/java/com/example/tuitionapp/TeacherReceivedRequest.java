@@ -148,8 +148,8 @@ public class TeacherReceivedRequest extends AppCompatActivity {
                                     final String CurrentDate = DateFormat.getDateTimeInstance().format(new Date());
 
                                     Map friendsMap = new HashMap();
-                                    friendsMap.put("Friends/" + mCurrent_user_id + "/" + userId + "/date", CurrentDate);
-                                    friendsMap.put("Friends/" + userId + "/" + mCurrent_user_id + "/date", CurrentDate);
+                                    friendsMap.put("AcceptTeacher/" + mCurrent_user_id + "/" + userId + "/date", CurrentDate);
+                                    friendsMap.put("AcceptTeacher/" + userId + "/" + mCurrent_user_id + "/date", CurrentDate);
 
                                     friendsMap.put("Friend_req/" + mCurrent_user_id + "/" + userId, null);
                                     friendsMap.put("Friend_req/" + userId + "/" + mCurrent_user_id, null);
