@@ -31,9 +31,7 @@
                     android:id="@+id/profile_image"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/userimg"
-                    app:civ_border_color="#FF000000"
-                    app:civ_border_width="2dp" />
+                    android:src="@drawable/userimg" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -72,14 +70,14 @@
                 android:layout_gravity="right"
                 android:gravity="right">
 
-                <ImageButton
-                    android:id="@+id/deleteBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:src="@drawable/ic_delete_btn">
+<!--                <ImageButton-->
+<!--                    android:id="@+id/deleteBtn"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="@null"-->
+<!--                    android:src="@drawable/ic_delete_btn">-->
 
-                </ImageButton>
+<!--                </ImageButton>-->
 
             </LinearLayout>
 

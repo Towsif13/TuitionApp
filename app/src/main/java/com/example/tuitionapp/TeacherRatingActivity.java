@@ -3,6 +3,7 @@ package com.example.tuitionapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -37,7 +38,7 @@ public class TeacherRatingActivity extends AppCompatActivity {
     private float overall;
 
     private Toolbar toolbar;
-    private TextView teachScr , timeScr , profScr , overallScr , comment;
+    //private TextView teachScr , timeScr , profScr , overallScr , comment;
 
     private EditText tutorReview;
 
@@ -68,11 +69,11 @@ public class TeacherRatingActivity extends AppCompatActivity {
         teacherProPic = findViewById(R.id.teacher_propic_review);
         teacherName = findViewById(R.id.teacher_name_review);
 
-        teachScr = findViewById(R.id.teaching_score);
-        timeScr = findViewById(R.id.timeliness_score);
-        profScr = findViewById(R.id.professionalism_score);
-        overallScr = findViewById(R.id.overall_score);
-        comment = findViewById(R.id.comment);
+//        teachScr = findViewById(R.id.teaching_score);
+//        timeScr = findViewById(R.id.timeliness_score);
+//        profScr = findViewById(R.id.professionalism_score);
+//        overallScr = findViewById(R.id.overall_score);
+//        comment = findViewById(R.id.comment);
 
         tutorReview = findViewById(R.id.tutor_review);
 
@@ -160,14 +161,14 @@ public class TeacherRatingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                teachScr.setText(String.valueOf(mTeachingLevel));
-                timeScr.setText(String.valueOf(mTimeLevel));
-                profScr.setText(String.valueOf(mProfessionalismLevel));
+//                teachScr.setText(String.valueOf(mTeachingLevel));
+//                timeScr.setText(String.valueOf(mTimeLevel));
+//                profScr.setText(String.valueOf(mProfessionalismLevel));
                 overall = (float) ((mTimeLevel+mTeachingLevel+mProfessionalismLevel)/3.0);
                 DecimalFormat df = new DecimalFormat();
                 df.setMaximumFractionDigits(1);
-                overallScr.setText(String.valueOf(df.format(overall)));
-                comment.setText(tutorReview.getText());
+//                overallScr.setText(String.valueOf(df.format(overall)));
+//                comment.setText(tutorReview.getText());
                 //Toast.makeText(TeacherRatingActivity.this, "Pint "+ mlevel, Toast.LENGTH_SHORT).show();
 
                 //TODO: Database work
@@ -216,6 +217,9 @@ public class TeacherRatingActivity extends AppCompatActivity {
 //                rating_db.setValue(rateMap);
 
 
+                Intent intent = new Intent(TeacherRatingActivity.this,StudentLandingActivity.class);
+                finish();
+                startActivity(intent);
             }
         });
     }
