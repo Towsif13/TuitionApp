@@ -307,9 +307,24 @@
                 android:id="@+id/rellay2"
                 android:layout_below="@+id/linlay1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="#F0F0F0">
+
+                <TextView
+                    android:id="@+id/textv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:fontFamily="@font/archivo_narrow_bold"
+                    android:text="Reviews"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
+
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:layout_below="@id/textv"
                     android:id="@+id/review_recycler"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -331,7 +346,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:layout_marginLeft="30dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginRight="30dp"
                     android:orientation="vertical">
 

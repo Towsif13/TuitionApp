@@ -27,5 +27,11 @@
     <color name="followingBg">#49beff</color>
     <color name="grey">#e5e5e5</color>
 
+    <color name="Excellent">#49beff</color>
+    <color name="Good">#0CBAD1</color>
+    <color name="Average">#F7E474</color>
+    <color name="Bad">#FFC107</color>
+    <color name="Terrible">#E76A5F</color>
+
 
 </resources>

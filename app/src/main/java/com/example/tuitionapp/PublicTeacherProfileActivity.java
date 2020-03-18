@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -266,6 +267,30 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
             protected void onBindViewHolder(@NonNull FirebaseViewHolder firebaseViewHolder, int i, @NonNull ReviewCurrentTutorList reviewCurrentTutorList) {
 
                 firebaseViewHolder.review.setText(reviewCurrentTutorList.getReview());
+
+                String overall = reviewCurrentTutorList.getOverall();
+                Float overallScore = Float.valueOf(overall);
+                if (overallScore<=1){
+                    firebaseViewHolder.reviewTitle.setText("Terrible");
+                    firebaseViewHolder.review_bg.setBackgroundColor(getResources().getColor(R.color.Terrible));
+                }
+                else if (overallScore>1 && overallScore<=2){
+                    firebaseViewHolder.reviewTitle.setText("Bad");
+                    firebaseViewHolder.review_bg.setBackgroundColor(getResources().getColor(R.color.Bad));
+                }
+                else if (overallScore>2 && overallScore<=3){
+                    firebaseViewHolder.reviewTitle.setText("Average");
+                    firebaseViewHolder.review_bg.setBackgroundColor(getResources().getColor(R.color.Average));
+                }
+                else if (overallScore>3 && overallScore<=4){
+                    firebaseViewHolder.reviewTitle.setText("Good");
+                    firebaseViewHolder.review_bg.setBackgroundColor(getResources().getColor(R.color.Good));
+                }
+                else if (overallScore>4){
+                    firebaseViewHolder.reviewTitle.setText("Excellent");
+                    firebaseViewHolder.review_bg.setBackgroundColor(getResources().getColor(R.color.Excellent));
+                }
+                //firebaseViewHolder.reviewTitle.setText(reviewCurrentTutorList.getOverall());
             }
 
             @NonNull
@@ -505,11 +530,14 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
 
 public static class FirebaseViewHolder extends RecyclerView.ViewHolder{
 
-    public TextView review;
+    public TextView review , reviewTitle;
+    public LinearLayout review_bg;
     public FirebaseViewHolder(@NonNull View itemView) {
         super(itemView);
 
         review = itemView.findViewById(R.id.teacher_review_show);
+        reviewTitle = itemView.findViewById(R.id.teacher_review_title);
+        review_bg = itemView.findViewById(R.id.review_bg);
     }
 }
 }
