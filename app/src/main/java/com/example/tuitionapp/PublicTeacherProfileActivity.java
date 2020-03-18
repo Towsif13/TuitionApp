@@ -1,7 +1,9 @@
 package com.example.tuitionapp;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -9,7 +11,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,6 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -42,6 +50,12 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
     private String uid, receiverUserId, Current_state;
 
     private RelativeLayout add_btn_teacher , msg_btn_teacher, dec_btn;
+    private RecyclerView reviewRecycler;
+    private TextView teacherReview;
+    private ArrayList<ReviewCurrentTutorList> arrayList;
+    private FirebaseRecyclerOptions<ReviewCurrentTutorList> options;
+    private FirebaseRecyclerAdapter<ReviewCurrentTutorList,FirebaseViewHolder> adapter;
+    private DatabaseReference databaseReference;
 
     CircleImageView propic;
 
@@ -52,6 +66,11 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_public_teacher_profile);
 
         propic = findViewById(R.id.publicProPic);
+        reviewRecycler = findViewById(R.id.review_recycler);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+        //reviewRecycler.setHasFixedSize(true);
+        reviewRecycler.setLayoutManager(layoutManager);
+        arrayList = new ArrayList<ReviewCurrentTutorList>();
 
         add_btn_teacher = findViewById(R.id.add_btn_teacher);
         msg_btn_teacher = findViewById(R.id.msg_btn_teacher);
@@ -97,6 +116,8 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
         uid = user.getUid();
         sturef = mFirebaseDatabase.getReference().child("AcceptStudent");
         receiverUserId = getIntent().getExtras().getString("userid");
+
+        DisplayReview();
 
         tutorRating = findViewById(R.id.tutor_rating_public_prof);
         DatabaseReference mref = FirebaseDatabase.getInstance().getReference().child("TutorRating");
@@ -205,6 +226,36 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
 
             }
         });
+
+
+    }
+
+    private void DisplayReview(){
+
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Review").child(receiverUserId);
+        databaseReference.keepSynced(true);
+        options = new FirebaseRecyclerOptions.Builder<ReviewCurrentTutorList>().setQuery(databaseReference,ReviewCurrentTutorList.class).build();
+
+        adapter = new FirebaseRecyclerAdapter<ReviewCurrentTutorList, FirebaseViewHolder>(options) {
+            @Override
+            protected void onBindViewHolder(@NonNull FirebaseViewHolder firebaseViewHolder, int i, @NonNull ReviewCurrentTutorList reviewCurrentTutorList) {
+
+                firebaseViewHolder.review.setText(reviewCurrentTutorList.getReview());
+            }
+
+            @NonNull
+            @Override
+            public FirebaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                return new FirebaseViewHolder(LayoutInflater.from(PublicTeacherProfileActivity.this).inflate(R.layout.review_row,parent,false));
+            }
+        };
+        adapter.notifyDataSetChanged();
+        adapter.startListening();
+        reviewRecycler.setAdapter(adapter);
+
+
+
+
 
     }
 
@@ -426,7 +477,17 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
                 }
             });
         }
+
+public static class FirebaseViewHolder extends RecyclerView.ViewHolder{
+
+    public TextView review;
+    public FirebaseViewHolder(@NonNull View itemView) {
+        super(itemView);
+
+        review = itemView.findViewById(R.id.teacher_review_show);
     }
+}
+}
 
 
 
