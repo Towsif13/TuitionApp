@@ -47,10 +47,11 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/tutor_rating_profile"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-light"
-                            android:text="4.5/5"
+                            android:text="NA"
                             android:textColor="@color/colorWhite"
                             android:textSize="25sp" />
 

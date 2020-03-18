@@ -32,7 +32,7 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
     ImageView send_req;
     Boolean b =false;
     TextView teacherName , teacherEmail , teacherPhone , teacherRegion , teacherAddress , teacherDOB , teacherGender ,
-            teacherInstitution , teacherDepartment , teacherYear,send_txt;
+            teacherInstitution , teacherDepartment , teacherYear,send_txt , tutorRating , studentCount;
 
     private FirebaseAuth mAuth;
     private FirebaseDatabase mFirebaseDatabase;
@@ -56,6 +56,8 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
         add_btn_teacher = findViewById(R.id.add_btn_teacher);
         msg_btn_teacher = findViewById(R.id.msg_btn_teacher);
         dec_btn = findViewById(R.id.decline_btn_teacher_profile);
+
+
 
         Current_state = "not_student";
 
@@ -95,6 +97,36 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
         uid = user.getUid();
         sturef = mFirebaseDatabase.getReference().child("AcceptStudent");
         receiverUserId = getIntent().getExtras().getString("userid");
+
+        tutorRating = findViewById(R.id.tutor_rating_public_prof);
+        DatabaseReference mref = FirebaseDatabase.getInstance().getReference().child("TutorRating");
+        mref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                float ratingSum = 0;
+                int ratingTotal = 0;
+                float ratingAvg ;
+                if (dataSnapshot.exists() && dataSnapshot.getChildrenCount()>0){
+                    for (DataSnapshot child : dataSnapshot.child(receiverUserId).getChildren()){
+                        ratingSum = ratingSum + Float.valueOf(child.getValue().toString());
+                        ratingTotal++;
+                    }
+                    if (ratingTotal != 0){
+                        ratingAvg = ratingSum/ratingTotal;
+                        tutorRating.setText(String.valueOf(ratingAvg)+"/5");
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        //TODO:
+        studentCount = findViewById(R.id.student_count_tutor_public_prof);
 
         myref.child("Users").child("Teacher").child(receiverUserId).addValueEventListener(new ValueEventListener() {
             @Override

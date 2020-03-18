@@ -49,7 +49,7 @@ public class TeacherRatingActivity extends AppCompatActivity {
     private CircleImageView teacherProPic;
     private TextView teacherName;
 
-    String mOverallRating;
+    String mOverallRating,mUpdatedRating;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -209,11 +209,11 @@ public class TeacherRatingActivity extends AppCompatActivity {
                 });
 
 
-//                DatabaseReference rating_db = FirebaseDatabase.getInstance().getReference().child("Rating").child(teacherUserid);
+                DatabaseReference rating_db = FirebaseDatabase.getInstance().getReference().child("TutorRating").child(teacherUserid);
+                rating_db.child(uid).setValue(overall);
 //                HashMap<String,String> rateMap = new HashMap<>();
-//                rateMap.put("Rating",overall);
+//                rateMap.put(uid,overall);
 //                rating_db.setValue(rateMap);
-
 
 
             }

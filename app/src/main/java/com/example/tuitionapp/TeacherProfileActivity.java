@@ -26,7 +26,7 @@ public class TeacherProfileActivity extends AppCompatActivity {
     ImageView backBtn;
 
     TextView teacherName , teacherEmail , teacherPhone , teacherRegion , teacherAddress , teacherDOB , teacherGender ,
-            teacherInstitution , teacherDepartment , teacherYear;
+            teacherInstitution , teacherDepartment , teacherYear , teacherRating;
 
     private FirebaseAuth mAuth;
     private FirebaseDatabase mFirebaseDatabase;
@@ -124,6 +124,33 @@ public class TeacherProfileActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        teacherRating = findViewById(R.id.tutor_rating_profile);
+        DatabaseReference mref = FirebaseDatabase.getInstance().getReference().child("TutorRating");
+        mref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                float ratingSum = 0;
+                int ratingTotal = 0;
+                float ratingAvg ;
+                if (dataSnapshot.exists() && dataSnapshot.getChildrenCount()>0){
+                    for (DataSnapshot child : dataSnapshot.child(uid).getChildren()){
+                        ratingSum = ratingSum + Float.valueOf(child.getValue().toString());
+                        ratingTotal++;
+                    }
+                    if (ratingTotal != 0){
+                        ratingAvg = ratingSum/ratingTotal;
+                        teacherRating.setText(String.valueOf(ratingAvg)+"/5");
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
             }
         });
