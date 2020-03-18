@@ -56,6 +56,7 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
     private FirebaseRecyclerOptions<ReviewCurrentTutorList> options;
     private FirebaseRecyclerAdapter<ReviewCurrentTutorList,FirebaseViewHolder> adapter;
     private DatabaseReference databaseReference;
+    private int stu_count = 0;
 
     CircleImageView propic;
 
@@ -108,6 +109,8 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
         teacherYear = findViewById(R.id.teacherYear);
         send_req = findViewById(R.id.t_send_req);
         send_txt = findViewById(R.id.send_txt_t);
+        final TextView student_count = findViewById(R.id.student_count_tutor_public_prof);
+
 
         mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -116,6 +119,28 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
         uid = user.getUid();
         sturef = mFirebaseDatabase.getReference().child("AcceptStudent");
         receiverUserId = getIntent().getExtras().getString("userid");
+
+        sturef.child(receiverUserId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                if(dataSnapshot.exists()){
+
+                    stu_count = (int)dataSnapshot.getChildrenCount();
+                    student_count.setText(Integer.toString(stu_count));
+
+                }else{
+
+                    student_count.setText("0");
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         DisplayReview();
 
