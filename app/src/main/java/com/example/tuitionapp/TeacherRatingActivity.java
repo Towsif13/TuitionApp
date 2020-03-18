@@ -191,22 +191,22 @@ public class TeacherRatingActivity extends AppCompatActivity {
                 reviewMap.put("Timeliness",String.valueOf(mTimeLevel));
                 reviewMap.put("Professionalism",String.valueOf(mProfessionalismLevel));
                 review_db.setValue(reviewMap);
-                myref.child(teacherUserid).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-
-                        if(dataSnapshot.child(teacherUserid).exists()){
-                            Toast.makeText(TeacherRatingActivity.this, "exists", Toast.LENGTH_SHORT).show();
-                        }else{
-                            Toast.makeText(TeacherRatingActivity.this, "exists", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
+//                myref.child(teacherUserid).addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                        if(dataSnapshot.child(teacherUserid).exists()){
+//                            Toast.makeText(TeacherRatingActivity.this, "exists", Toast.LENGTH_SHORT).show();
+//                        }else{
+//                            Toast.makeText(TeacherRatingActivity.this, "exists", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(DatabaseError databaseError) {
+//
+//                    }
+//                });
 
 
                 DatabaseReference rating_db = FirebaseDatabase.getInstance().getReference().child("TutorRating").child(teacherUserid);
