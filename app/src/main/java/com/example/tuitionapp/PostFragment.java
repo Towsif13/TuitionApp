@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -36,7 +37,6 @@ public class PostFragment extends Fragment {
     AdapterPosts adapterPosts;
 
     EditText seachInput;
-
 
 
     public PostFragment(){
@@ -122,6 +122,7 @@ public class PostFragment extends Fragment {
 
                     recyclerView.setAdapter(adapterPosts);
 
+                    adapterPosts.notifyItemRemoved(adapterPosts.getItemCount());
 
                 }
 

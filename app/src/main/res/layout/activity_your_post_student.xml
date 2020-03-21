@@ -16,18 +16,7 @@
         android:background="#EEEEEE">
 
 
-        <EditText
-            android:background="@drawable/edittext_style"
-            android:layout_margin="5dp"
-            android:hint="Search"
-            android:drawablePadding="10dp"
-            android:drawableLeft="@drawable/ic_search_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/search_item">
 
-
-        </EditText>
 
         <androidx.recyclerview.widget.RecyclerView
             android:paddingTop="0dp"

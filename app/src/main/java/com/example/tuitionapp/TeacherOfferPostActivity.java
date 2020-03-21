@@ -178,11 +178,11 @@ public class TeacherOfferPostActivity extends AppCompatActivity {
 
     private void createPostInFirebase() {
 
-        DateFormat df = new SimpleDateFormat("d-MM-yyyy,HH:mm:ss");
-        String date = df.format(Calendar.getInstance().getTime());
-
+//        DateFormat df = new SimpleDateFormat("d-MM-yyyy,HH:mm:ss");
+//        String date = df.format(Calendar.getInstance().getTime());
+        String timeStamp = String.valueOf(System.currentTimeMillis());
         String userId = mAuth.getCurrentUser().getUid();
-        DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("TuitionPosts").child("TeacherPosts").child(userId+" "+date);
+        DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("TuitionPosts").child("TeacherPosts").child(timeStamp);
 
 
         String desired_subjects = subjects.getText().toString();
@@ -214,6 +214,7 @@ public class TeacherOfferPostActivity extends AppCompatActivity {
 
         offerMap.put("Date",today_date);
         offerMap.put("Time",today_time);
+        offerMap.put("postId", timeStamp);
         offerMap.put("ProfileImage",propic);
 
 

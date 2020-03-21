@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -56,7 +58,6 @@ public class PostFragment_Student extends Fragment {
 
         //init
         firebaseAuth =FirebaseAuth.getInstance();
-
 
         // recycler view and its properties
 
@@ -115,6 +116,10 @@ public class PostFragment_Student extends Fragment {
                     // set adapter to recycleview
 
                     recyclerView.setAdapter(adapterPostTeacher);
+
+
+                    adapterPostTeacher.notifyItemRemoved(adapterPostTeacher.getItemCount());
+
 
 
                 }

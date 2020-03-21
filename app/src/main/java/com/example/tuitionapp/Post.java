@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 
 
 public class Post {
-    private String id, ProfileImage ,FirstName,LastName ,Address , sClass, Date , Time, Days, Region ,Salary, PreferredGender ,Subjects, Notes , Medium;
+    private String id, ProfileImage ,FirstName,LastName ,Address , sClass, Date , Time, Days, Region ,Salary, PreferredGender ,Subjects, Notes , Medium,postId;
     private String Department , PreferredMedium, Year;
 
     // creating model class for recylerView
@@ -25,7 +25,7 @@ public class Post {
         this.id = id;
     }
 
-    public Post(String Id, String ProfileImage, String Department , String Year, String PreferredMedium, String FirstName, String LastName, String address, String sClass, String date, String time, String days, String region, String salary, String gender, String subjects, String notes, String medium) {
+    public Post(String Id,String postId, String ProfileImage, String Department , String Year, String PreferredMedium, String FirstName, String LastName, String address, String sClass, String date, String time, String days, String region, String salary, String gender, String subjects, String notes, String medium) {
 
         this.id = Id;
         this.FirstName = FirstName;
@@ -45,10 +45,11 @@ public class Post {
         this.PreferredMedium = PreferredMedium;
         this.Year = Year;
         this.ProfileImage = ProfileImage;
+        this.postId = postId;
     }
 
 
-    public Post( String Id, String FirstName, String ProfileImage,String LastName, String address, String sClass, String date, String time, String days, String region, String salary, String gender, String subjects, String notes, String medium) {
+    public Post( String Id,String postId, String FirstName, String ProfileImage,String LastName, String address, String sClass, String date, String time, String days, String region, String salary, String gender, String subjects, String notes, String medium) {
 
         this.id = Id;
         this.FirstName = FirstName;
@@ -66,6 +67,8 @@ public class Post {
         this.Notes = notes;
         this.Medium = medium;
         this.ProfileImage = ProfileImage;
+        this.postId = postId;
+
     }
 
     public void setProfileImage(String profileImage) {
@@ -78,7 +81,9 @@ public class Post {
     public String getFirstName() {
         return FirstName;
     }
-
+    public String getPostId(){
+        return postId;
+    }
     public String getDepartment(){ return Department;};
     public String getPreferredMedium(){return PreferredMedium;}
     public String getYear(){return Year;}

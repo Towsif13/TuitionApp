@@ -1,5 +1,6 @@
 package com.example.tuitionapp;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -11,10 +12,17 @@ import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -24,6 +32,7 @@ public class AdapterPostTeacher extends RecyclerView.Adapter<AdapterPostTeacher.
     Context context;
     List<Post> postList;
     List<Post> mDataFiltered;
+    String myUid ;
 
 
     public AdapterPostTeacher (Context c , List<Post> p){
@@ -31,6 +40,7 @@ public class AdapterPostTeacher extends RecyclerView.Adapter<AdapterPostTeacher.
         this.context = c;
         this.postList = p;
         this.mDataFiltered = p;
+        myUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
     }
 
@@ -51,6 +61,7 @@ public class AdapterPostTeacher extends RecyclerView.Adapter<AdapterPostTeacher.
         Log.d("AdapterPosts","ji"+id);
 
         //get data
+        final String postId= mDataFiltered.get(position).getPostId();
 
         String firstName = mDataFiltered.get(position).getFirstName();
         String lastName = mDataFiltered.get(position).getLastName();
@@ -95,67 +106,54 @@ public class AdapterPostTeacher extends RecyclerView.Adapter<AdapterPostTeacher.
             public void onClick(View v) {
                 Intent intent = new Intent(context,PublicTeacherProfileActivity.class);
                 intent.putExtra("userid",mDataFiltered.get(position).getId());
+
+
                 context.startActivity(intent);
             }
         });
 
+        if(!myUid.equals(id)){
+            holder.deleteButton.setVisibility(View.GONE);
+        }else{
+            holder.deleteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    deletePost(postId);
 
 
+                }
+            });
+        }
 
 
-        //holder.post_idTV.setText(firstNameName);
-
-//        holder.post_locTV.setText(Address+Region);
-//        holder.post_categoryTV.setText(Medium);
-//        holder.post_salTV.setText(Salary);
-//        holder.post_genderTV.setText(Gender);
-//        holder.post_classTv.setText(sClass);
-//        holder.post_daysTV.setText(Days);
-//        holder.post_subTV.setText(Subjects);
-//        holder.post_notesTV.setText(Notes);
-
-
-
-
-
-
-
-
-
-//        // handle button click
-//
-//        // will implement later
-//        holder.moreBtnTV.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                Toast.makeText(context, "More ", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//        holder.sendMsgBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Toast.makeText(context, "Send msg ", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                Intent intent = new Intent(context, PublicStudentProfile.class);
-//                intent.putExtra("userid",id);
-//                Log.d("AdapterPosts","ji"+id);
-//                context.startActivity(intent);
-//
-//                // Toast.makeText(context, "send req", Toast.LENGTH_SHORT).show();
-//            }
-//        });
 
     }
 
 
+
+
+    public void deletePost(String pId){
+        final ProgressDialog pd = new ProgressDialog(context);
+        pd.setMessage("Deleting .. ");
+        Query fQuery = FirebaseDatabase.getInstance().getReference("TuitionPosts").child("TeacherPosts").orderByChild("postId").equalTo(pId);
+        fQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()){
+                    ds.getRef().removeValue();
+                }
+                Toast.makeText(context, "Deleted sucessfully", Toast.LENGTH_SHORT).show();
+                pd.dismiss();
+                notifyItemRemoved(getItemCount());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
 
     @Override
 
@@ -212,7 +210,7 @@ public class AdapterPostTeacher extends RecyclerView.Adapter<AdapterPostTeacher.
 
         //button and views from row_post
         ImageView ProfileImage;
-        ImageButton moreBtnTV,sendMsgBtn,sendReq;
+        ImageButton moreBtnTV,sendMsgBtn,sendReq ,deleteButton;
         TextView post_nameTV ,post_timeTV,post_idTV,post_locTV,post_categoryTV,post_salTV,post_genderTV ,post_classTv,post_daysTV,post_subTV,post_notesTV
                 ,post_mediumTV,post_preferenceTV, note, YearTV, DeptTv,preferedMedTv;
 
@@ -239,23 +237,10 @@ public class AdapterPostTeacher extends RecyclerView.Adapter<AdapterPostTeacher.
             post_preferenceTV = itemView.findViewById(R.id.preferenceTV);
             post_salTV = itemView.findViewById(R.id.salaryTV);
             post_notesTV = itemView.findViewById(R.id.post_notesTV);
+            deleteButton = itemView.findViewById(R.id.deleteBtn);
 
 
             note = itemView.findViewById(R.id.note);
-
-
-
-//            post_idTV = itemView.findViewById(R.id.post_idTV);
-//            post_locTV = itemView.findViewById(R.id.post_locTV);
-//            post_categoryTV = itemView.findViewById(R.id.post_categoryTV);
-//            post_salTV = itemView.findViewById(R.id.post_salTV);
-//            post_genderTV = itemView.findViewById(R.id.post_genderTV);
-//            post_classTv = itemView.findViewById(R.id.post_classTv);
-//            post_daysTV = itemView.findViewById(R.id.post_daysTV);
-//            post_subTV = itemView.findViewById(R.id.post_subTV);
-//            post_notesTV = itemView.findViewById(R.id.post_notesTV);
-
-
 
 
 

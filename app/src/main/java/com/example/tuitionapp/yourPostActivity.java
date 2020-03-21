@@ -1,11 +1,14 @@
 
 package com.example.tuitionapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -26,10 +29,11 @@ import java.util.List;
 public class yourPostActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
 
-    String uid;
+    String uid ;
     RecyclerView recyclerView;
     List<Post> postList;
     AdapterPostTeacher adapterPostTeacher;
+
 
     EditText seachInput;
     @Override
@@ -41,6 +45,7 @@ public class yourPostActivity extends AppCompatActivity {
 
         //init
         firebaseAuth =FirebaseAuth.getInstance();
+
 
 
         // recycler view and its properties
@@ -57,26 +62,11 @@ public class yourPostActivity extends AppCompatActivity {
         postList = new ArrayList<>();
 
         loadPostsTeacher();
-        seachInput.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-            }
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                if(adapterPostTeacher!= null){
-                    adapterPostTeacher.getFilter().filter(charSequence);
-                }
 
-            }
 
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
     }
 
     private void loadPostsTeacher(){
@@ -87,7 +77,7 @@ public class yourPostActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
 //        mFirebaseDatabase = FirebaseDatabase.getInstance();
 //        myref = mFirebaseDatabase.getReference();
-         uid = firebaseAuth.getUid();
+        uid = firebaseAuth.getUid();
         Log.i("yourbahirerPost",uid);
 
         ref.addValueEventListener(new ValueEventListener() {
@@ -125,53 +115,11 @@ public class yourPostActivity extends AppCompatActivity {
 
 
 
-    // search option isnt fully done yet
 
 
 
 
-    private void searchPostsTeacher(final String  query){
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("TuitionPosts").child("TeacherPosts");
-
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                postList.clear();
-                for (DataSnapshot ds: dataSnapshot.getChildren()){
-                    Post post = ds.getValue(Post.class);
-
-
-                    if(post.getDepartment().toLowerCase().contains(query.toLowerCase())||post.getRegion().toLowerCase().contains(query.toLowerCase())
-                            ||post.getAddress().toLowerCase().contains(query.toLowerCase())){
-
-                        postList.add(post);
-
-
-                    }
-
-
-                    //adapter
-                    adapterPostTeacher = new AdapterPostTeacher(yourPostActivity.this,postList);
-                    // set adapter to recycleview
-
-                    recyclerView.setAdapter(adapterPostTeacher);
-
-
-                }
-
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // error handlle
-                Toast.makeText(yourPostActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
-    }
 
 
 

@@ -36,8 +36,8 @@
                                 <LinearLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:orientation="vertical"
                                     android:layout_gravity="center_horizontal"
+                                    android:orientation="vertical"
                                     android:paddingLeft="10dp">
 
                                         <TextView
@@ -47,7 +47,7 @@
                                             android:text="NAME:"
                                             android:textColor="@color/colorPrimaryDark"
                                             android:textSize="22sp"
-                                            android:textStyle="bold"/>
+                                            android:textStyle="bold" />
 
 
                                         <TextView
@@ -57,7 +57,7 @@
                                             android:text="POSTED TIME:"
                                             android:textColor="@color/colorPrimaryDark"
                                             android:textSize="17sp"
-                                            android:textStyle="normal"/>
+                                            android:textStyle="normal" />
 
                                 </LinearLayout>
                                 <LinearLayout
@@ -66,7 +66,6 @@
                                     android:orientation="vertical"
                                     android:layout_gravity="center_horizontal"
                                     android:paddingLeft="10dp">
-
 
                                 </LinearLayout>
 

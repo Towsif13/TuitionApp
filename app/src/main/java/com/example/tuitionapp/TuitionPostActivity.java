@@ -34,7 +34,7 @@ public class TuitionPostActivity extends AppCompatActivity {
 
     EditText subjects , salary , notes;
     Spinner spinner_preference , spinner_days;
-
+    String postKey;
     String prefered_gender , days_per_week;
 
     String[] mPreference = {"Any" , "Male" , "Female"};
@@ -181,11 +181,13 @@ public class TuitionPostActivity extends AppCompatActivity {
 
     private void createPostInFirebase() {
 
-        DateFormat df = new SimpleDateFormat("d-MM-yyyy,HH:mm:ss");
-        String date = df.format(Calendar.getInstance().getTime());
+//        DateFormat df = new SimpleDateFormat("d-MM-yyyy,HH:mm:ss");
+//        String date = df.format(Calendar.getInstance().getTime());
+        String timeStamp = String.valueOf(System.currentTimeMillis());
 
         String userId = mAuth.getCurrentUser().getUid();
-        DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("TuitionPosts").child("StudentPosts").child(userId+" "+date);
+        postKey= userId+" "+date ;
+        DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("TuitionPosts").child("StudentPosts").child(timeStamp);
 
 
         String desired_subjects = subjects.getText().toString();
@@ -216,6 +218,7 @@ public class TuitionPostActivity extends AppCompatActivity {
         offerMap.put("sClass",clas);
         offerMap.put("Region",region);
         offerMap.put("Address",address);
+        offerMap.put("postId", timeStamp);
 
         offerMap.put("Date",today_date);
         offerMap.put("Time",today_time);
@@ -226,6 +229,7 @@ public class TuitionPostActivity extends AppCompatActivity {
         current_user_db.setValue(offerMap);
 
         showSuccessDialog("Offer Posted");
+
 
     }
 

@@ -55,36 +55,14 @@ public class yourPostStudentActivity extends AppCompatActivity {
         postList = new ArrayList<>();
 
         loadPostsStudent();
-        seachInput.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                if(adapterPosts!= null){
-                    adapterPosts.getFilter().filter(charSequence);
-                }
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
     }
 
     private void loadPostsStudent(){
-        // path of all posts
-        // String userId = mAuth.getCurrentUser().getUid();
-        // FirebaseDatabase.getInstance().getReference().child("TuitionPosts").child(userId).child(userId+"-"+date);
+
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("TuitionPosts").child("StudentPosts");
         firebaseAuth = FirebaseAuth.getInstance();
-//        mFirebaseDatabase = FirebaseDatabase.getInstance();
-//        myref = mFirebaseDatabase.getReference();
+
         uid = firebaseAuth.getUid();
         Log.i("yourbahirerPost",uid);
         ref.addValueEventListener(new ValueEventListener() {
@@ -127,48 +105,7 @@ public class yourPostStudentActivity extends AppCompatActivity {
 
     // search option isnt fully done yet
 
-    private void searchPosts(final String  query){
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("TuitionPosts").child("StudentPosts");
-
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                postList.clear();
-                for (DataSnapshot ds: dataSnapshot.getChildren()){
-                    Post post = ds.getValue(Post.class);
-
-
-                    if(post.getsClass().toLowerCase().contains(query.toLowerCase())||post.getPreferredGender().toLowerCase().contains(query.toLowerCase())
-                            ||post.getAddress().toLowerCase().contains(query.toLowerCase())){
-
-                        postList.add(post);
-
-
-                    }
-
-
-                    //adapter
-                    adapterPosts = new AdapterPosts(yourPostStudentActivity.this,postList);
-                    // set adapter to recycleview
-
-                    recyclerView.setAdapter(adapterPosts);
-
-
-                }
-
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // error handlle
-                Toast.makeText(yourPostStudentActivity.this, ""+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
-    }
 
 
 
