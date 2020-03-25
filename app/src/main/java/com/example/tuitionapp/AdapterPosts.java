@@ -120,7 +120,8 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> im
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context,PublicStudentProfile.class);
-                intent.putExtra("userid",mDataFiltered.get(position).getId());
+                intent.putExtra("CurrentStudentId",mDataFiltered.get(position).getId());
+                Log.d("CurrentStudentId",mDataFiltered.get(position).getId());
                 context.startActivity(intent);
 
             }

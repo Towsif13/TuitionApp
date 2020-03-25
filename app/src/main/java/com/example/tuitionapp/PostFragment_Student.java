@@ -29,7 +29,6 @@ import java.util.List;
 
 
 public class PostFragment_Student extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
     FirebaseAuth firebaseAuth;

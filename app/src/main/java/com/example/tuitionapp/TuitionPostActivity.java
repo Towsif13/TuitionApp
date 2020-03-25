@@ -169,7 +169,9 @@ public class TuitionPostActivity extends AppCompatActivity {
                 address = dataSnapshot.child("Address").getValue().toString();
                 region = dataSnapshot.child("Region").getValue().toString();
                 clas = dataSnapshot.child("Class").getValue().toString();
+                if(dataSnapshot.hasChild("ProfileImage")){
                 propic = dataSnapshot.child("ProfileImage").getValue().toString();
+                }
             }
 
             @Override

@@ -114,7 +114,6 @@ public class StudentReceivedRequestsActivity extends AppCompatActivity {
                                     if (dataSnapshot.exists()) {
                                         final String fname = dataSnapshot.child("FirstName").getValue().toString();
                                         final String lname = dataSnapshot.child("LastName").getValue().toString();
-                                        final String pimg = dataSnapshot.child("ProfileImage").getValue().toString();
                                         findFriendViewHolder.userName.setText(fname + " " + lname);
                                         if(dataSnapshot.child("ProfileImage").getValue() != null) {
                                             Picasso.get().load(dataSnapshot.child("ProfileImage").getValue().toString()).into(findFriendViewHolder.profileImage);

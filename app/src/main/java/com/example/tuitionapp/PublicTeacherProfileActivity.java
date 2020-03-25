@@ -1,6 +1,8 @@
 package com.example.tuitionapp;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,13 +44,14 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
     Boolean b =false;
     TextView teacherName , teacherEmail , teacherPhone , teacherRegion , teacherAddress , teacherDOB , teacherGender ,
             teacherInstitution , teacherDepartment , teacherYear,send_txt , tutorRating , studentCount;
-
+    ImageView videocallBtn;
     private FirebaseAuth mAuth;
     private FirebaseDatabase mFirebaseDatabase;
 
     private FirebaseAuth.AuthStateListener mAuthListner;
-    private DatabaseReference myref,reference,sturef;
-    private String uid, receiverUserId, Current_state;
+    private DatabaseReference myref,reference,sturef ,forValidateDBref;
+    private String uid, receiverUserId, Current_state ;
+    private  String calledBy="";
 
     private RelativeLayout add_btn_teacher , msg_btn_teacher, dec_btn;
     private RecyclerView reviewRecycler;
@@ -58,6 +61,7 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
     private FirebaseRecyclerAdapter<ReviewCurrentTutorList,FirebaseViewHolder> adapter;
     private DatabaseReference databaseReference;
     private int stu_count = 0;
+
 
     CircleImageView propic;
 
@@ -78,7 +82,7 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
         msg_btn_teacher = findViewById(R.id.msg_btn_teacher);
         dec_btn = findViewById(R.id.decline_btn_teacher_profile);
 
-
+        videocallBtn = findViewById(R.id.VideoCamIV); // video call
 
         Current_state = "not_student";
 
@@ -96,6 +100,9 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
+
+
 
 
         teacherName = findViewById(R.id.teacherName);
@@ -120,6 +127,37 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
         uid = user.getUid();
         sturef = mFirebaseDatabase.getReference().child("AcceptStudent");
         receiverUserId = getIntent().getExtras().getString("userid");
+
+        Toast.makeText(this, ""+receiverUserId, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, ""+uid, Toast.LENGTH_SHORT).show();
+
+
+       
+        // video call
+        videocallBtn.setVisibility(View.GONE);
+        validateUser( receiverUserId , videocallBtn ,uid);
+
+
+        videocallBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                //important
+
+                Intent intent = new Intent(PublicTeacherProfileActivity.this, VideoCallingActivity.class);
+                intent.putExtra("fromPuBTeaTeaID",receiverUserId);
+
+                Log.d("ReciverIDFromPubTea" ,receiverUserId );
+                Log.d("CallerIdFromPubTea" ,uid );
+
+                finish();
+                startActivity(intent);
+
+            }
+
+
+        });
 
         sturef.child(receiverUserId).addValueEventListener(new ValueEventListener() {
             @Override
@@ -311,7 +349,6 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
 
     private void AcceptRequest() {
 
-
         SimpleDateFormat df1 = new SimpleDateFormat("d-MM-yyyy");
         final String today_date = df1.format(Calendar.getInstance().getTime());
         sturef.child(uid).child(receiverUserId).child("date").setValue(today_date).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -341,7 +378,6 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
                                                                         Current_state = "connected";
                                                                         send_req.setImageResource(R.drawable.ic_person_add);
                                                                         send_txt.setText("Remove Student");
-
                                                                     }
                                                                 }
 
@@ -528,18 +564,64 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
             });
         }
 
-public static class FirebaseViewHolder extends RecyclerView.ViewHolder{
+    public static class FirebaseViewHolder extends RecyclerView.ViewHolder{
 
-    public TextView review , reviewTitle;
-    public LinearLayout review_bg;
-    public FirebaseViewHolder(@NonNull View itemView) {
-        super(itemView);
+        public TextView review , reviewTitle;
+        public LinearLayout review_bg;
+        public FirebaseViewHolder(@NonNull View itemView) {
+            super(itemView);
 
-        review = itemView.findViewById(R.id.teacher_review_show);
-        reviewTitle = itemView.findViewById(R.id.teacher_review_title);
-        review_bg = itemView.findViewById(R.id.review_bg);
+            review = itemView.findViewById(R.id.teacher_review_show);
+            reviewTitle = itemView.findViewById(R.id.teacher_review_title);
+            review_bg = itemView.findViewById(R.id.review_bg);
+        }
     }
-}
+
+
+
+    // video chat validation of user
+    public void validateUser(final String receiverUserId , final ImageView videocallBtn , final String uid){
+
+        forValidateDBref= FirebaseDatabase.getInstance().getReference();
+
+        forValidateDBref.child("AcceptTeacher").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                if (snapshot.hasChild(receiverUserId)) {
+
+                    videocallBtn.setVisibility(View.VISIBLE);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        forValidateDBref.child("AcceptStudent").child(receiverUserId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                if (snapshot.hasChild(uid)) {
+
+                    videocallBtn.setVisibility(View.VISIBLE);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(PublicTeacherProfileActivity.this, "student Is not", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+    }
+
+
+
 }
 
 

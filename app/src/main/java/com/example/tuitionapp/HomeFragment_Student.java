@@ -108,27 +108,32 @@ public class HomeFragment_Student extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myref = mFirebaseDatabase.getReference();
+
+
+
         uid = mAuth.getUid();
 
-        myref.child("Users").child("Student").child(uid).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String fname = dataSnapshot.child("FirstName").getValue().toString();
-                String lname = dataSnapshot.child("LastName").getValue().toString();
-                String name = fname+" "+lname;
+            myref.child("Users").child("Student").child(uid).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    String fname = dataSnapshot.child("FirstName").getValue().toString();
+                    String lname = dataSnapshot.child("LastName").getValue().toString();
+                    String name = fname + " " + lname;
 
-                if (dataSnapshot.child("ProfileImage").exists()){
-                    String propic = dataSnapshot.child("ProfileImage").getValue().toString();
-                    Picasso.get().load(propic).into(studentImage);;
+                    if (dataSnapshot.child("ProfileImage").exists()) {
+                        String propic = dataSnapshot.child("ProfileImage").getValue().toString();
+                        Picasso.get().load(propic).into(studentImage);
+
+                    }
+
+                    studentName.setText(name);
                 }
 
-                studentName.setText(name);
-            }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                }
+            });
+        }
 
-            }
-        });
-    }
 }

@@ -126,8 +126,9 @@ public class TeacherOfferPostActivity extends AppCompatActivity {
                 department = dataSnapshot.child("Department").getValue().toString();
                 year = dataSnapshot.child("Year").getValue().toString();
                 region = dataSnapshot.child("Region").getValue().toString();
-                propic = dataSnapshot.child("ProfileImage").getValue().toString();
-
+                if(dataSnapshot.hasChild("ProfileImage")) {
+                    propic = dataSnapshot.child("ProfileImage").getValue().toString();
+                }
 
             }
 

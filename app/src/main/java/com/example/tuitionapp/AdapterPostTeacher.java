@@ -107,8 +107,12 @@ public class AdapterPostTeacher extends RecyclerView.Adapter<AdapterPostTeacher.
                 Intent intent = new Intent(context,PublicTeacherProfileActivity.class);
                 intent.putExtra("userid",mDataFiltered.get(position).getId());
 
+                Log.d("Id asdasdadfrom Adapter",mDataFiltered.get(position).getId());
+
+
 
                 context.startActivity(intent);
+
             }
         });
 
