@@ -324,7 +324,18 @@
                                 android:id="@+id/VideoCamIV"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
-                                android:src="@drawable/ic_videocam_black_24dp" />
+                                android:backgroundTint="@color/colorWhite"
+                                android:background="@drawable/ic_videocam_black_24dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-light"
+                                android:text="video Call"
+                                android:textAllCaps="true"
+                                android:id="@+id/t_vdo_txt"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="13sp" />
 
 
                         </LinearLayout>

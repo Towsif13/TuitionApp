@@ -42,6 +42,12 @@ public class ReviewCurrentTutorsActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.user_toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         getSupportActionBar().setTitle("Review Tutor");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);

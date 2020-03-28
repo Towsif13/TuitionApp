@@ -14,7 +14,7 @@
             android:id="@+id/user_profile_image"
             android:layout_width="65dp"
             android:layout_height="65dp"
-            android:src = "@drawable/ic_account_circle_blue_24dp">
+            android:src = "@drawable/uimg">
         </de.hdodenhof.circleimageview.CircleImageView>
 
         <LinearLayout

@@ -45,6 +45,12 @@ public class Current_teacher extends AppCompatActivity {
 
         mtoolbar = findViewById(R.id.user_toolbar);
         setSupportActionBar(mtoolbar);
+        mtoolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         getSupportActionBar().setTitle("My Tutors");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);

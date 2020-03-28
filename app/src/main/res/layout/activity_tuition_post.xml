@@ -9,7 +9,9 @@
 
     <Button
         android:id="@+id/button_post"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginEnd="25dp"
+        android:layout_marginStart="25dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="27dp"
         android:layout_marginBottom="96dp"
@@ -90,11 +92,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="21dp"
-        android:layout_marginTop="34dp"
+        android:layout_marginTop="36dp"
         android:fontFamily="sans-serif-black"
         android:text="Post Offer"
         android:textColor="@android:color/black"
         android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.45"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

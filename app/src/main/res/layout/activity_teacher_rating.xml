@@ -42,7 +42,7 @@
                     android:id="@+id/teacher_propic_review"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/userimg"
+                    android:src="@drawable/uimg"
                     android:layout_gravity="center_horizontal"/>
 
                 <TextView

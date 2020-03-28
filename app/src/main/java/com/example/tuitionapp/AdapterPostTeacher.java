@@ -58,7 +58,6 @@ public class AdapterPostTeacher extends RecyclerView.Adapter<AdapterPostTeacher.
     public void onBindViewHolder(@NonNull MyHolder holder, final int position) {
         // bind data here
         final String id = mDataFiltered.get(position).getId();
-        Log.d("AdapterPosts","ji"+id);
 
         //get data
         final String postId= mDataFiltered.get(position).getPostId();
@@ -106,10 +105,6 @@ public class AdapterPostTeacher extends RecyclerView.Adapter<AdapterPostTeacher.
             public void onClick(View v) {
                 Intent intent = new Intent(context,PublicTeacherProfileActivity.class);
                 intent.putExtra("userid",mDataFiltered.get(position).getId());
-
-                Log.d("Id asdasdadfrom Adapter",mDataFiltered.get(position).getId());
-
-
 
                 context.startActivity(intent);
 

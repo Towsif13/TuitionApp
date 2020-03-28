@@ -86,12 +86,6 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
 
         Current_state = "not_student";
 
-        msg_btn_teacher.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(PublicTeacherProfileActivity.this, "MSG", Toast.LENGTH_SHORT).show();
-            }
-        });
 
         backBtn = findViewById(R.id.teacher_profile_back_btn);
         backBtn.setOnClickListener(new View.OnClickListener() {
@@ -128,11 +122,20 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
         sturef = mFirebaseDatabase.getReference().child("AcceptStudent");
         receiverUserId = getIntent().getExtras().getString("userid");
 
-        Toast.makeText(this, ""+receiverUserId, Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, ""+uid, Toast.LENGTH_SHORT).show();
 
 
-       
+        msg_btn_teacher.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PublicTeacherProfileActivity.this,MessageActivity.class);
+                intent.putExtra("userId",receiverUserId);
+                startActivity(intent);
+            }
+        });
+
+
+
+
         // video call
         videocallBtn.setVisibility(View.GONE);
         validateUser( receiverUserId , videocallBtn ,uid);
@@ -147,9 +150,6 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(PublicTeacherProfileActivity.this, VideoCallingActivity.class);
                 intent.putExtra("fromPuBTeaTeaID",receiverUserId);
-
-                Log.d("ReciverIDFromPubTea" ,receiverUserId );
-                Log.d("CallerIdFromPubTea" ,uid );
 
                 finish();
                 startActivity(intent);

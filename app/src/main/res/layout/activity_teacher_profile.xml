@@ -133,11 +133,11 @@
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/teacher_profile_image"
-                        android:layout_width="200dp"
-                        android:layout_height="200dp"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
                         android:layout_margin="1dp"
                         android:padding="1dp"
-                        android:src="@drawable/userimg"
+                        android:src="@drawable/uimg"
                         app:civ_border_width="2dp"
                         app:civ_border_color="#FFF"/>
 
@@ -165,6 +165,7 @@
                     android:layout_marginTop="2sp"
                     android:fontFamily="sans-serif-light"
                     android:text=" "
+                    android:textStyle="bold"
                     android:textColor="@color/colorWhite"
                     android:textSize="32sp"
 

@@ -77,12 +77,7 @@ public class PublicStudentProfile extends AppCompatActivity {
         dec_btn = findViewById(R.id.decline_btn_student_profile);
 
 
-        msg_btn_student_profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(PublicStudentProfile.this, "MSG", Toast.LENGTH_SHORT).show();
-            }
-        });
+
         send_txt = findViewById(R.id.send_txt);
         studentName = findViewById(R.id.studentName);
         studentEmail = findViewById(R.id.studentEmail);
@@ -131,9 +126,6 @@ public class PublicStudentProfile extends AppCompatActivity {
                 Intent intent = new Intent(PublicStudentProfile.this, VideoCallingActivity.class);
                 intent.putExtra("fromPuBTeaTeaID",receiverUserId);
 
-                Log.d("ReciverIDFromPubTea" ,receiverUserId );
-                Log.d("CallerIdFromPubTea" ,uid );
-
                 finish();
                 startActivity(intent);
 
@@ -142,9 +134,16 @@ public class PublicStudentProfile extends AppCompatActivity {
 
         });
 
-        Toast.makeText(this, "CurrentStudent" + receiverUserId, Toast.LENGTH_SHORT).show();
+        msg_btn_student_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PublicStudentProfile.this,MessageActivity.class);
+                intent.putExtra("userId",receiverUserId);
+                startActivity(intent);
+            }
+        });
 
-        Toast.makeText(this, "Current user" + uid, Toast.LENGTH_SHORT).show();
+
 
         myref.child("Users").child("Student").child(receiverUserId).addValueEventListener(new ValueEventListener() {
             @Override
