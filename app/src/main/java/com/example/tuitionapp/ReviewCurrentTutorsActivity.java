@@ -90,7 +90,10 @@ public class ReviewCurrentTutorsActivity extends AppCompatActivity {
 
                                     final  String fname = dataSnapshot.child("FirstName").getValue().toString();
                                     final  String lname = dataSnapshot.child("LastName").getValue().toString();
-                                    final  String pimg= dataSnapshot.child("ProfileImage").getValue().toString();
+                                    if (dataSnapshot.child("ProfileImage").exists()){
+                                        final  String pimg= dataSnapshot.child("ProfileImage").getValue().toString();
+                                    }
+
 
                                     final String name = fname+" "+lname;
                                     findFriendViewHolder.tutor_name_review.setText(name);
