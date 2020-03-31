@@ -53,6 +53,7 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
     private String uid, receiverUserId, Current_state ;
     private  String calledBy="";
 
+    RelativeLayout VideoCAMRL;
     private RelativeLayout add_btn_teacher , msg_btn_teacher, dec_btn;
     private RecyclerView reviewRecycler;
     private TextView teacherReview;
@@ -86,6 +87,8 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
 
         Current_state = "not_student";
 
+
+        VideoCAMRL =findViewById(R.id.VideoCAMRL);
 
         backBtn = findViewById(R.id.teacher_profile_back_btn);
         backBtn.setOnClickListener(new View.OnClickListener() {
@@ -137,11 +140,10 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
 
 
         // video call
-        videocallBtn.setVisibility(View.GONE);
-        validateUser( receiverUserId , videocallBtn ,uid);
+        validateUser( receiverUserId , VideoCAMRL ,uid);
 
 
-        videocallBtn.setOnClickListener(new View.OnClickListener() {
+        VideoCAMRL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -580,7 +582,7 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
 
 
     // video chat validation of user
-    public void validateUser(final String receiverUserId , final ImageView videocallBtn , final String uid){
+    public void validateUser(final String receiverUserId , final RelativeLayout VideoCAMRL , final String uid){
 
         forValidateDBref= FirebaseDatabase.getInstance().getReference();
 
@@ -589,7 +591,7 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot snapshot) {
                 if (snapshot.hasChild(receiverUserId)) {
 
-                    videocallBtn.setVisibility(View.VISIBLE);
+                    VideoCAMRL.setVisibility(View.VISIBLE);
 
                 }
             }
@@ -605,7 +607,7 @@ public class PublicTeacherProfileActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot snapshot) {
                 if (snapshot.hasChild(uid)) {
 
-                    videocallBtn.setVisibility(View.VISIBLE);
+                    VideoCAMRL.setVisibility(View.VISIBLE);
 
                 }
             }

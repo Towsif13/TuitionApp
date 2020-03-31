@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 
 import androidx.annotation.NonNull;
@@ -50,7 +51,7 @@ public class MainVideoChatActivity extends AppCompatActivity implements  Session
     private  String userID ="";
 
     private FrameLayout mPublisherViewController;
-    private FrameLayout mSubscriberViewController;
+    private RelativeLayout mSubscriberViewController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

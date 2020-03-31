@@ -40,7 +40,7 @@ public class PublicStudentProfile extends AppCompatActivity {
             studentMedium, studentClass;
 
     CircleImageView propic;
-
+    RelativeLayout VideoCAMRL ;
     private FirebaseAuth mAuth;
     String name;
     private FirebaseDatabase mFirebaseDatabase;
@@ -76,7 +76,7 @@ public class PublicStudentProfile extends AppCompatActivity {
         msg_btn_student_profile = findViewById(R.id.msg_btn_student_profile);
         dec_btn = findViewById(R.id.decline_btn_student_profile);
 
-
+        VideoCAMRL = findViewById(R.id.VideoCAMRL);
 
         send_txt = findViewById(R.id.send_txt);
         studentName = findViewById(R.id.studentName);
@@ -112,11 +112,10 @@ public class PublicStudentProfile extends AppCompatActivity {
 
 
         // video call
-        videocallBtn.setVisibility(View.GONE);
-        validateUser( receiverUserId , videocallBtn ,uid);
+        validateUser( receiverUserId , VideoCAMRL ,uid);
 
 
-        videocallBtn.setOnClickListener(new View.OnClickListener() {
+        VideoCAMRL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -492,7 +491,7 @@ public class PublicStudentProfile extends AppCompatActivity {
 
     }
 
-    public void validateUser(final String receiverUserId, final ImageView videocallBtn, final String uid) {
+    public void validateUser(final String receiverUserId, final RelativeLayout VideoCAMRL, final String uid) {
 
         forValidateDBref = FirebaseDatabase.getInstance().getReference();
 
@@ -501,7 +500,7 @@ public class PublicStudentProfile extends AppCompatActivity {
             public void onDataChange(DataSnapshot snapshot) {
                 if (snapshot.hasChild(receiverUserId)) {
 
-                    videocallBtn.setVisibility(View.VISIBLE);
+                    VideoCAMRL.setVisibility(View.VISIBLE);
 
                 }
             }
@@ -517,7 +516,7 @@ public class PublicStudentProfile extends AppCompatActivity {
             public void onDataChange(DataSnapshot snapshot) {
                 if (snapshot.hasChild(uid)) {
 
-                    videocallBtn.setVisibility(View.VISIBLE);
+                    VideoCAMRL.setVisibility(View.VISIBLE);
 
                 }
             }
