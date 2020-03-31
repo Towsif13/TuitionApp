@@ -58,7 +58,7 @@ public class TuitionPostActivity extends AppCompatActivity {
 
         DateFormat df = new SimpleDateFormat("d MMM yyyy, h:mm a");
         date = df.format(Calendar.getInstance().getTime());
-        Toast.makeText(this, date, Toast.LENGTH_LONG).show();
+
 
         spinner_preference = findViewById(R.id.preference);
         spinner_days = findViewById(R.id.days);
@@ -152,7 +152,7 @@ public class TuitionPostActivity extends AppCompatActivity {
         } else {
             // TODO: Call create FirebaseUser() here
             createPostInFirebase();
-            Toast.makeText(this, String.valueOf(note_len), Toast.LENGTH_SHORT).show();
+
 
         }
     }

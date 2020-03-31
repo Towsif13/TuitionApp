@@ -1,5 +1,6 @@
 package com.example.tuitionapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -43,6 +45,18 @@ public class ChatsFragment_Teacher extends Fragment {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         userlist = new ArrayList<>();
         databaseReference= FirebaseDatabase.getInstance().getReference("Chats");
+
+        FloatingActionButton floatingActionButton1 = view.findViewById(R.id.Chat_teacher_button);
+
+        floatingActionButton1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getActivity(), Current_Student.class);
+                startActivity(intent);
+
+            }
+        });
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override

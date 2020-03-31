@@ -65,6 +65,12 @@ public class TeacherReceivedRequest extends AppCompatActivity {
         setSupportActionBar(mtoolbar);
         getSupportActionBar().setTitle("Requests");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mtoolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
         mRequestList = findViewById(R.id.user_request_recycler_list);

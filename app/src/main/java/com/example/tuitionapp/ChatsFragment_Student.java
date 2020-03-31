@@ -1,5 +1,6 @@
 package com.example.tuitionapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -41,6 +43,19 @@ public class ChatsFragment_Student extends Fragment {
         recyclerView = view.findViewById(R.id.Chats_recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        FloatingActionButton floatingActionButton = view.findViewById(R.id.Chat_student_button);
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getActivity(), Current_teacher.class);
+                startActivity(intent);
+
+            }
+        });
+
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         userlist = new ArrayList<>();
         databaseReference= FirebaseDatabase.getInstance().getReference("Chats");

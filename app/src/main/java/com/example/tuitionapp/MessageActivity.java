@@ -141,7 +141,6 @@ public class MessageActivity extends AppCompatActivity {
                             }
 
                             readMessage(firebaseUser.getUid(),userid);
-                            Toast.makeText(MessageActivity.this, userid, Toast.LENGTH_SHORT).show();
                             seenMessage(userid);
                         }
 

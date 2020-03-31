@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,7 +29,7 @@ import java.util.List;
 
 public class yourPostActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
-
+    Toolbar mtoolbar;
     String uid ;
     RecyclerView recyclerView;
     List<Post> postList;
@@ -45,6 +46,23 @@ public class yourPostActivity extends AppCompatActivity {
 
         //init
         firebaseAuth =FirebaseAuth.getInstance();
+        mtoolbar = findViewById(R.id.user_toolbar);
+        setSupportActionBar(mtoolbar);
+        getSupportActionBar().setTitle("My Posts");
+        mtoolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        mtoolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
 

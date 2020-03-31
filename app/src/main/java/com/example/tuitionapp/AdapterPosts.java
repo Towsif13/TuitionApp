@@ -51,7 +51,6 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> im
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        //inflate laout row_post.xml
 
         View view = LayoutInflater.from(context).inflate(R.layout.row_post,viewGroup,false);
         return new MyHolder(view);
@@ -62,7 +61,6 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> im
 
         // bind data here
         final String id = mDataFiltered.get(position).getId();
-        Log.d("AdapterPosts","ji"+id);
 
         //get data
         final String postId= mDataFiltered.get(position).getPostId();
@@ -113,7 +111,6 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> im
                 }
             });
         }
-
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

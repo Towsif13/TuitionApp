@@ -58,6 +58,12 @@ public class StudentReceivedRequestsActivity extends AppCompatActivity {
         mtoolbar = findViewById(R.id.user_toolbar);
         setSupportActionBar(mtoolbar);
         getSupportActionBar().setTitle("Requests");
+        mtoolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 

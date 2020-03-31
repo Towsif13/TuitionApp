@@ -46,6 +46,12 @@ public class Current_Student extends AppCompatActivity {
         mtoolbar = findViewById(R.id.user_toolbar);
         setSupportActionBar(mtoolbar);
         getSupportActionBar().setTitle("My Students");
+        mtoolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
@@ -75,7 +81,7 @@ public class Current_Student extends AppCompatActivity {
                     @NonNull
                     @Override
                     public FindFriendViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                        Log.d("Msg", "Hi");
+
                         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_display_layout, parent, false);
                         FindFriendViewHolder viewHolder = new FindFriendViewHolder(view);
                         return viewHolder;

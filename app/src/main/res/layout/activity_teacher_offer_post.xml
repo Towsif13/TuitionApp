@@ -8,18 +8,20 @@
 
     <Button
         android:id="@+id/button_tutor_post"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="27dp"
-        android:layout_marginBottom="96dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="76dp"
         android:background="@drawable/button_bg"
         android:text="Post"
         android:textColor="#fff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/notes" />
+        app:layout_constraintTop_toBottomOf="@+id/tutor_notes"
+        app:layout_constraintVertical_bias="0.641" />
 
     <EditText
         android:id="@+id/tutor_subjects"
@@ -91,9 +93,10 @@
         android:layout_marginStart="21dp"
         android:layout_marginTop="34dp"
         android:fontFamily="sans-serif-black"
-        android:text="Tutor Post Offer"
+        android:text="Post Tuition"
         android:textColor="@android:color/black"
         android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

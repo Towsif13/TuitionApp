@@ -4,11 +4,14 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,7 +27,7 @@ import java.util.List;
 
 public class yourPostStudentActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
-
+    Toolbar mtoolbar;
     String uid;
     RecyclerView recyclerView;
     List<Post> postList;
@@ -39,6 +42,23 @@ public class yourPostStudentActivity extends AppCompatActivity {
 
         //init
         firebaseAuth =FirebaseAuth.getInstance();
+        mtoolbar = findViewById(R.id.user_toolbar);
+        setSupportActionBar(mtoolbar);
+        getSupportActionBar().setTitle("My Posts");
+        mtoolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        mtoolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
         // recycler view and its properties

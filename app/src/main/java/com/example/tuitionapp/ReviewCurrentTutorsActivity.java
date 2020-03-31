@@ -42,6 +42,12 @@ public class ReviewCurrentTutorsActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.user_toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         getSupportActionBar().setTitle("Review Tutor");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -90,7 +96,10 @@ public class ReviewCurrentTutorsActivity extends AppCompatActivity {
 
                                     final  String fname = dataSnapshot.child("FirstName").getValue().toString();
                                     final  String lname = dataSnapshot.child("LastName").getValue().toString();
-                                    final  String pimg= dataSnapshot.child("ProfileImage").getValue().toString();
+                                    if (dataSnapshot.child("ProfileImage").exists()){
+                                        final  String pimg= dataSnapshot.child("ProfileImage").getValue().toString();
+                                    }
+
 
                                     final String name = fname+" "+lname;
                                     findFriendViewHolder.tutor_name_review.setText(name);
