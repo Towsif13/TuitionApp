@@ -240,9 +240,7 @@ public class VideoCallingActivity extends AppCompatActivity {
     }
 
     private void getAndSetVideoCallUserProInfo() {
-
             // vice versa
-
             userRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -266,8 +264,6 @@ public class VideoCallingActivity extends AppCompatActivity {
                             if(dataSnapshot.child("Student").child(stuId_call_from_publicStudent_Pro).hasChild("ProfileImage")){
                                 callerImg = dataSnapshot.child("Student").child(stuId_call_from_publicStudent_Pro).child("ProfileImage").getValue().toString();
                                 Picasso.get().load(callerImg).placeholder(R.drawable.ic_person_black_24dp).into(propic);
-
-
                             }
                             callerName = dataSnapshot.child("Student").child(stuId_call_from_publicStudent_Pro).child("FirstName").getValue().toString();
                             nameContact.setText(callerName);
@@ -277,12 +273,10 @@ public class VideoCallingActivity extends AppCompatActivity {
                         }
                     }
 
-
-
                 }
-
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
+                    Toast.makeText(VideoCallingActivity.this, "Error Database", Toast.LENGTH_SHORT).show();
 
                 }
             });
@@ -293,19 +287,13 @@ public class VideoCallingActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
-
         mediaPlayer.start();
-
-
         userRef.addListenerForSingleValueEvent(  new ValueEventListener() {
-
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                // this is form Student --- studnet call korle tokhn dhukbe
-
-                if (teaId_ring_FromPublicTeacher_pro != null && !checker.equals("checker")&&!dataSnapshot.child("Teacher").child(teaId_ring_FromPublicTeacher_pro).hasChild("Ringing") && !dataSnapshot.child("Student").child(CurrentUserCallerStu).hasChild("Calling")) {
+                // this is form Student ---
+                if (teaId_ring_FromPublicTeacher_pro != null && !checker.equals("checker")&&!dataSnapshot.child("Teacher").child(teaId_ring_FromPublicTeacher_pro)
+                        .hasChild("Ringing") && !dataSnapshot.child("Student").child(CurrentUserCallerStu).hasChild("Calling")) {
 
                     final HashMap<String, Object> callingInfo = new HashMap<>();
 
@@ -316,36 +304,26 @@ public class VideoCallingActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
                                 final HashMap<String, Object> ringingInfo = new HashMap<>();
-
                                 ringingInfo.put("ringing", CurrentUserCallerStu);
                                 userRef.child("Teacher").child(teaId_ring_FromPublicTeacher_pro).child("Ringing").updateChildren(ringingInfo).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         finish();
                                         startActivity(getIntent());
-
                                     }
                                 });
-
                             }
-//
                         }
                     });
-
-
-//
                 }
 
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Toast.makeText(VideoCallingActivity.this, "DatabasError", Toast.LENGTH_SHORT).show();
             }
         });
-
         // this is for teacher end
-
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -360,13 +338,7 @@ public class VideoCallingActivity extends AppCompatActivity {
                     Intent intent = new Intent(VideoCallingActivity.this,MainVideoChatActivity.class);
                     startActivity(intent);
                 }
-
-
-
-
             }
-
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
@@ -374,6 +346,4 @@ public class VideoCallingActivity extends AppCompatActivity {
         });
 
     }
-
-
 }
