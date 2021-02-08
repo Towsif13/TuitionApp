@@ -7,7 +7,6 @@
 [<img src="opt.png" width="185" style="margin-right:5px;"/>](Opt)
 [<img src="reg.png" width="185" style="margin-right:5px;"/>](Registration)
 [<img src="s_prof.png" width="185" style="margin-right:5px;"/>](Student)
-
 [<img src="t_prof.png" width="185" style="margin-right:5px;"/>](Teacher)
 [<img src="dashboard.png" width="185" style="margin-right:5px;"/>](Dashboard)
 [<img src="newsfeed.png" width="185" style="margin-right:5px;"/>](Newsfeed)
