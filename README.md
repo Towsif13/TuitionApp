@@ -1,6 +1,6 @@
 # TuitionApp
 
-'Porao' is an app based platform to connect tutors and students. Through this app both students and teachers can post tuition offers and they can communicate with each other. The students and tutors can chat and can connect through video call with this app. The students and also give reviews about their tutor thoruht this app and can rate them.
+'Porao' is an app based platform to connect tutors and students. Through this app both students and teachers can post tuition offers and they can communicate with each other. The students and tutors can chat and can connect through video call with this app. The students can also give reviews about their tutor thoruht this app and can rate them.
 
 [<img src="porao.png" width="185" style="margin-right:5px;"/>](Splashscreen)
 [<img src="signin.png" width="185" style="margin-right:5px;"/>](Signin)
